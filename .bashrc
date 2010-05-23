@@ -18,7 +18,7 @@ LIGHT_PURPLE="\[\033[1;35m\]"
     NO_COLOR="\[\e[0m\]"
 
 ### PROMPT ###
-PS1="${PURPLE}\u${WHITE}@${GREEN}`hostname`${WHITE}:${CYAN}\w\n${NO_COLOR}\$ "
+PS1="${PURPLE}\u${WHITE}@${GREEN}`hostname`${WHITE}:${CYAN}\w ${NO_COLOR}\$ "
 
 ### ALIAS ###
 alias ls='ls -G'
