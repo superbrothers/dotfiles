@@ -49,8 +49,9 @@ if [ $SHLVL -eq 1 -a -e "`which screen`" ]; then
 fi
 
 ### PATH ###
+PATH=/opt/local/bin:$PATH
 
 
 ### etc ###
 umask 002
-export LSCOLORS=exfxcxdxbxegedabagacad
+export LSCOLORS=Gxfxcxdxbxegedabagacad
