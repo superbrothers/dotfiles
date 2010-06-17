@@ -48,6 +48,9 @@ if [ $SHLVL -eq 1 -a -e "`which screen`" ]; then
   screen -UxR
 fi
 
+### GIT ###
+GIT_EDITOR="'vim' -c 'set fenc=utf-8'"
+
 ### PATH ###
 PATH=/opt/local/bin:$PATH
 
