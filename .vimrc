@@ -7,6 +7,8 @@ set autoread            "外部のエディタで編集中のファイルが変�
 set history=100         "コロンコマンドを記録する数 
 set hidden              "変更中のファイルでも、保存しないで他のファイルを表示することが出来るようにする
 set encoding=utf-8      "デフォルト文字コード UTF-8
+filetype on
+filetype plugin on
 
 setlocal omnifunc=syntaxcomplete#Complete "omni補完できるようにする
 
@@ -289,10 +291,3 @@ autocmd FileType php  let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i,k~/.vim/d
 " http://www.vim.org/scripts/script.php?script_id=1234
 " =====================================================
 nmap ,y :YRShow<CR>
-
-" =====================================================
-" PDV - phpDocumentor for vim
-" =====================================================
-autocmd FileType php inoremap <C-d> <ESC>:call phpDocSingle()<CR>i
-autocmd FileType php inoremap <C-d> :call phpDocSingle()<CR>
-autocmd FileType php inoremap <C-d> <>:call phpDocRange<CR>
