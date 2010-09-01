@@ -9,6 +9,7 @@ set hidden              "変更中のファイルでも、保存しないで他�
 set encoding=utf-8      "デフォルト文字コード UTF-8
 filetype on
 filetype plugin on
+filetype indent on
 
 setlocal omnifunc=syntaxcomplete#Complete "omni補完できるようにする
 
@@ -33,7 +34,7 @@ set showcmd             "コマンドをステータスラインに表示
 " syntax color
 " =====================================================
 syntax on               "強調表示
-"set t_Co=256            "256色
+set t_Co=256            "256色
 colorscheme wombat256
 
 " statusline
@@ -285,6 +286,12 @@ nnoremap ,9   :e #9<CR>
 " http://www.vim.org/scripts/script.php?script_id=1879
 " =====================================================
 autocmd FileType php  let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i,k~/.vim/dict/php.dict'
+
+" ====================================================
+" gist.vim
+" http://github.com/mattn/gist-vim
+" ====================================================
+let g:gist_detect_filetype = 1
 
 " =====================================================
 " YangRing.vim
