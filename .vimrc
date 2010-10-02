@@ -1,24 +1,102 @@
-" =====================================================
-" basic setting
-" =====================================================
-set nocompatible        "Use Vim defaults instead of 100% vi compatibility
-set visualbell          "エラー音の代わりに画面フラッシュを使う
-set autoread            "外部のエディタで編集中のファイルが変更されたら、自動的に読み直す
-set history=100         "コロンコマンドを記録する数 
-set hidden              "変更中のファイルでも、保存しないで他のファイルを表示することが出来るようにする
-set encoding=utf-8      "デフォルト文字コード UTF-8
-filetype on
-filetype plugin on
-filetype indent on
+" Options: {{{1
 
-setlocal omnifunc=syntaxcomplete#Complete "omni補完できるようにする
+" initialize {{{2
 
-" display
-" =====================================================
-set number              "行番号を表示する
-set ruler               "ルーラー（右下に表示される行・列の番号）を表示する
-set cmdheight=2         "コマンドラインに使われるスクリーン上の行数
-set laststatus=2        "常にステータスラインを表示する
+set nocompatible
+set shellslash
+
+" encoding {{{2
+
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213,euc-jp'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+
+  let &fileencodings = 'ucs-bom'
+  if has('guess_encode')
+    let &fileencodings = &fileencodings . ',' . 'guess'
+  endif
+  if &encoding !=# 'utf-8'
+    let &fileencodings = &fileencodings . ',' . 'ucs-2le'
+    let &fileencodings = &fileencodings . ',' . 'ucs-2'
+  endif
+  let &fileencodings = &fileencodings . ',' . s:enc_jis
+
+  if &encoding ==? 'utf-8'
+    let &fileencodings = &fileencodings . ',' . 'cp932' . ',' . s:enc_euc
+  elseif &encoding ==? 'cp932'
+    let &fileencodings = &fileencodings . ',' . 'utf-8' . ',' . s:enc_euc
+  elseif &encoding =~# '^euc-\%(jp\|jisx0213\)$'
+    let &fileencodings = &fileencodings . ',' . 'utf-8' . ',' . 'cp932'
+  endif
+
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+
+function! s:recheck_fenc()
+  if &l:fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+    let &l:fileencoding = &encoding
+  endif
+endfunction
+augroup Encoding
+  autocmd!
+  autocmd BufReadPost * call s:recheck_fenc()
+  autocmd BufWritePre,FileWritePre * if &l:fileencoding =~# '^utf-8' | setlocal nobomb | endif
+  autocmd BufNewFile,BufRead * if &l:fileencoding =~# '^utf\|^ucs' | setlocal bomb | endif
+augroup END
+
+set fileformat=unix
+set fileformats=unix,dos,mac
+
+if exists('&ambiwidth')
+  if has('kaoriya')
+    set ambiwidth=auto
+  else
+    set ambiwidth=double
+  endif
+endif
+
+" display {{{2
+
+"エラー音の代わりに画面フラッシュを使う(画面端で詰まる)
+"set visualbell
+"行番号を表示する
+set number
+"ルーラー（右下に表示される行・列の番号）を表示する
+set ruler
+"常にステータスラインを表示する
+set laststatus=2
+"行末に $ を置く
+"set list
+"行間を設定する
+set linespace=0
+"コマンドをステータスラインに表示
+set showcmd
+"コマンドラインに使われるスクリーン上の行数
+set cmdheight=2
+"閉じ括弧が入力されたとき、対応する括弧を表示
+set showmatch
+"強調表示
+syntax on
+"検索結果をハイライトする
+set hlsearch 
+"マーカーで折り畳み
+set foldmethod=marker
+"256色
+set t_Co=256
+"使用するカラースキーム
+colorscheme wombat256
+"statusline
+"highlight LineNr ctermfg=darkgrey
+"highlight Comment ctermfg=DarkCyan
+" 補完候補の色づけ for vim7
+hi Pmenu        ctermfg=Black ctermbg=Grey
+hi PmenuSel     ctermbg=Blue
+hi PmenuSbar    ctermbg=Cyan
 
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするGetB(を使用)
 if has('iconv')
@@ -27,209 +105,7 @@ else
     set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P
 endif
 
-set linespace=0         "行間を設定する
-set wildmenu            "補完候補を表示する
-set showcmd             "コマンドをステータスラインに表示
-
-" syntax color
-" =====================================================
-syntax on               "強調表示
-set t_Co=256            "256色
-colorscheme wombat256
-
-" statusline
-"highlight LineNr ctermfg=darkgrey
-"highlight Comment ctermfg=DarkCyan
-
-" 補完候補の色づけ for vim7
-hi Pmenu        ctermfg=Black ctermbg=Grey
-hi PmenuSel     ctermbg=Blue
-hi PmenuSbar    ctermbg=Cyan
-
-" search
-" =====================================================
-set ignorecase          "検索で、大文字小文字を区別しない
-set smartcase           "検索で小文字なら大文字を無視、大文字なら無視しない設定 
-set wrapscan            "検索をファイルの末尾まで検索したら、ファイルの先頭へループする
-set hlsearch            "検索結果をハイライトする 
-
-" edit
-" =====================================================
-set autoindent                 " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする
-set smartindent
-set showmatch                  " 閉じ括弧が入力されたとき、対応する括弧を表示
-set backspace=indent,eol,start " バックスペースキーの動作を決定
-"set cindent                    " Cプログラムファイルの自動インデントを始める
-
-" tab
-" =====================================================
-set expandtab           "タブをスペースに置き換える
-set tabstop=4           "ファイル内の <Tab> が対応する空白の数
-set shiftwidth=4        "自動インデントの各段階に使われる空白の数
-set softtabstop=0       "<Tab>を押した時に挿入される空白の量(0:ts'で指定した量
-set shiftround          "インデントを'shiftwidth' の値の倍数に丸める
-
-" keymap
-" =====================================================
-" 表示行単位で移動するようにする
-nmap j gj
-nmap k gk
-vmap j gj
-vmap k gk
-
-" command mode 時 tcsh風のキーバインドに
-cmap <C-A> <Home>
-cmap <C-F> <Right>
-cmap <C-B> <Left>
-"cmap <C-D> <Delete>
-cmap <Esc>b <S-Left>
-cmap <Esc>f <S-Right>
-
-" date/time
-inoremap <Leader>date <C-R>=strftime('%Y/%m/%d %H:%M:%S')<CR>
-inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
-inoremap <Leader>w3cd <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
-
-" buffer
-nnoremap <silent> bb :b#<CR>
-nnoremap <silent> bp :bp<CR>
-nnoremap <silent> bn :bn<CR>
-nnoremap <silent> bd :bd<CR>
-"nnoremap ls :ls<CR>:b
-
-"close
-nnoremap cl :close<CR>
-
-" 検索ハイライト一時消去
-nnoremap  gh :nohlsearch<Return>
-
-" 検索語が画面の真ん中に来るようにする
-nmap n nzz 
-nmap N Nzz 
-nmap * *zz 
-nmap # #zz 
-nmap g* g*zz 
-nmap g# g#zz
-
-" .vimrcを開く
-nnoremap ,. :<C-u>edit $MYVIMRC<CR>
-
-" .vimrcを即座に反映する　
-nnoremap ,s. :<C-u>source $MYVIMRC<CR>
-
-" helpショートカット
-nnoremap <C-h> :<C-u>help<Space>
-
-" カーソル下のキーワードでhelpを検索
-nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><CR>
-
-" ファイルを実行する
-nmap ,e :execute '!' &ft ' %'<CR>
-
-" 連結後のスペース削除
-nmap J J<C-[>x
-
-" autocmd
-" =====================================================
-" vim起動で、screenに編集中ファイル名を表示 ＆
-" vim終了で、screenにディレクトリ名を表示
-if &term =~ "screen"
-  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | silent!  exe '!echo -n "^[kv:%^[\\    "' | endif
-  autocmd VimLeave * silent!  exe '!echo -n "^[k[`basename $PWD`]^[\\"'
-endif
-
-" 前回終了したカーソル行に移動
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-
-" Ex Command
-" =====================================================
-" 文字コードを指定して開き直す
-command! Cp932     edit ++enc=cp932<CR>
-command! Utf8      edit ++enc=utf-8<CR>
-command! Eucjp     edit ++enc=euc-jp<CR>
-command! Iso2022jp edit ++enc=iso2022jp<CR>
-command! Jis       Iso2022jp
-command! Sjis      Cp932
-
-" ファイルタイプを変更
-nmap ,d :set fileformat=dos<cr>
-nmap ,m :set fileformat=mac<cr>
-nmap ,u :set fileformat=unix<cr>
-
-" backup
-" =====================================================
-set nobackup              "ファイルを上書きする前にバックアップファイルを作る
-"set backupdir=~/vim_backup
-set noswapfile            "スワップファイルを使用する設定
-"set directory=~/vim_backup
-
-" 文字コード自動認識
-" =====================================================
-" http://www.kawaz.jp/pukiwiki/?vim#cb691f26
-" =====================================================
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') == "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932','euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','.s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~#
-      '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings =&fileencodings.','s:enc_euc
-    endif
-  endif
-  "定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
-
-" =====================================================
-"カーソル上の文字コードをエンコードに応じた表示にする
-" =====================================================
-"statuslineで文字コードを表示するための下請け関数です。
-
-function! GetB()
+function! GetB() " {{{
     let c = matchstr(getline('.'), '.', col('.') - 1)
     let c = iconv(c, &enc, &fenc)
     return s:String2Hex(c)
@@ -245,6 +121,159 @@ function! s:Nr2Hex(nr)
     endwhile
     return r
 endfunc
+" }}}
+
+        " backup {{{2
+
+        set backup
+        set backupdir=$HOME/.backup/
+        set swapfile
+        set directory=$HOME/.backup/
+        set viewdir=$HOME/.vim/view/
+
+" tab {{{2
+
+"ファイル内の <Tab> が対応する空白の数
+set tabstop=4
+"自動インデントの各段階に使われる空白の数
+set shiftwidth=4
+"<Tab>を押した時に挿入される空白の量(0:ts'で指定した量
+set softtabstop=0
+"タブをスペースに置き換える
+set expandtab
+"インデントを'shiftwidth' の値の倍数に丸める
+"set shiftround
+
+" indent {{{2
+
+"新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする
+set autoindent
+"バックスペースキーの動作を決定
+set backspace=indent,eol,start
+"新しい行を作ったときに高度な自動インデントを行う。
+"set smartindent
+
+" file {{{2
+
+"外部のエディタで編集中のファイルが変更されたら、自動的に読み直す
+set autoread
+"変更中のファイルでも、保存しないで他のファイルを表示することが出来るようにする
+set hidden
+
+" search {{{2
+
+"検索で、大文字小文字を区別しない
+set ignorecase
+"検索で小文字なら大文字を無視、大文字なら無視しない設定
+set smartcase 
+"検索をファイルの末尾まで検索したら、ファイルの先頭へループする
+set wrapscan
+"インクリメンタルな検索を行う
+set incsearch
+
+" history {{{2
+
+"コマンドを記録する数
+set history=100 
+
+" complete {{{2
+
+set infercase
+"補完候補を表示する
+set wildmenu
+"補完モードの指定
+set wildmode=list:longest,full
+"omni補完できるようにする
+setlocal omnifunc=syntaxcomplete#Complete
+
+" help {{{2
+
+" 日本語ヘルプを使う
+set helplang=ja
+
+" filetype {{{2
+
+filetype plugin indent on
+
+" Keymap: {{{1
+
+" 表示行単位で移動するようにする {{{2
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+
+" emacs-like-keys {{{2
+cnoremap <C-B> <Left>
+cnoremap <C-F> <Right>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <A-b> <S-Left>
+cnoremap <A-f> <S-Right>
+
+inoremap <C-A> <Home>
+inoremap <C-B> <Left>
+inoremap <C-D> <Del>
+inoremap <C-E> <End>
+inoremap <C-F> <Right>
+inoremap <A-n> <Down>
+inoremap <A-p> <Up>
+inoremap <A-b> <S-Left>
+inoremap <A-f> <S-Right>
+
+" buffer {{{2
+nnoremap <silent> bb :b#<CR>
+nnoremap <silent> bp :bp<CR>
+nnoremap <silent> bn :bn<CR>
+nnoremap <silent> bd :bd<CR>
+"nnoremap ls :ls<CR>:b
+
+" date/time {{{2
+inoremap <Leader>date <C-R>=strftime('%Y/%m/%d %H:%M:%S')<CR>
+inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
+inoremap <Leader>w3cd <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
+
+" close {{{2
+nnoremap cl :close<CR>
+
+" 検索ハイライト一時消去 {{{2
+nnoremap  gh :nohlsearch<Return>
+
+" 検索語が画面の真ん中に来るようにする {{{2
+nmap n nzz 
+nmap N Nzz 
+nmap * *zz 
+nmap # #zz 
+nmap g* g*zz 
+nmap g# g#zz
+
+" quick-vimrc {{{2
+".vimrcを開く
+nnoremap ,. :<C-u>edit $MYVIMRC<CR>
+".vimrcを即座に反映する　
+nnoremap ,s. :<C-u>source $MYVIMRC<CR>
+
+" helpショートカット {{{2
+nnoremap <C-h> :<C-u>help<Space>
+
+" カーソル下のキーワードでhelpを検索 {{{2
+nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><CR>
+
+" ファイルを実行する {{{2
+nmap ,e :execute '!' &ft ' %'<CR>
+
+" 連結後のスペース削除 {{{2
+"nmap J J<C-[>x
+
+" fileformatを変更  {{{2
+nmap ,d :set fileformat=dos<cr>
+nmap ,m :set fileformat=mac<cr>
+nmap ,u :set fileformat=unix<cr>
+
+
+" Function: {{{1
+
+" function String2Hex {{{2
 " The function String2Hex() converts each character in a string to a two
 " character Hex string.
 function! s:String2Hex(str)
@@ -257,10 +286,29 @@ function! s:String2Hex(str)
     return out
 endfunc
 
-" plugin
-" .vim/plugin/
-" =====================================================
-" minibufexpl.vim
+" Command: {{{1
+
+" 文字コードを指定して開き直す {{{2
+command! Cp932     edit ++enc=cp932<CR>
+command! Utf8      edit ++enc=utf-8<CR>
+command! Eucjp     edit ++enc=euc-jp<CR>
+command! Iso2022jp edit ++enc=iso2022jp<CR>
+command! Jis       Iso2022jp
+command! Sjis      Cp932
+
+" Ex: {{{1
+" screen {{{2
+if &term =~ "screen"
+  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | silent!  exe '!echo -n "^[kv:%^[\\    "' | endif
+  autocmd VimLeave * silent!  exe '!echo -n "^[k[`basename $PWD`]^[\\"'
+endif
+
+" 前回終了したカーソル行に移動 {{{2
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
+" Plugin: {{{1
+
+" minibufexpl.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=159
 " =====================================================
 let g:miniBufExplMapWindowNavVim=1
@@ -281,20 +329,17 @@ nnoremap ,7   :e #7<CR>
 nnoremap ,8   :e #8<CR>
 nnoremap ,9   :e #9<CR>
 
-" =====================================================
-" autocomplpop.vim
+" autocomplpop.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=1879
 " =====================================================
 autocmd FileType php  let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i,k~/.vim/dict/php.dict'
 
-" ====================================================
-" gist.vim
+" gist.vim {{{2
 " http://github.com/mattn/gist-vim
 " ====================================================
 let g:gist_detect_filetype = 1
 
-" =====================================================
-" YangRing.vim
+" YangRing.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=1234
 " =====================================================
 nmap ,y :YRShow<CR>
