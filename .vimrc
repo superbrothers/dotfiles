@@ -306,7 +306,31 @@ endif
 " 前回終了したカーソル行に移動 {{{2
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
-" Plugin: {{{1
+" Filetype settings {{{1
+
+" ruby {{{2
+augroup RubyExtend
+  autocmd!
+  autocmd FileType ruby,eruby setlocal fileencoding=utf-8
+  autocmd FileType ruby,eruby setlocal ts=2 sts=2 sw=2
+  autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+augroup END
+
+" javascript {{{2
+augroup JavascriptExtend
+  autocmd!
+  autocmd FileType javascript setlocal fileencoding=utf-8
+  autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+augroup END
+
+" php {{{2
+augroup PhpExtend
+  autocmd!
+  autocmd FileType php setlocal fileencoding=utf-8
+  autocmd FileType php setlocal ts=4 sts=4 sw=4
+augroup END
+
+" Plugins: {{{1
 
 " minibufexpl.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=159
@@ -342,4 +366,6 @@ let g:gist_detect_filetype = 1
 " YangRing.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=1234
 " =====================================================
+let g:yankring_history_file = ".yankring_history_file"
+
 nmap ,y :YRShow<CR>
