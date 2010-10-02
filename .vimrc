@@ -86,6 +86,8 @@ syntax on
 set hlsearch 
 "マーカーで折り畳み
 set foldmethod=marker
+"カーソルがある画面上の行を強調する
+set cursorline
 "256色
 set t_Co=256
 "使用するカラースキーム
