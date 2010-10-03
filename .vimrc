@@ -323,6 +323,7 @@ augroup JavascriptExtend
   autocmd!
   autocmd FileType javascript setlocal fileencoding=utf-8
   autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+  autocmd FileType javascript nmap ,e :JSLintUpdate<CR>
 augroup END
 
 " php {{{2
