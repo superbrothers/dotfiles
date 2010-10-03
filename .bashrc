@@ -20,6 +20,13 @@ LIGHT_PURPLE="\[\033[1;35m\]"
 ### PROMPT ###
 PS1="${PURPLE}\u${WHITE}@${GREEN}`hostname`${WHITE}:${CYAN}\w ${NO_COLOR}\$ "
 
+### PATH ###
+export PATH=/opt/local/bin:~/opt/screen-4.1.0/bin:$PATH
+export MANPATH=/opt/local/share/man:~/opt/screen-4.1.0/share/man:$MANPATH
+
+### GEM ###
+export GEM_HOME=~/.gem/ruby/1.8
+
 ### ALIAS ###
 alias ls='ls -G'
 alias ll='ls -lhFG'
@@ -29,6 +36,9 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias vi='vim'
 alias svim='sudo vim'
+
+### rvm ###
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then source "$HOME/.rvm/scripts/rvm"; fi
 
 ### FUNCTION ###
 cd() { command cd $@; ls; }
@@ -43,18 +53,14 @@ function find_grep() {
   find $1 -name $2 | xargs egrep -nC3 $3 | less
 }
 
+### GIT ###
+GIT_EDITOR="'vim' -c 'set fenc=utf-8'"
+
+### etc ###
+umask 002
+export LSCOLORS=gxfxcxdxbxegedabagacad
+
 ### SCREEN ###
 if [ $SHLVL -eq 1 -a -e "`which screen`" ]; then
   screen -UxR
 fi
-
-### GIT ###
-GIT_EDITOR="'vim' -c 'set fenc=utf-8'"
-
-### PATH ###
-PATH=/opt/local/bin:$PATH
-
-
-### etc ###
-umask 002
-export LSCOLORS=Gxfxcxdxbxegedabagacad
