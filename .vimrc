@@ -316,6 +316,7 @@ augroup RubyExtend
   autocmd FileType ruby,eruby setlocal fileencoding=utf-8
   autocmd FileType ruby,eruby setlocal ts=2 sts=2 sw=2
   autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+  autocmd BufNewFile *.rb 0r $HOME/.vim/templates/skeleton.rb
 augroup END
 
 " javascript {{{2
@@ -331,6 +332,16 @@ augroup PhpExtend
   autocmd!
   autocmd FileType php setlocal fileencoding=utf-8
   autocmd FileType php setlocal ts=4 sts=4 sw=4
+  autocmd Bufread,BufNewFile *.inc setlocal filetype=php
+  autocmd BufNewFile *.php,*.inc 0r $HOME/.vim/templates/skeleton.php
+augroup END
+
+" html {{{2
+augroup HtmlExtend
+  autocmd!
+  autocmd FileType html setlocal fileencoding=utf-8
+  autocmd FileType html setlocal ts=4 sts=4 sw=4
+  autocmd BufNewFile *.html 0r $HOME/.vim/templates/skeleton.html
 augroup END
 
 " Plugins: {{{1
