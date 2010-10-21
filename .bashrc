@@ -61,6 +61,7 @@ umask 002
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
 ### SCREEN ###
-if [ $SHLVL -eq 1 -a -e "`which screen`" ]; then
+if [ $SHLVL -eq 1 -a which screen > /dev/null 2>&1 ]
+then
   screen -UxR
 fi
