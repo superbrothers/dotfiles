@@ -89,7 +89,9 @@ set ruler
 "常にステータスラインを表示する
 set laststatus=2
 "行末に $ を置く
-"set list
+set list
+"
+set listchars=tab:>-,trail:_
 "行間を設定する
 set linespace=0
 "コマンドをステータスラインに表示
@@ -179,6 +181,10 @@ set backspace=indent,eol,start
 set autoread
 "変更中のファイルでも、保存しないで他のファイルを表示することが出来るようにする
 set hidden
+"カレントディレクトリを自動で変更する
+if exists("+autochdir")
+    set autochdir
+endif
 
 " search {{{2
 
