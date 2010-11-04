@@ -90,7 +90,7 @@ set ruler
 set laststatus=2
 "行末に $ を置く
 set list
-"
+"タブの可視化
 set listchars=tab:>-,trail:_
 "行間を設定する
 set linespace=0
@@ -145,13 +145,13 @@ function! s:Nr2Hex(nr)
 endfunc
 " }}}
 
-        " backup {{{2
+" backup {{{2
 
-        set backup
-        set backupdir=$HOME/.backup/
-        set swapfile
-        set directory=$HOME/.backup/
-        set viewdir=$HOME/.vim/view/
+set backup
+set backupdir=$HOME/.backup/
+set swapfile
+set directory=$HOME/.backup/
+set viewdir=$HOME/.vim/view/
 
 " tab {{{2
 
@@ -164,7 +164,7 @@ set softtabstop=0
 "タブをスペースに置き換える
 set expandtab
 "インデントを'shiftwidth' の値の倍数に丸める
-"set shiftround
+set shiftround
 
 " indent {{{2
 
@@ -191,7 +191,7 @@ endif
 "検索で、大文字小文字を区別しない
 set ignorecase
 "検索で小文字なら大文字を無視、大文字なら無視しない設定
-set smartcase 
+set smartcase
 "検索をファイルの末尾まで検索したら、ファイルの先頭へループする
 set wrapscan
 "インクリメンタルな検索を行う
@@ -200,7 +200,7 @@ set incsearch
 " history {{{2
 
 "コマンドを記録する数
-set history=100 
+set history=100
 
 " complete {{{2
 
