@@ -22,7 +22,7 @@ PS1="${PURPLE}\u${WHITE}@${GREEN}`hostname`${WHITE}:${CYAN}\w ${NO_COLOR}\$ "
 
 ### PATH ###
 #export PATH=/usr/local/bin:/opt/local/bin:~/opt/screen-4.1.0/bin:$PATH
-export PATH=/usr/local/bin:$HOME/ws/screen-4.1.0/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/ws/screen-4.1.0/bin:$PATH
 export MANPATH=$HOME/ws/screen-4.1.0/share/man:$MANPATH
 
 ### GEM ###
@@ -61,8 +61,8 @@ umask 002
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
 ### SCREEN ###
-#if [ $SHLVL -eq 1 -a which screen > /dev/null 2>&1 ]
-#if which screen > /dev/null 2>&1
-#then
-#  screen -UxR
-#fi
+if [ $SHLVL -eq 1 ]; then
+    if which screen > /dev/null 2>&1; then
+        screen -UxR
+    fi
+fi
