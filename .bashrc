@@ -54,7 +54,7 @@ function find_grep() {
 }
 
 ### GIT ###
-GIT_EDITOR="/usr/local/bin/vim -c set fenc=utf-8"
+GIT_EDITOR="/usr/local/bin/vim -c 'set fenc=utf-8'"
 
 ### etc ###
 umask 002
