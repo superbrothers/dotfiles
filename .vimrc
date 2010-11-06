@@ -348,6 +348,27 @@ endif
 " 前回終了したカーソル行に移動 {{{2
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" クリップボード共有 {{{2
+" reference
+" http://subtech.g.hatena.ne.jp/cho45/20061010/1160459376
+" http://vim.wikia.com/wiki/Mac_OS_X_clipboard_sharing
+"
+" need 'set enc=utf-8' and
+" below shell environment variable for UTF-8 characters
+" export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
+"
+" Vim(Mac)
+if has('mac') && !has('gui')
+    nnoremap <silent> <Space>y :.w !pbcopy<CR><CR>
+    vnoremap <silent> <Space>y :w !pbcopy<CR><CR>
+    nnoremap <silent> <Space>p :r !pbpaste<CR>
+    vnoremap <silent> <Space>p :r !pbpaste<CR>
+" GVim(Mac & Win)
+else
+    noremap <Space>y "+y
+    noremap <Space>p "+p
+endif
+
 " Filetype settings {{{1
 
 " ruby {{{2
@@ -454,6 +475,9 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
@@ -466,7 +490,8 @@ endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::'
 
-" jslint.vim
+" jslint.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=2729
 " =====================================================
 " TODO jslint.vimのオンオフを簡単に 
+
