@@ -59,6 +59,8 @@ GIT_EDITOR="/usr/local/bin/vim -c 'set fenc=utf-8'"
 ### etc ###
 umask 002
 export LSCOLORS=gxfxcxdxbxegedabagacad
+# 文字コード設定
+export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
 
 ### SCREEN ###
 if [ $SHLVL -eq 1 ]; then

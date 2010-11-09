@@ -1,7 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/superbrothers/work/rails/blog/app/models'
-let g:netrw_dirhist_2='/Users/superbrothers/work/rails'
-let g:netrw_dirhist_3='/Users/superbrothers'
-let g:netrw_dirhist_4='/Users/superbrothers/Documents'
-let g:netrw_dirhist_5='/Users/superbrothers/Documents/hatena'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/superbrothers/ws'
+let g:netrw_dirhist_2='/Users/superbrothers/ws/gm_scripts'
+let g:netrw_dirhist_3='/Users/superbrothers/.vim'
+let g:netrw_dirhist_4='/Users/superbrothers'

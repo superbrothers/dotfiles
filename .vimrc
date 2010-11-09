@@ -495,3 +495,9 @@ let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|e
 " =====================================================
 " TODO jslint.vimのオンオフを簡単に 
 
+" eregex.vim {{{2
+" http://www.vim.org/scripts/script.php?script_id=3282
+" =====================================================
+" / で行なう通常の検索と :M/ を入れ替える
+nnoremap / :M/
+nnoremap ,/ /

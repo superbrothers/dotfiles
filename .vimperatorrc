@@ -5,17 +5,17 @@ set wildoptions=auto
 " :[tab]open の補完対象と順序
 set complete=tsl
 
-" Change the title of the browser window. 
+" Change the title of the browser window.
 set titlestring="vimperator!!"
 
 " Show or hide certain GUI elements.
 set guioptions-=rb
 "set guioptions+=n
 
-" Never show tab bar 
+" Never show tab bar
 "set showtabline=0
 
-" Show the link in the command line 
+" Show the link in the command line
 set showstatuslinks=1
 
 " ページロード時にテキストボックにフォーカスするのを防ぐ
@@ -75,6 +75,7 @@ map <BS> <A-Left>
 noremap ,s :so ~/.vimperatorrc<CR>
 
 " ////// qmarks ///////////////////////////////////////////////
+qmark r javascript:location.href='http://reader.livedoor.com/subscribe/'+location.href
 qmark g https://mail.google.com/
 qmark b http://b.hatena.ne.jp/superbrothers
 qmark t http://twitter.com/
@@ -85,7 +86,7 @@ qmark f http://favotter.matope.com/user.php?user=superbrothers
 " #########################
 " direct_bookmark.js
 " #########################
-let g:direct_sbm_use_services_by_tag = "h" 
+let g:direct_sbm_use_services_by_tag = "h"
 let g:direct_sbm_use_services_by_post = "h"
 let g:direct_sbm_is_normalize = "false"
 let g:direct_sbm_is_use_migemo = "true"
@@ -108,7 +109,7 @@ javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://h
 "EOM
 noremap s :hbtab<Space>
 noremap S :hbtab<Space>
-set complete+=H
+"set complete+=H
 
 " #########################
 " copy.js
@@ -157,13 +158,13 @@ noremap ,T :twittperator!
 noremap ,@ :twittperator!@
 " ChirpUserStream
 let g:twittperator_use_chirp = 1
-" echo-tweet.tw 
+" echo-tweet.tw
 let g:twittperator_plugin_echo_tweet = 1
 " reply-popup-alert.tw
-let g:twittperator_plugin_reply_popup_alert = 1
-let g:twittperator_screen_name = "superbrothers"
+"let g:twittperator_plugin_reply_popup_alert = 1
+"let g:twittperator_screen_name = "superbrothers"
 " twlist_win
-let g:twittperator_plugin_twlist_win = 1
+"let g:twittperator_plugin_twlist_win = 1
 
 " #########################
 " ulti_requester.js
@@ -172,7 +173,7 @@ let g:twittperator_plugin_twlist_win = 1
 "noremap ,mT :mr<Space>twitter-search-pcod-no-jp<Space>["superbrothers"]<CR>
 "noremap ,mf :mr<Space>favotter-new<Space>
 "noremap ,mF :mr<Space>favotter-new<Space>["superbrothers"]<CR>
- 
+
 " #########################
 " ldrize_cooperation.js
 " #########################
@@ -195,14 +196,23 @@ js <<EOM
 EOM
 
 " //////// colorscheme ////////////////////////////////////////
+"" ステータスバーのフォントサイズを大きくする
+style chrome://* <<EOM
+#liberator-statusline {
+    font-family: Menlo, Consolas, Monaco, monospace !important;
+    font-size: 9pt;
+    font-weight: normal !important;
+}
+EOM
+
 " CommadLine
-hi Normal       color: LightYellow; background: #333;   font-size: 9pt;
-hi InfoMsg      color: LightYellow; background: #333;   font-size: 9pt;
-hi ModeMsg      color: LightYellow; background: #333;   font-size: 9pt;
-hi MoreMsg      color: LimeGreen;   background: #333;   font-size: 9pt;
-hi LineNr       color: DeepPink;    background: #333;   font-size: 9pt;
-hi Question     color: Yellow;      background: #333;   font-size: 9pt;
-hi WarningMsg   color: DeepPink;    background: #333;   font-size: 9pt;
+hi Normal       color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi InfoMsg      color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi ModeMsg      color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi MoreMsg      color: LimeGreen;   background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi LineNr       color: DeepPink;    background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi Question     color: Yellow;      background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi WarningMsg   color: DeepPink;    background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
 hi NonText      background: #333;
 hi Null         color: CornflowerBlue;
 hi Tag          color: CornflowerBlue;
@@ -226,10 +236,13 @@ hi TabText       font-size: 8pt;
 hi TabNumber    font-weight: bold; font-size: 10pt;
 
 " StatusLine
-hi StatusLine height: 23px; -moz-appearance: statusbar;
+hi StatusLine height: 23px; color:white; background-color:black;
+
+" Hint
+hi Hint z-index:5000; font-family:Menlo; font-size:14px; color:white; background-color:red; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute;
 
 " ex mode時IMEをOFF
 style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
 
 " /////////////////////////////////////////////////////////////
-" vim:sw=4 ts=4 et: 
+" vim:sw=4 ts=4 et:
