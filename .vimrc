@@ -395,6 +395,8 @@ augroup PhpExtend
   autocmd FileType php setlocal ts=4 sts=4 sw=4
   autocmd Bufread,BufNewFile *.inc setlocal filetype=php
   autocmd BufNewFile *.php,*.inc 0r $HOME/.vim/templates/skeleton.php
+  " enable folding for classes and functions
+  let php_folding = 1
 augroup END
 
 " html {{{2
