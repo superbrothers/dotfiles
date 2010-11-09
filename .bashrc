@@ -22,11 +22,11 @@ PS1="${PURPLE}\u${WHITE}@${GREEN}`hostname`${WHITE}:${CYAN}\w ${NO_COLOR}\$ "
 
 ### PATH ###
 #export PATH=/usr/local/bin:/opt/local/bin:~/opt/screen-4.1.0/bin:$PATH
-export PATH=$HOME/bin:/usr/local/bin:$HOME/ws/screen-4.1.0/bin:$PATH
-export MANPATH=$HOME/ws/screen-4.1.0/share/man:$MANPATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export MANPATH=$HOME/share/man:$MANPATH
 
 ### GEM ###
-export GEM_HOME=~/.gem/ruby/1.8
+# export GEM_HOME=~/.gem/ruby/1.8
 
 ### ALIAS ###
 alias ls='ls -G'
