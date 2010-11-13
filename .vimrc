@@ -103,7 +103,7 @@ set showmatch
 "強調表示
 syntax on
 "検索結果をハイライトする
-set hlsearch 
+set hlsearch
 "マーカーで折り畳み
 set foldmethod=marker
 "カーソルがある画面上の行を強調する
@@ -173,7 +173,7 @@ set autoindent
 "バックスペースキーの動作を決定
 set backspace=indent,eol,start
 "新しい行を作ったときに高度な自動インデントを行う。
-"set smartindent
+set smartindent
 
 " file {{{2
 
@@ -266,11 +266,11 @@ nnoremap cl :close<CR>
 nnoremap  gh :nohlsearch<Return>
 
 " 検索語が画面の真ん中に来るようにする {{{2
-"nmap n nzz 
-"nmap N Nzz 
-"nmap * *zz 
-"nmap # #zz 
-"nmap g* g*zz 
+"nmap n nzz
+"nmap N Nzz
+"nmap * *zz
+"nmap # #zz
+"nmap g* g*zz
 "nmap g# g#zz
 
 " quick-vimrc {{{2
@@ -385,7 +385,6 @@ augroup JavascriptExtend
   autocmd!
   autocmd FileType javascript setlocal fileencoding=utf-8
   autocmd FileType javascript setlocal ts=2 sts=2 sw=2
-  autocmd FileType javascript nmap ,e :JSLintUpdate<CR>
 augroup END
 
 " php {{{2
@@ -434,6 +433,7 @@ nnoremap ,9   :e #9<CR>
 " http://github.com/mattn/gist-vim
 " ====================================================
 let g:gist_detect_filetype = 1
+let g:gist_browser_command = 'w3m %URL%'
 
 " YangRing.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=1234
@@ -495,7 +495,15 @@ let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|e
 " jslint.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=2729
 " =====================================================
-" TODO jslint.vimのオンオフを簡単に 
+function! ToggleJSLintHighlightErrorLine()
+    if g:JSLintHighlightErrorLine == 1
+        let g:JSLintHighlightErrorLine = 0
+    else
+        let g:JSLintHighlightErrorLine = 1
+    endif
+    JSLintUpdate
+endfunc
+autocmd FileType javascript nmap ,e :call ToggleJSLintHighlightErrorLine()<CR>
 
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
@@ -503,3 +511,15 @@ let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|e
 " / で行なう通常の検索と :M/ を入れ替える
 nnoremap / :M/
 nnoremap ,/ /
+
+" NERD_commenter.vim {{{2
+" http://www.vim.org/scripts/script.php?script_id=1218
+" =====================================================
+let g:NERDSpaceDelims = 1
+let g:ERDCompactSexyComs = 1
+
+" grep.vim {{{2
+" http://www.vim.org/scripts/script.php?script_id=311
+" =====================================================
+let Grep_Default_Options = '-i'
+let Grep_Skip_Dirs = 'CVS .svn .git'
