@@ -406,6 +406,9 @@ augroup HtmlExtend
   autocmd BufNewFile *.html 0r $HOME/.vim/templates/skeleton.html
 augroup END
 
+" etc {{{2
+autocmd Bufread,BufNewFile .pentadactylrc setlocal filetype=vimperator
+
 " Plugins: {{{1
 
 " minibufexpl.vim {{{2
