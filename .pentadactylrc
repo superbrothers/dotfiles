@@ -1,0 +1,82 @@
+set wildmode=list:full
+"set complete=
+set guioptions+=n
+set visualbell
+:hi Bell display: none;
+
+set verbose=0
+
+"# mapping
+"########################
+noremap j 3j
+noremap k 3k
+noremap J 3j
+noremap K 3k
+
+noremap h <C-p>
+noremap l <C-n>
+
+noremap <C-h> :tabmove! -1<CR>
+noremap <C-l> :tabmove! +1<CR>
+
+noremap U :undo<Space>
+noremap <C-r> :restart
+noremap e :st<CR>
+
+noremap ! :set invum<CR> // css on/off
+
+map <BS> <A-Left>
+
+noremap ,s :so ~/.pentadactylrc<CR>
+
+"# script
+"########################
+js <<EOM
+// dont work
+/*
+(function(){
+    var feedPanel  = document.createElement('statusbarpanel');
+    var feedButton = document.getElementById('feed-button');
+    feedPanel.setAttribute('id','feed-panel-clone');
+    feedPanel.appendChild(feedButton.cloneNode(true));
+    feedButton.parentNode.removeChild(feedButton);
+    document.getElementById('status-bar').insertBefore(feedPanel,document.getElementById('security-button'));
+})();
+*/
+EOM
+
+"#  qmarks
+"########################
+qmark g https://mail.google.com/
+qmark b http://b.hatena.ne.jp/superbrothers
+qmark t http://twitter.com/
+qmark m http://meme.yahoo.com/home/
+qmark f http://favotter.matope.com/user.php?user=superbrothers
+
+"# style {{{
+"########################
+" CommadLine
+hi Normal       color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi InfoMsg      color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi ModeMsg      color: LightYellow; background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi MoreMsg      color: LimeGreen;   background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi LineNr       color: DeepPink;    background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi Question     color: Yellow;      background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi WarningMsg   color: DeepPink;    background: #333;   font-size: 9pt; font-family: Menlo, Consolas, Monaco, monospace !important;
+hi NonText      background: #333;
+hi Null         color: CornflowerBlue;
+hi Tag          color: CornflowerBlue;
+
+hi CompTitle            color: magenta;     background:#222;    font-weight: bold;
+hi CompItem[selected]   color: DeepPink;    background: Black;
+hi CompDesc             color: Pink;
+hi GradientRight    background-color: Black;
+
+hi Title        color: white;
+hi Indicator    color: DodgerBlue;
+hi String       color: Orchid;
+hi Number       color: Orchid;
+hi Object       color: Khaki;
+hi Function     color: SkyBlue;
+hi URL          color: LightGreen;
+" }}}
