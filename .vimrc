@@ -369,6 +369,15 @@ else
     noremap <Space>p "+p
 endif
 
+" MacVim {{{2
+if has("gui_running")
+  set fuoptions=maxvert,maxhorz
+  au GUIEnter * set fullscreen
+
+  set transparency=10
+  set guifont=M+1VM+IPAG\ circle:h16
+endif
+
 " Filetype settings {{{1
 
 " ruby {{{2
