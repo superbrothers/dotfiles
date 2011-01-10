@@ -445,7 +445,12 @@ nnoremap ,9   :e #9<CR>
 " http://github.com/mattn/gist-vim
 " ====================================================
 let g:gist_detect_filetype = 1
-let g:gist_browser_command = 'w3m %URL%'
+let g:gist_open_browser_after_post = 1
+if has('mac')
+    let g:gist_browser_command = 'open -a Firefox %URL%'
+else
+    let g:gist_browser_command = 'w3c %URL%'
+endif
 
 " YangRing.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=1234
