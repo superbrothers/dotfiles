@@ -80,7 +80,7 @@ qmark g https://mail.google.com/
 qmark b http://b.hatena.ne.jp/superbrothers
 qmark t http://twitter.com/
 qmark m http://meme.yahoo.com/home/
-qmark f http://favotter.matope.com/user.php?user=superbrothers
+qmark f http://favotter.net/user.php?user=superbrothers
 
 " ////// plugin ///////////////////////////////////////////////
 " #########################

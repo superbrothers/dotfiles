@@ -415,6 +415,21 @@ augroup HtmlExtend
   autocmd BufNewFile *.html 0r $HOME/.vim/templates/skeleton.html
 augroup END
 
+" confluencewiki {{{2
+augroup ConfluenceExtend
+  autocmd!
+  autocmd Bufread,BufNewFile *.cfl setlocal filetype=confluencewiki
+  autocmd Bufread,BufNewFile *.cfl setlocal foldmethod=expr
+  autocmd Bufread,BufNewFile *.cfl setlocal foldexpr=CflFold(v:lnum)
+augroup END
+function! CflFold(lnum)
+  if getline(a:lnum) =~ '^h[1-6]\.'
+    return '>1'
+  else
+    return '='
+  endif
+endfunction
+
 " etc {{{2
 autocmd Bufread,BufNewFile .pentadactylrc setlocal filetype=vimperator
 
