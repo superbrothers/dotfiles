@@ -40,6 +40,7 @@ alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
 alias svim='sudo vim'
+alias r='rails'
 
 ### rvm ###
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then source "$HOME/.rvm/scripts/rvm"; fi
