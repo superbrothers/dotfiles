@@ -28,6 +28,10 @@ export MANPATH=$HOME/share/man:$MANPATH
 ### GEM ###
 # export GEM_HOME=~/.gem/ruby/1.8
 
+### node.js ###
+export NODE_PATH=$HOME/.node/installed/0.3.1/
+export PATH=$HOME/.node/installed/0.3.1/bin/:$PATH
+
 ### ALIAS ###
 alias ls='ls -G'
 alias ll='ls -lhFG'
