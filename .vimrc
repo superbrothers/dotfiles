@@ -97,7 +97,7 @@ set linespace=0
 "コマンドをステータスラインに表示
 set showcmd
 "コマンドラインに使われるスクリーン上の行数
-set cmdheight=2
+set cmdheight=1
 "閉じ括弧が入力されたとき、対応する括弧を表示
 set showmatch
 "強調表示
@@ -111,14 +111,8 @@ set cursorline
 "256色
 set t_Co=256
 "使用するカラースキーム
-colorscheme wombat256
-"statusline
-"highlight LineNr ctermfg=darkgrey
-"highlight Comment ctermfg=DarkCyan
-" 補完候補の色づけ for vim7
-hi Pmenu        ctermfg=Black ctermbg=Grey
-hi PmenuSel     ctermbg=Blue
-hi PmenuSbar    ctermbg=Cyan
+"colorscheme wombat256
+colorscheme lucius
 
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするGetB(を使用)
 if has('iconv')
@@ -326,7 +320,7 @@ function! InsertTabWrapper()
         return "\<c-x>\<c-o>"
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <silent> <tab> <c-r>=InsertTabWrapper()<cr>
 
 " Command: {{{1
 
@@ -375,7 +369,7 @@ if has("gui_running")
   au GUIEnter * set fullscreen
 
   set transparency=10
-  set guifont=M+1VM+IPAG\ circle:h16
+  set guifont=M+1VM+IPAG\ circle:h14
 endif
 
 " Filetype settings {{{1
