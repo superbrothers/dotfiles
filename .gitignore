@@ -1,2 +1,4 @@
-_vimperator/info/*
-_vim/.netrwhist
+.DS_Store
+*.swp
+/_vimperator/info/*
+/_vim/.netrwhist
