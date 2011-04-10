@@ -1,0 +1,151 @@
+" Options
+" Show or hide Firefox's GUI elements like the menu bar, toolbars or the tab bar.
+set gui=none,tabs
+" Items which are completed at the :open prompts
+set complete=tsl
+" the default search engine
+set defsearch=google
+" visualbell
+set novisualbell
+" error message level
+set verbose=1
+" editor
+set editor=set editor='/usr/bin/mvim -f'
+" Controls which characters are used to generate hint labels
+set hintchars=ifjklasdhguonmerwc
+
+set noscrollbars
+
+" Mappings
+" undo一覧から開く
+noremap U :undo<Space>
+" <C-r> でブラウザ再起動
+noremap <C-r> :restart
+" e で読み込み中止
+noremap e :st<CR>
+" 上のディレクトリに移動
+noremap <BS> gu
+noremap <C-BS> gU
+" j/k スクロール幅変更
+noremap j 3j
+noremap k 3k
+noremap J 3j
+noremap K 3k
+" タブ移動
+noremap h <C-p>
+noremap l <C-n>
+" タブ順序変更
+noremap <C-h> :tabmove! -1<CR>
+noremap <C-l> :tabmove! +1<CR>
+" buffer
+noremap <silent> . :buffer<Space>
+" !  でページのCSSをon/off
+noremap ! :set invum<CR>
+" Backspaceに戻るを割当
+map <BS> <A-Left>
+" .vimperatorrc読み込み
+noremap ,s :so ~/.vimperatorrc<CR>
+
+" qmarks
+qmark r javascript:location.href='http://reader.livedoor.com/subscribe/'+location.href
+qmark g https://mail.google.com/
+qmark b http://b.hatena.ne.jp/superbrothers
+qmark t http://twitter.com/
+qmark m http://meme.yahoo.com/home/
+qmark f http://favstar.fm/users/superbrothers/recent
+
+" Plugins
+" twittperator
+noremap ,t :twittperator<Space>
+"noremap ,T :twittperator!
+noremap ,T :twittperator!
+noremap ,@ :twittperator!@
+" ChirpUserStream
+let g:twittperator_use_chirp = 1
+" echo-tweet.tw
+let g:twittperator_plugin_echo_tweet = 1
+" reply-popup-alert.tw
+let g:twittperator_plugin_reply_popup_alert = 1
+let g:twittperator_screen_name = "superbrothers"
+
+" feedSomeKeys_3.js
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='www\.google\.co\.jp/reader' -events=vkeypress j k n p m s v A r S N P X O gh ga gs gt gu u / ? J K
+lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
+lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
+lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k
+lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/detail' u
+
+" hatenabookmark.js
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+javascript <<EOF
+liberator.globalVariables.hBookmark_shortcuts = {
+    hintsAdd     : 'c',
+    hintsComment : 'C',
+    add          : ['c'],
+    comment      : ['C'],
+};
+EOF
+noremap s :hbtab<Space>
+noremap S :hbtab<Space>
+"set complete+=H
+
+" copy.js
+noremap ,c :copy<Space>
+javascript <<EOM
+liberator.globalVariables.copy_templates = [
+    { label: 'titleAndURL',    value: '%TITLE% %URL%' },
+    { label: 'title',          value: '%TITLE%' },
+    { label: 'url',            value: '%URL%' },
+    { label: 'hatena',         value: '[%URL%:title=%TITLE%]' },
+    { label: 'hatenacite',     value: '>%URL%:title=%TITLE%>\n%SEL%\n<<' },
+    { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }
+];
+EOM
+
+" sbm_incsearch.js
+let sbmincsearch_service_name = "googlebookmarks"
+let sbmincsearch_max = 10
+autocmd VimperatorEnter .* :set complete+=I
+
+" direct_bookmark.js
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+let g:direct_sbm_is_normalize = "false"
+let g:direct_sbm_is_use_migemo = "true"
+noremap B :bentry<CR>
+"noremap a :sbm<CR>
+noremap A :sbm<Space>
+"noremap ,a :btags<CR>
+
+" Greasemonkey Hack
+js <<EOM
+autocommands.add('VimperatorEnter', '.*',
+  function() {
+    let gm = Components.classes['@greasemonkey.mozdev.org/greasemonkey-service;1'];
+    if (gm) {
+      gm = gm.getService().wrappedJSObject;
+      if (gm.injectScripts.toSource().search('sharedWindow') == -1) {
+          gm.injectScripts = liberator.eval(
+              gm.injectScripts.toSource()
+                  .replace(/(?=var firebugConsole)/,
+                          'var sharedWindow = {};' +
+                          'sharedWindow.window = sharedWindow;' +
+                          'sharedWindow.__proto__ = new XPCNativeWrapper(unsafeContentWin);')
+                  .replace(/(?=sandbox\.__proto__)/, ' sandbox.window = sharedWindow;'),
+              gm.injectScripts);
+      }
+    }
+  });
+EOM
+
+" Configs for Firefox
+" 閉じるボタンを表示
+set! browser.tabs.closeButtons=3
+" undo limit
+set! browser.sessionstore.max_tabs_undo=100
+
+" Style
+hi Hint -append font-family: "Lucida Grande", "Segoe UI", sans-serif; font-size: 11px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; padding: 2px 5px;

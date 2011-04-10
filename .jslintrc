@@ -1,2 +1,0 @@
-/*jslint undef: true, eqeqeq: true, plusplus: true, regexp: true, indent: 2 */
-/*global jquery, $, document, window, GM_deleteValue, GM_getValue, GM_listValues, GM_setValue, GM_getResourceText, GM_getResourceURL, GM_addStyle, GM_xmlhttpRequest, GM_log, GM_openInTab, GM_registerMenuCommand*/
