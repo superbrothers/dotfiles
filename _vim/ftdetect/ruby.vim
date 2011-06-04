@@ -1,14 +1,4 @@
-" Ruby
-au BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspec	set filetype=ruby
-
-" Ruby on Rails
-au BufNewFile,BufRead *.builder,*.rxml,*.rjs		set filetype=ruby
-
-" Rakefile
-au BufNewFile,BufRead [rR]akefile,*.rake		set filetype=ruby
-
-" Rantfile
-au BufNewFile,BufRead [rR]antfile,*.rant		set filetype=ruby
-
-" eRuby
-au BufNewFile,BufRead *.erb,*.rhtml			set filetype=eruby
+autocmd FileType ruby,eruby setlocal fileencoding=utf-8
+autocmd FileType ruby,eruby setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+autocmd BufNewFile *.rb 0r $HOME/.vim/templates/skeleton.rb

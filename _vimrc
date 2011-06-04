@@ -1,9 +1,50 @@
-" Options: {{{1
-
-" initialize {{{2
+" initialize {{{1
 
 set nocompatible
 set shellslash
+filetype off
+
+" Vundle {{{2
+" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle.git
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Bundle files {{{3
+" plugin {{{4
+" github
+Bundle 'gmarik/vundle'
+Bundle 'mattn/gist-vim '
+Bundle 'Shougo/neocomplcache'
+Bundle 'hallettj/jslint.vim'
+Bundle 'othree/eregex.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+Bundle 'pix/vim-align'
+" vim-scripts repos
+Bundle 'minibufexpl.vim'
+Bundle 'YankRing.vim'
+Bundle 'grep.vim'
+Bundle 'renamer.vim'
+
+" syntax {{{4
+" github
+Bundle 'tpope/vim-haml'
+Bundle 'kchmck/vim-coffee-script'
+
+" vim-scripts repos
+Bundle 'confluencewiki.vim'
+
+" colorscheme {{{4
+" github
+Bundle 'larssmit/Lucius'
+Bundle 'mrkn/mrkn256.vim'
+Bundle 'vim-scripts/wombat256.vim'
+
+
+
+" Options: {{{1
 
 " encoding {{{2
 
@@ -374,64 +415,13 @@ endif
 
 " Filetype settings {{{1
 
-" ruby {{{2
-augroup RubyExtend
-  autocmd!
-  autocmd FileType ruby,eruby setlocal fileencoding=utf-8
-  autocmd FileType ruby,eruby setlocal ts=2 sts=2 sw=2
-  autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
-  autocmd BufNewFile *.rb 0r $HOME/.vim/templates/skeleton.rb
-augroup END
-
-" javascript {{{2
-augroup JavascriptExtend
-  autocmd!
-  autocmd FileType javascript setlocal fileencoding=utf-8
-  autocmd FileType javascript setlocal ts=2 sts=2 sw=2
-augroup END
-
-" php {{{2
-augroup PhpExtend
-  autocmd!
-  autocmd FileType php setlocal fileencoding=utf-8
-  autocmd FileType php setlocal ts=4 sts=4 sw=4
-  autocmd Bufread,BufNewFile *.inc setlocal filetype=php
-  autocmd BufNewFile *.php,*.inc 0r $HOME/.vim/templates/skeleton.php
-  " enable folding for classes and functions
-  let php_folding = 1
-augroup END
-
-" html {{{2
-augroup HtmlExtend
-  autocmd!
-  autocmd FileType html setlocal fileencoding=utf-8
-  autocmd FileType html setlocal ts=4 sts=4 sw=4
-  autocmd BufNewFile *.html 0r $HOME/.vim/templates/skeleton.html
-augroup END
-
-" confluencewiki {{{2
-augroup ConfluenceExtend
-  autocmd!
-  autocmd Bufread,BufNewFile *.cfl setlocal filetype=confluencewiki
-  autocmd Bufread,BufNewFile *.cfl setlocal foldmethod=expr
-  autocmd Bufread,BufNewFile *.cfl setlocal foldexpr=CflFold(v:lnum)
-augroup END
-function! CflFold(lnum)
-  if getline(a:lnum) =~ '^h[1-6]\.'
-    return '>1'
-  else
-    return '='
-  endif
-endfunction
-
-" etc {{{2
-autocmd Bufread,BufNewFile .pentadactylrc setlocal filetype=vimperator
+autocmd Bufread,BufNewFile *.inc setlocal filetype=php
+autocmd Bufread,BufNewFile *.cfl setlocal filetype=confluencewiki
+autocmd Bufread,BufNewFile *.pentadactylrc setlocal filetype=vimperator
 
 " Plugins: {{{1
 
 " minibufexpl.vim {{{2
-" http://www.vim.org/scripts/script.php?script_id=159
-" =====================================================
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplSplitBelow=0
 let g:miniBufExplMapWindowNavArrows=1
@@ -451,8 +441,6 @@ nnoremap ,8   :e #8<CR>
 nnoremap ,9   :e #9<CR>
 
 " gist.vim {{{2
-" http://github.com/mattn/gist-vim
-" ====================================================
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 if has('mac')
@@ -462,15 +450,11 @@ else
 endif
 
 " YangRing.vim {{{2
-" http://www.vim.org/scripts/script.php?script_id=1234
-" =====================================================
 let g:yankring_history_file = ".yankring_history_file"
 
 nmap ,y :YRShow<CR>
 
 " neocomplcache {{{2
-" http://www.vim.org/scripts/script.php?script_id=2620
-" =====================================================
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
@@ -519,8 +503,6 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::'
 
 " jslint.vim {{{2
-" http://www.vim.org/scripts/script.php?script_id=2729
-" =====================================================
 function! ToggleJSLintHighlightErrorLine()
     if g:JSLintHighlightErrorLine == 1
         let g:JSLintHighlightErrorLine = 0
@@ -549,3 +531,6 @@ let g:ERDCompactSexyComs = 1
 " =====================================================
 let Grep_Default_Options = '-i'
 let Grep_Skip_Dirs = 'CVS .svn .git'
+
+" finalize {{{1
+filetype plugin indent on
