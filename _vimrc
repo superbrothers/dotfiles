@@ -22,8 +22,10 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
 Bundle 'pix/vim-align'
+Bundle 'scrooloose/nerdtree'
+Bundle 'rwfitzge/vim-bclose'
+Bundle 'fholgado/minibufexpl.vim'
 " vim-scripts repos
-Bundle 'minibufexpl.vim'
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
 Bundle 'renamer.vim'
@@ -286,7 +288,7 @@ inoremap <A-f> <S-Right>
 nnoremap <silent> bb :b#<CR>
 nnoremap <silent> bp :bp<CR>
 nnoremap <silent> bn :bn<CR>
-nnoremap <silent> bd :bd<CR>
+nnoremap <silent> bd :Bclose<CR>
 "nnoremap ls :ls<CR>:b
 
 " date/time {{{2
@@ -424,7 +426,7 @@ autocmd Bufread,BufNewFile *.pentadactylrc setlocal filetype=vimperator
 " minibufexpl.vim {{{2
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplSplitBelow=0
-let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplMapWindowNavArrows=0
 let g:miniBufExplMapCTabSwitchBuffs=1
 let g:miniBufExplModSelTarget=1
 let g:miniBufExplSplitToEdge=1
