@@ -2,3 +2,4 @@
 *.swp
 /_vimperator/info/*
 /_vim/.netrwhist
+/_vim/bundle/*
