@@ -25,6 +25,7 @@ Bundle 'pix/vim-align'
 Bundle 'scrooloose/nerdtree'
 Bundle 'rwfitzge/vim-bclose'
 Bundle 'fholgado/minibufexpl.vim'
+Bundle 'edsono/vim-viewoutput'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -468,7 +469,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_min_syntax_length = 4
 "let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
