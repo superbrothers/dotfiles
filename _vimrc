@@ -5,7 +5,7 @@ set shellslash
 filetype off
 
 " Vundle {{{2
-" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle.git
+" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
