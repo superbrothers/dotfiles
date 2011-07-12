@@ -35,6 +35,8 @@ Bundle 'renamer.vim'
 " github
 Bundle 'tpope/vim-haml'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'vim-scripts/JavaScript-syntax'
+Bundle 'vim-scripts/jade.vim'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
