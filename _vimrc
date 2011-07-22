@@ -26,6 +26,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'rwfitzge/vim-bclose'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'edsono/vim-viewoutput'
+Bundle 'tpope/vim-fugitive'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -46,8 +47,6 @@ Bundle 'confluencewiki.vim'
 Bundle 'larssmit/Lucius'
 Bundle 'mrkn/mrkn256.vim'
 Bundle 'vim-scripts/wombat256.vim'
-
-
 
 " Options: {{{1
 
@@ -407,15 +406,6 @@ if has('mac') && !has('gui')
 else
     noremap <Space>y "+y
     noremap <Space>p "+p
-endif
-
-" MacVim {{{2
-if has("gui_running")
-  set fuoptions=maxvert,maxhorz
-  au GUIEnter * set fullscreen
-
-  set transparency=10
-  set guifont=M+1VM+IPAG\ circle:h14
 endif
 
 " Filetype settings {{{1

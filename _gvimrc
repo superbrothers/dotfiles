@@ -293,4 +293,8 @@ endif
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
+
+  set guioptions-=rL
+  set guifont=M+1VM+IPAG\ circle:h13
+  set transparency=10
 endif
