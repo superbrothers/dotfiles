@@ -41,9 +41,14 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias svim='sudo vim'
 alias r='rails'
+alias g='git'
+alias b='bundle'
 
 ### rvm ###
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then source "$HOME/.rvm/scripts/rvm"; fi
+
+### git-completion ###
+source /usr/local/etc/bash_completion.d/git-completion.bash
 
 ### FUNCTION ###
 cd() { command cd $@; ls; }
@@ -68,8 +73,8 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
 
 ### SCREEN ###
-if [ $SHLVL -eq 1 ]; then
-    if which screen > /dev/null 2>&1; then
-        screen -UxR
-    fi
-fi
+#if [ $SHLVL -eq 1 ]; then
+#    if which screen > /dev/null 2>&1; then
+#        screen -UxR
+#    fi
+#fi
