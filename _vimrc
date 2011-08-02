@@ -27,6 +27,7 @@ Bundle 'rwfitzge/vim-bclose'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'edsono/vim-viewoutput'
 Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/sudo.vim'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
