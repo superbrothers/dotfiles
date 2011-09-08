@@ -1,0 +1,11 @@
+# Load zsh extentions
+for ext_file ($ZSH/extentions/*.zsh) source $ext_file
+
+# Load all of zsh config files
+for config_file ($ZSH/*.zsh) source $config_file
+
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# nave
+[[ -s "$HOME/.nave/nave.sh" ]] && alias nave="$HOME/.nave/nave.sh"
