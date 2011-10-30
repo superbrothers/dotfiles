@@ -28,6 +28,7 @@ Bundle 'fholgado/minibufexpl.vim'
 Bundle 'edsono/vim-viewoutput'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/sudo.vim'
+Bundle 'ujihisa/neco-rubymf'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -48,6 +49,7 @@ Bundle 'confluencewiki.vim'
 Bundle 'larssmit/Lucius'
 Bundle 'mrkn/mrkn256.vim'
 Bundle 'vim-scripts/wombat256.vim'
+"Bundle 'altercation/vim-colors-solarized'
 
 " Options: {{{1
 
@@ -462,7 +464,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 " Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 4
+let g:neocomplcache_min_syntax_length = 3
 "let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
@@ -507,12 +509,11 @@ function! ToggleJSLintHighlightErrorLine()
     endif
     JSLintUpdate
 endfunc
-autocmd FileType javascript nmap ,e :call ToggleJSLintHighlightErrorLine()<CR>
+autocmd FileType javascript nmap <silent>,e :call ToggleJSLintHighlightErrorLine()<CR>
 
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
 " =====================================================
-" / で行なう通常の検索と :M/ を入れ替える
 nnoremap / :M/
 nnoremap ,/ /
 
