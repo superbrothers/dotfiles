@@ -5,7 +5,11 @@ for ext_file ($ZSH/extentions/*.zsh) source $ext_file
 for config_file ($ZSH/*.zsh) source $config_file
 
 # rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+    source "$HOME/.rvm/scripts/rvm"
+elif [ -x `which gem` ]; then
+    PATH="`gem env | perl -ne 'print $1 if /EXECUTABLE DIRECTORY: (.+)$/'`":$PATH
+fi
 
 # nave
 [[ -s "$HOME/.nave/nave.sh" ]] && alias nave="$HOME/.nave/nave.sh"
