@@ -4,9 +4,13 @@ setopt PROMPT_SUBST
 autoload -U colors && colors
 
 nodebrew_node_version() {
-    NODEBREW=`which nodebrew`
-    if [ ! -z "$NODEBREW" ]; then
-        NODE_VERSION=`$NODEBREW  ls | tail -n 1 | egrep -o '[0-9\.]+'`
-        echo "%{$fg[yellow]%}[node-$NODE_VERSION]%{$reset_color%}"
+    if [ -n "`which nodebrew`" ]; then
+        if [ -z "$NODEBREW_ROOT" ]; then
+            NODEBREW_ROOT="$HOME/.nodebrew"
+        fi
+        NODE_VERSION=`ls -l $NODEBREW_ROOT/current | egrep -o 'v[0-9\.]+'`
+        if [ -n "$NODE_VERSION" ]; then
+            echo "%{$fg[yellow]%}[node-$NODE_VERSION]%{$reset_color%}"
+        fi
     fi
 }
