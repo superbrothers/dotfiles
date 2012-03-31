@@ -4,7 +4,7 @@ setopt PROMPT_SUBST
 autoload -U colors && colors
 
 nodebrew_node_version() {
-    if [ -n "`which nodebrew`" ]; then
+    if which nodebrew >/dev/null; then
         if [ -z "$NODEBREW_ROOT" ]; then
             NODEBREW_ROOT="$HOME/.nodebrew"
         fi
