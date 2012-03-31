@@ -295,6 +295,6 @@ if has("gui_running")
   au GUIEnter * set fullscreen
 
   set guioptions-=rL
-  set guifont=M+1VM+IPAG\ circle:h13
+  set guifont=M+1VM+IPAG\ circle:h16
   set transparency=10
 endif
