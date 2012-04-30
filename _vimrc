@@ -14,9 +14,10 @@ call vundle#rc()
 " plugin {{{4
 " github
 Bundle 'gmarik/vundle'
-Bundle 'mattn/gist-vim '
+Bundle 'mattn/gist-vim'
 Bundle 'Shougo/neocomplcache'
-Bundle 'hallettj/jslint.vim'
+" Bundle 'hallettj/jslint.vim'
+Bundle 'scrooloose/syntastic'
 Bundle 'othree/eregex.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-ruby/vim-ruby'
@@ -29,6 +30,7 @@ Bundle 'edsono/vim-viewoutput'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'ujihisa/neco-rubymf'
+Bundle 'mrtazz/simplenote.vim'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -40,6 +42,7 @@ Bundle 'tpope/vim-haml'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/JavaScript-syntax'
 Bundle 'vim-scripts/jade.vim'
+Bundle 'superbrothers/vim-vimperator'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
@@ -500,17 +503,6 @@ endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php  = '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::'
 
-" jslint.vim {{{2
-function! ToggleJSLintHighlightErrorLine()
-    if g:JSLintHighlightErrorLine == 1
-        let g:JSLintHighlightErrorLine = 0
-    else
-        let g:JSLintHighlightErrorLine = 1
-    endif
-    JSLintUpdate
-endfunc
-autocmd FileType javascript nmap <silent>,e :call ToggleJSLintHighlightErrorLine()<CR>
-
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
 " =====================================================
@@ -528,6 +520,17 @@ let g:ERDCompactSexyComs = 1
 " =====================================================
 let Grep_Default_Options = '-i'
 let Grep_Skip_Dirs = 'CVS .svn .git'
+
+" vim-coffee-script {{{2
+" let coffee_compile_vert = 1
+
+" simplenote.vim {{{2
+source ~/.vim/config/simplenote.vimrc
+
+" syntastic {{{2
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': ['ruby'],
+                           \ 'passive_filetypes': [] }
 
 " finalize {{{1
 filetype plugin indent on
