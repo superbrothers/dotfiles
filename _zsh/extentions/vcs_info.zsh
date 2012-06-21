@@ -23,6 +23,7 @@ function _update_vcs_info_msg() {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     psvar[2]=$(_git_not_pushed)
+    psvar[3]=$(_git_stash_count)
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -40,6 +41,13 @@ function _git_not_pushed() {
     return 0
 }
 
+function _git_stash_count() {
+    COUNT=`git stash list 2>/dev/null | wc -l | tr -d ' '`
+    if [ "$COUNT" -gt 0 ]; then
+        echo "\$$COUNT"
+    fi
+}
+
 vcs_info_msg() {
-    echo "%1(v|%{$fg[cyan]%}%1v%2v%f|)${vcs_info_git_pushed}%{$reset_color%}"
+    echo "%1(v|%{$fg[cyan]%}%1v%2v%3v%f|)${git_stash_count}%{$reset_color%}"
 }
