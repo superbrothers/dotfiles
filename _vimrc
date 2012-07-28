@@ -49,7 +49,7 @@ Bundle 'confluencewiki.vim'
 
 " colorscheme {{{4
 " github
-Bundle 'larssmit/Lucius'
+Bundle 'vim-scripts/Lucius'
 Bundle 'mrkn/mrkn256.vim'
 Bundle 'vim-scripts/wombat256.vim'
 "Bundle 'altercation/vim-colors-solarized'
