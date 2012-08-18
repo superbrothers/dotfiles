@@ -1,3 +1,3 @@
-if which npm 1>/dev/null; then
+if [[ -x `which -p npm ` ]]; then
     . <(npm completion)
 fi
