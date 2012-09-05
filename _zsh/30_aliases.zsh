@@ -13,7 +13,7 @@ alias bl='bundle list'
 alias be='bundle exec'
 alias bc='bundle console'
 alias nb='nodebrew'
-if [[ -x `which -p hub` ]]; then
+if [ -x "`which hub 2>/dev/null`" ]; then
     alias git='hub'
 fi
 alias g='git'

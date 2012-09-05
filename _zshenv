@@ -1,3 +1,5 @@
 ZSH=$HOME/.zsh
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -x "`which rbenv`" ]; then
+    eval "$(rbenv init -)"
+fi
