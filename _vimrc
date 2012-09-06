@@ -163,6 +163,7 @@ set cursorline
 set t_Co=256
 "使用するカラースキーム
 "colorscheme wombat256
+let g:lucius_style = "dark"
 colorscheme lucius
 
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするGetB(を使用)
