@@ -44,6 +44,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/JavaScript-syntax'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'superbrothers/vim-vimperator'
+Bundle 'hail2u/vim-css3-syntax'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
