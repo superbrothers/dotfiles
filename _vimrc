@@ -31,6 +31,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'ujihisa/neco-rubymf'
 Bundle 'mrtazz/simplenote.vim'
+Bundle 'Lokaltog/vim-powerline'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -166,30 +167,32 @@ set t_Co=256
 let g:lucius_style = "dark"
 colorscheme lucius
 
+" use powerline.vim
+"
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするGetB(を使用)
-if has('iconv')
-    set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
-else
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P
-endif
-
-function! GetB() " {{{
-    let c = matchstr(getline('.'), '.', col('.') - 1)
-    let c = iconv(c, &enc, &fenc)
-    return s:String2Hex(c)
-endfunction
-" :help eval-examples
-" The function Nr2Hex() returns the Hex string of a number.
-function! s:Nr2Hex(nr)
-    let n = a:nr
-    let r = ''
-    while n
-        let r = '0123456789ABCDEF'[n % 16] . r
-        let n = n / 16
-    endwhile
-    return r
-endfunc
-" }}}
+" if has('iconv')
+"     set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
+" else
+"     set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P
+" endif
+"
+" function! GetB() " {{{
+"     let c = matchstr(getline('.'), '.', col('.') - 1)
+"     let c = iconv(c, &enc, &fenc)
+"     return s:String2Hex(c)
+" endfunction
+" " :help eval-examples
+" " The function Nr2Hex() returns the Hex string of a number.
+" function! s:Nr2Hex(nr)
+"     let n = a:nr
+"     let r = ''
+"     while n
+"         let r = '0123456789ABCDEF'[n % 16] . r
+"         let n = n / 16
+"     endwhile
+"     return r
+" endfunc
+" " }}}
 
 " backup {{{2
 
