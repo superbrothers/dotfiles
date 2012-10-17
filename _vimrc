@@ -15,6 +15,7 @@ call vundle#rc()
 " github
 Bundle 'gmarik/vundle'
 Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
 Bundle 'Shougo/neocomplcache'
 " Bundle 'hallettj/jslint.vim'
 Bundle 'scrooloose/syntastic'
