@@ -199,9 +199,9 @@ colorscheme lucius
 " backup {{{2
 
 set backup
-set backupdir=$HOME/.backup/
+set backupdir=$HOME/.vim-bak/
 set swapfile
-set directory=$HOME/.backup/
+set directory=$HOME/.vim-bak/
 set viewdir=$HOME/.vim/view/
 
 " tab {{{2
