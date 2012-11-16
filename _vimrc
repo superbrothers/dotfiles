@@ -56,6 +56,7 @@ Bundle 'vim-scripts/Lucius'
 Bundle 'mrkn/mrkn256.vim'
 Bundle 'vim-scripts/wombat256.vim'
 "Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
 
 " Options: {{{1
 
