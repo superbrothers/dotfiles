@@ -1,3 +1,5 @@
 [user]
 	name = superbrothers
 	email = superbrothers@shisobu.in
+[color]
+	ui = auto
