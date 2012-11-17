@@ -26,13 +26,15 @@ Bundle 'tpope/vim-rails'
 Bundle 'pix/vim-align'
 Bundle 'scrooloose/nerdtree'
 Bundle 'superbrothers/vim-bclose'
-Bundle 'fholgado/minibufexpl.vim'
+" Bundle 'fholgado/minibufexpl.vim'
 Bundle 'edsono/vim-viewoutput'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'ujihisa/neco-rubymf'
 Bundle 'mrtazz/simplenote.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimfiler'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -549,6 +551,8 @@ nnoremap ,/ /
 " =====================================================
 let g:NERDSpaceDelims = 1
 let g:ERDCompactSexyComs = 1
+nmap ,, <Plug>NERDCommenterToggle
+vmap ,, <Plug>NERDCommenterToggle
 
 " grep.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=311
@@ -566,6 +570,40 @@ source ~/.vim/config/simplenote.vimrc
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': ['ruby'],
                            \ 'passive_filetypes': [] }
+
+" unite.vim {{{2
+""" unite.vim
+" 入力モードで開始する
+let g:unite_enable_start_insert=0
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+" 常用セット
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+" 全部乗せ
+nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+" vimfiler.vim {{{2
+vimデフォルトのエクスプローラをvimfilerで置き換える
+let g:vimfiler_as_default_explorer = 1
+nnoremap <silent> ,vf :<C-u>VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
+nnoremap <silent> ,vfb :<C-u>VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
+
 
 " finalize {{{1
 filetype plugin indent on
