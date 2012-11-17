@@ -349,7 +349,8 @@ nmap ,e :execute '!' &ft ' %'<CR>
 nmap ,d :set fileformat=dos<cr>
 nmap ,m :set fileformat=mac<cr>
 nmap ,u :set fileformat=unix<cr>
-
+"pasteモードトグル
+nnoremap <Space>tp :<C-u>set paste!<CR>
 
 " Function: {{{1
 
