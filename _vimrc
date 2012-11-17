@@ -318,12 +318,12 @@ nnoremap cl :close<CR>
 nnoremap  gh :nohlsearch<Return>
 
 " 検索語が画面の真ん中に来るようにする {{{2
-"nmap n nzz
-"nmap N Nzz
-"nmap * *zz
-"nmap # #zz
-"nmap g* g*zz
-"nmap g# g#zz
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
 
 " quick-vimrc {{{2
 ".vimrcを開く
