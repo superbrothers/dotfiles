@@ -3,3 +3,29 @@
 	email = superbrothers@shisobu.in
 [color]
 	ui = auto
+[merge]
+	ff = false
+[pull]
+	rebase = true
+[alias]
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	b = branch -a
+	br = browse-remote
+	ci = commit
+	co = checkout
+	d = diff
+	dc = diff --cached
+	di = diff
+	dic = diff --cached
+	f = fetch --prune
+	fs = !git f && git su
+	ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore
+	info = remote show origin
+	l = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+	ll = log --stat --abbrev-commit
+	ln = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
+	lp = log --oneline -n 20 -p
+	ls = log --stat --abbrev-commit -n 1 # display previous log
+	s = status --short --branch
+	st = status
+	su = submodule update
