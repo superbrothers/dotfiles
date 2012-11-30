@@ -352,6 +352,19 @@ nmap ,u :set fileformat=unix<cr>
 "pasteモードトグル
 nnoremap <Space>tp :<C-u>set paste!<CR>
 
+" folding {{{2
+noremap <Space>j zj
+noremap <Space>k zk
+noremap <Space>n ]z
+noremap <Space>p [z
+noremap <Space>h zc
+noremap <Space>l zo
+noremap <Space>a za
+noremap <Space>m zM
+noremap <Space>i zMzv
+noremap <Space>r zR
+noremap <Space>f zf
+
 " Function: {{{1
 
 " function String2Hex {{{2
