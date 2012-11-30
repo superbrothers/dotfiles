@@ -353,17 +353,17 @@ nmap ,u :set fileformat=unix<cr>
 nnoremap <Space>tp :<C-u>set paste!<CR>
 
 " folding {{{2
-noremap <Space>j zj
-noremap <Space>k zk
-noremap <Space>n ]z
-noremap <Space>p [z
-noremap <Space>h zc
-noremap <Space>l zo
-noremap <Space>a za
-noremap <Space>m zM
-noremap <Space>i zMzv
-noremap <Space>r zR
-noremap <Space>f zf
+noremap ,j zj
+noremap ,k zk
+noremap ,n ]z
+noremap ,p [z
+noremap ,h zc
+noremap ,l zo
+noremap ,a za
+noremap ,m zM
+noremap ,i zMzv
+noremap ,r zR
+noremap ,f zf
 
 " Function: {{{1
 
