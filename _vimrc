@@ -426,7 +426,8 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 " export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
 "
 " Vim(Mac)
-if has('mac') && !has('gui')
+" if has('mac') && !has('gui')
+if stridx(tolower(system('uname')), 'darwin') >= 0 && !has('gui')
     nnoremap <silent> <Space>y :.w !pbcopy<CR><CR>
     vnoremap <silent> <Space>y :w !pbcopy<CR><CR>
     nnoremap <silent> <Space>p :r !pbpaste<CR>
