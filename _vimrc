@@ -267,6 +267,9 @@ set wildmenu
 set wildmode=list:longest,full
 "omni補完できるようにする
 setlocal omnifunc=syntaxcomplete#Complete
+" プレビューウィンドウを展開しない
+" http://vim.wikia.com/wiki/Omnicomplete_-_Remove_Python_Pydoc_Preview_Window
+set completeopt-=preview
 
 " help {{{2
 
