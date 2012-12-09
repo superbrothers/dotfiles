@@ -2,6 +2,8 @@ setlocal fileencoding=utf-8
 setlocal ts=4 sts=4 sw=4
 nmap ,e :SyntasticToggleMode<CR>
 
+let g:node_usejscomplete = 1
+
 " npm install -g jslint
 "nmap <F4> :w<CR>:make<CR>:cw<CR>
 "setlocal makeprg=jslint\ %
