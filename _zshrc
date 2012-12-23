@@ -1,5 +1,8 @@
 # Load zsh extentions
 for ext_file ($ZSH/extentions/*.zsh) source $ext_file
+if [ -f ~/.zsh/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.zsh/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Load all of zsh config files
 for config_file ($ZSH/*.zsh) source $config_file
