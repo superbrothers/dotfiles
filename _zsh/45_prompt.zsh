@@ -1,3 +1,3 @@
-PROMPT="%{$fg[red]%}${USER} %{$fg[white]%}in %{$fg[green]%}${HOST} %{$fg[white]%}at %{$fg[cyan]%}%~%{$reset_color%}
+PROMPT="%B%(?.%F{green}(^_^%)%f.%F{red}(>_<%)%f)%b %{$fg[red]%}${USER} %{$fg[white]%}in %{$fg[green]%}${HOST} %{$fg[white]%}at %{$fg[cyan]%}%~%{$reset_color%}
 %# "
 RPROMPT='$(rbenv_version)$(nodebrew_node_version)$(vcs_info_msg)[%D %T]'
