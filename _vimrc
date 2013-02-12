@@ -61,6 +61,7 @@ Bundle 'mrkn/mrkn256.vim'
 Bundle 'vim-scripts/wombat256.vim'
 "Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 " Options: {{{1
 
