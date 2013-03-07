@@ -279,6 +279,10 @@ set completeopt-=preview
 " 日本語ヘルプを使う
 set helplang=ja
 
+" modeline
+set modeline
+set modelines=5
+
 " filetype {{{2
 
 filetype plugin indent on
