@@ -37,6 +37,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimfiler'
 Bundle 'teramako/jscomplete-vim'
 Bundle 'myhere/vim-nodejs-complete'
+Bundle 'airblade/vim-gitgutter'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
