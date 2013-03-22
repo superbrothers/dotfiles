@@ -641,6 +641,8 @@ let g:vimfiler_as_default_explorer = 1
 nnoremap <silent> ,vf :<C-u>VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 nnoremap <silent> ,vfb :<C-u>VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 
+" Vundler {{{2
+let g:vundle_default_git_proto = "git"
 
 " finalize {{{1
 filetype plugin indent on
