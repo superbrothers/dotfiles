@@ -19,3 +19,5 @@ export PATH=$HOME/.rbenv/bin:$PATH
 if [ -x "`which rbenv`" ]; then
     eval "$(rbenv init -)"
 fi
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
