@@ -644,5 +644,8 @@ nnoremap <silent> ,vfb :<C-u>VimFiler -buffer-name=explorer -split -simple -winw
 " Vundler {{{2
 let g:vundle_default_git_proto = "git"
 
+" Powerline {{{2
+let g:Powerline_symbols = 'fancy'
+
 " finalize {{{1
 filetype plugin indent on
