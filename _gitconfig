@@ -17,6 +17,7 @@
 	dc = diff --cached
 	di = diff
 	dic = diff --cached
+	dw = diff --color-words --word-diff
 	f = fetch --prune
 	fs = !git f && git su
 	ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore
