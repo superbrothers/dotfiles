@@ -21,3 +21,6 @@ if [ -x "`which rbenv 2>/dev/null`" ]; then
 fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# auto exec screen
+[ $SHLVL -eq 1 -a -x "`which screen 2>/dev/null`" ] && screen -UxR
