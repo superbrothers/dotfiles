@@ -33,6 +33,7 @@ Bundle 'vim-scripts/sudo.vim'
 Bundle 'ujihisa/neco-rubymf'
 Bundle 'mrtazz/simplenote.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'stephenmckinney/vim-solarized-powerline'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimfiler'
 Bundle 'teramako/jscomplete-vim'
@@ -646,6 +647,8 @@ let g:vundle_default_git_proto = "git"
 
 " Powerline {{{2
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_theme='short'
+let g:Powerline_colorscheme='solarized256_dark'
 
 " finalize {{{1
 filetype plugin indent on
