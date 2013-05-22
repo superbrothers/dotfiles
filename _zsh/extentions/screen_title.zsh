@@ -2,7 +2,7 @@
 ## show remote hostname during ssh
 #
 # PermitLocalCommand yes
-# LocalCommand [[ "$TERM" =~ ^screen ]] && echo -ne "\ek$(echo %h | awk 'BEGIN{FS="."}{print $1}')\e\\"
+# LocalCommand [[ "$TERM" =~ ^screen ]] && echo -ne "\ek$(echo %h | awk -F "." '{print $1}')\e\\"
 #
 autoload -Uz add-zsh-hook
 function _precmd_screen_title() {
