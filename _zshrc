@@ -27,3 +27,5 @@ for config_file ($ZSH/*.zsh) source $config_file
 
 # uniq path
 typeset -U path
+
+# vim: set ft=zsh :
