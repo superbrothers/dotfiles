@@ -7,9 +7,7 @@ fi
 
 # rbenv
 export PATH=$HOME/.rbenv/bin:$PATH
-if [ -x "`which rbenv 2>/dev/null`" ]; then
-    eval "$(rbenv init -)"
-fi
+[ -x "`which rbenv 2>/dev/null`" ] && eval "$(rbenv init -)"
 
 # Load zsh extentions
 for ext_file ($ZSH/extentions/*.zsh) source $ext_file
