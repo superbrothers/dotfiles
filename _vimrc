@@ -420,11 +420,6 @@ command! Jis       Iso2022jp
 command! Sjis      Cp932
 
 " Ex: {{{1
-" screen {{{2
-if &term =~ "screen"
-  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | silent!  exe '!echo -n "^[kv:%^[\\    "' | endif
-  autocmd VimLeave * silent!  exe '!echo -n "^[k[`basename $PWD`]^[\\"'
-endif
 
 " 前回終了したカーソル行に移動 {{{2
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
