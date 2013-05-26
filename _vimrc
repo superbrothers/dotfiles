@@ -483,7 +483,10 @@ else
 endif
 
 " YangRing.vim {{{2
-let g:yankring_history_file = ".yankring_history_file"
+let g:yinkring_history_file = ".yankring_history_file"
+let g:yankring_paste_v_akey = ''
+let g:yankring_paste_v_bkey = ''
+let g:yankring_paste_v_key  = ''
 
 nmap ,y :YRShow<CR>
 
