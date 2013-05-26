@@ -20,8 +20,10 @@ for config_file ($ZSH/*.zsh) source $config_file
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# auto exec screen
-[ $SHLVL -eq 1 -a -x "`which screen 2>/dev/null`" ] && screen -UxR
+if [ $ITERM_PROFILE != "Hotkey Window" -a \
+     $SHLVL -eq 1 -a -x "`which screen 2>/dev/null`" ]; then
+    exec screen -UxR
+fi
 
 # uniq path
 typeset -U path
