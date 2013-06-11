@@ -39,6 +39,7 @@ Bundle 'Shougo/vimfiler'
 Bundle 'teramako/jscomplete-vim'
 Bundle 'myhere/vim-nodejs-complete'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'sorah/presen.vim'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -66,6 +67,7 @@ Bundle 'vim-scripts/wombat256.vim'
 Bundle 'tomasr/molokai'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'jnurmine/Zenburn'
 
 " Options: {{{1
 
@@ -175,9 +177,7 @@ set cursorline
 "256色
 set t_Co=256
 "使用するカラースキーム
-"colorscheme wombat256
-let g:lucius_style = "dark"
-colorscheme lucius
+colorscheme zenburn
 
 " use powerline.vim
 "
