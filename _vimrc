@@ -52,6 +52,7 @@ Bundle 'vim-scripts/JavaScript-syntax'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'superbrothers/vim-vimperator'
 Bundle 'hail2u/vim-css3-syntax'
+Bundle 'plasticboy/vim-markdown'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
