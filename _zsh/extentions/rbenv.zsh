@@ -4,10 +4,12 @@ setopt PROMPT_SUBST
 autoload -U colors && colors
 
 rbenv_version() {
-    if [[ -x "`which rbenv 2>/dev/null`" ]]; then
-        VERSION=`rbenv version | egrep -o '^[0-9a-z\.-]+'`
-        if [ -n "$VERSION" ]; then
-            echo "%{$fg[red]%}[ruby-$VERSION]%{$reset_color%}"
+    if [ -n "$RBENV_ROOT" ]; then
+        if [ -r .ruby-version ]; then
+            VERSION=`cat .ruby-version`
+        else
+            VERSION=`cat "${RBENV_ROOT}/version"`
         fi
+        echo "%{$fg[red]%}[$VERSION]%{$reset_color%}"
     fi
 }
