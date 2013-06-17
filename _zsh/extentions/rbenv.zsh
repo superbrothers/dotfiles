@@ -3,7 +3,9 @@ setopt PROMPT_SUBST
 
 autoload -U colors && colors
 
-[ -z "$RBENV_ROOT" ] && export RBENV_ROOT=`rbenv root`
+if `which rbenv >/dev/null 2>&1` && [ -z "$RBENV_ROOT" ]; then
+    export RBENV_ROOT=`rbenv root`
+fi
 
 rbenv_version() {
     if [ -n "$RBENV_ROOT" ]; then
