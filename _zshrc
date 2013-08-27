@@ -24,6 +24,9 @@ if [ "$ITERM_PROFILE" != "Hotkey Window" -a \
     screen -UxR
 fi
 
+# nvm
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
+
 # uniq path
 typeset -U path
 
