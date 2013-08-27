@@ -32,14 +32,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'ujihisa/neco-rubymf'
 Bundle 'mrtazz/simplenote.vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'stephenmckinney/vim-solarized-powerline'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimfiler'
 Bundle 'teramako/jscomplete-vim'
 Bundle 'myhere/vim-nodejs-complete'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'sorah/presen.vim'
+Bundle 'itchyny/lightline.vim'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -179,33 +178,6 @@ set cursorline
 set t_Co=256
 "使用するカラースキーム
 colorscheme zenburn
-
-" use powerline.vim
-"
-" iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするGetB(を使用)
-" if has('iconv')
-"     set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
-" else
-"     set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P
-" endif
-"
-" function! GetB() " {{{
-"     let c = matchstr(getline('.'), '.', col('.') - 1)
-"     let c = iconv(c, &enc, &fenc)
-"     return s:String2Hex(c)
-" endfunction
-" " :help eval-examples
-" " The function Nr2Hex() returns the Hex string of a number.
-" function! s:Nr2Hex(nr)
-"     let n = a:nr
-"     let r = ''
-"     while n
-"         let r = '0123456789ABCDEF'[n % 16] . r
-"         let n = n / 16
-"     endwhile
-"     return r
-" endfunc
-" " }}}
 
 " backup {{{2
 
@@ -646,9 +618,64 @@ nnoremap <silent> ,vfb :<C-u>VimFiler -buffer-name=explorer -split -simple -winw
 " Vundler {{{2
 let g:vundle_default_git_proto = "git"
 
-" Powerline {{{2
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme='solarized256_dark'
+" lightline.vim
+" https://github.com/itchyny/lightline.vim#my-settings
+let g:lightline = {
+      \ 'colorscheme': 'solarized_dark',
+      \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'modified': 'MyModified',
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
+        \  &ft == 'unite' ? unite#get_status_string() : 
+        \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') : 
+        \ '' != expand('%t') ? expand('%t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  return &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+endfunction
+
+function! MyFileformat()
+  return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
 
 " finalize {{{1
 filetype plugin indent on
