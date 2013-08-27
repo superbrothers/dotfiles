@@ -54,6 +54,7 @@ Bundle 'vim-scripts/jade.vim'
 Bundle 'superbrothers/vim-vimperator'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'elzr/vim-json'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
@@ -647,7 +648,6 @@ let g:vundle_default_git_proto = "git"
 
 " Powerline {{{2
 let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme='short'
 let g:Powerline_colorscheme='solarized256_dark'
 
 " finalize {{{1
