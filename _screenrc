@@ -1,3 +1,4 @@
+term xterm-256color
 termcapinfo xterm-256color 'is=^[r^[m^[2J^[H^[?7h^[?1;4;6l'
 termcapinfo xterm-256color 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
 defbce "on"
@@ -20,6 +21,6 @@ startup_message off
 vbell off
 logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
 caption always "%{= Kk} %?%F%{b kK}%? %?%h%:%t (#%n)%? %{-}"
-hardstatus alwayslastline "%{= Gk} %-Lw%40L>%{b kg} %n %t %{-}%+Lw%-025=%{b kb} %Y/%m/%d %{=b km}%C:%s %A "
+hardstatus alwayslastline "%{= Gk} %-Lw%40L>%{b kg} %n %t %{-}%+Lw%-025=%{b kb} %Y/%m/%d %{=b km}%c:%s"
 sorendition "= Kk"
 shelltitle '$ |shell'
