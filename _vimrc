@@ -179,6 +179,8 @@ set cursorline
 set t_Co=256
 "使用するカラースキーム
 colorscheme zenburn
+"コピー/ペーストにクリップボードを利用する
+set clipboard=unnamed
 
 " backup {{{2
 
@@ -398,28 +400,6 @@ command! Sjis      Cp932
 
 " 前回終了したカーソル行に移動 {{{2
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-
-" クリップボード共有 {{{2
-" reference
-" http://subtech.g.hatena.ne.jp/cho45/20061010/1160459376
-" http://vim.wikia.com/wiki/Mac_OS_X_clipboard_sharing
-"
-" need 'set enc=utf-8' and
-" below shell environment variable for UTF-8 characters
-" export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
-"
-" Vim(Mac)
-" if has('mac') && !has('gui')
-if stridx(tolower(system('uname')), 'darwin') >= 0 && !has('gui')
-    nnoremap <silent> <Space>y :.w !pbcopy<CR><CR>
-    vnoremap <silent> <Space>y :w !pbcopy<CR><CR>
-    nnoremap <silent> <Space>p :r !pbpaste<CR>
-    vnoremap <silent> <Space>p :r !pbpaste<CR>
-" GVim(Mac & Win)
-else
-    noremap <Space>y "+y
-    noremap <Space>p "+p
-endif
 
 " Filetype settings {{{1
 
