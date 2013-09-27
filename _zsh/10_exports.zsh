@@ -5,3 +5,6 @@ export PATH=$HOME/Dropbox/root/bin:$HOME/.nodebrew/current/bin:/usr/local/bin:$P
 export MANPATH=$HOME/share/man:$MANPATH
 export RBENV_ROOT=/usr/local/var/rbenv #Used Homebrew
 export WORDCHARS='*_[]~;!%^(){}<>'
+# coreutils
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

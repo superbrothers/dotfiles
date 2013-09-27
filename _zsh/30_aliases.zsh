@@ -1,12 +1,6 @@
-if [[ $OSTYPE =~ "^linux-" ]]; then
-    alias ls='ls --color'
-    alias ll='ls -lhF --color'
-    alias la='ls -ahF --color'
-else
-    alias ls='ls -G'
-    alias ll='ls -lhFG'
-    alias la='ls -ahFG'
-fi
+alias ls='ls --color'
+alias ll='ls -lhF --color'
+alias la='ls -ahF --color'
 alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
