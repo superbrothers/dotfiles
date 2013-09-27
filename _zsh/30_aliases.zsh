@@ -24,3 +24,4 @@ if [ -x "`which hub 2>/dev/null`" ]; then
 fi
 alias g='git'
 alias gs='git status -sb'
+alias grep='grep --color=auto'
