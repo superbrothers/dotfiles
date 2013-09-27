@@ -40,6 +40,9 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'sorah/presen.vim'
 Bundle 'itchyny/lightline.vim'
 Bundle 'Yggdroot/indentLine'
+Bundle 'thinca/vim-quickrun'
+Bundle 'tyru/open-browser.vim'
+Bundle 'superbrothers/vim-quickrun-markdown-gfm'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -682,5 +685,14 @@ endfunction
 
 " indentLine {{{2
 let g:indentLine_color_term = 239
+
+" quickrun {{{2
+let g:quickrun_config = {
+\ 'markdown': {
+\   'type': 'markdown/gfm',
+\   'outputter': 'browser'
+\ }
+\ }
+
 " finalize {{{1
 filetype plugin indent on
