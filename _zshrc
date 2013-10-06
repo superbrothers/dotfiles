@@ -14,8 +14,7 @@ if [ -s "$HOME/.rvm/scripts/rvm" ]; then
 fi
 
 # rbenv
-export PATH=$HOME/.rbenv/bin:$PATH
-[ -x "`which rbenv 2>/dev/null`" ] && eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
