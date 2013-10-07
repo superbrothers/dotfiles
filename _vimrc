@@ -552,7 +552,7 @@ let Grep_Skip_Dirs = 'CVS .svn .git'
 " let coffee_compile_vert = 1
 
 " simplenote.vim {{{2
-" let g:VimplenoteUsername = 'email address'
+" let g:SimplenoteUsername = 'email address'
 " let g:SimplenotePassword = 'verysecret'
 if filereadable($HOME . "/.simplenote.vim")
     source $HOME/.simplenote.vim
