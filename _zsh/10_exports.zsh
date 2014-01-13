@@ -8,3 +8,7 @@ export WORDCHARS='*_[]~;!%^(){}<>'
 # coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+if which go >/dev/null 2>&1; then
+    export GOROOT="/usr/local/Cellar/go/$(go version | grep -o -e '[0-9]\+.[0-9]\+')/libexec"
+    export GOPATH="$HOME/.go/$(go version | grep -o -e '[0-9]\+.[0-9]\+')"
+fi

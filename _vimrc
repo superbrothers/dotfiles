@@ -4,6 +4,9 @@ set nocompatible
 set shellslash
 filetype off
 
+" for golang {{{2
+set rtp+=$GOROOT/misc/vim
+
 " Vundle {{{2
 " git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
@@ -43,6 +46,7 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'thinca/vim-quickrun'
 Bundle 'tyru/open-browser.vim'
 Bundle 'superbrothers/vim-quickrun-markdown-gfm'
+Bundle 'nsf/gocode', {'rtp': 'vim'}
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -527,6 +531,7 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.go = '\h\w*'
 
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
