@@ -62,6 +62,7 @@ Bundle 'superbrothers/vim-vimperator'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'elzr/vim-json'
+Bundle 'ekalinin/Dockerfile.vim'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
