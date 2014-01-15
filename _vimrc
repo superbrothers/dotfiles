@@ -409,6 +409,9 @@ command! Sjis      Cp932
 " 前回終了したカーソル行に移動 {{{2
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" bash なシンタックスハイライトを利用する
+let g:is_bash = 1
+
 " Filetype settings {{{1
 
 autocmd Bufread,BufNewFile *.inc setlocal filetype=php
