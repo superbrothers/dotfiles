@@ -26,7 +26,11 @@ if [ "$ITERM_PROFILE" != "Hotkey Window" -a \
 fi
 
 # nvm
-[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
+if which brew >/dev/null 2>&1 &&  ! (brew info nvm | grep "Not installed" >/dev/null 2>&1); then
+    source $(brew --prefix nvm)/nvm.sh
+elif [[ -s ~/.nvm/nvm.sh ]]; then
+    source ~/.nvm/nvm.sh
+fi
 
 # uniq path
 typeset -U path
