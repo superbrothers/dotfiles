@@ -20,7 +20,7 @@ escape ^Jj
 startup_message off
 vbell off
 logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
-caption always "%{= Kk} %?%F%{b kK}%? %?%h%:%t (#%n)%? %{-}"
-hardstatus alwayslastline "%{= Gk} %-Lw%40L>%{b kg} %n %t %{-}%+Lw%-025=%{b kb} %Y/%m/%d %{=b km}%c:%s"
+caption always "%{= Kk} %?%F%{= kK}%? %?%h%:%t (%n)%? %{-}"
+hardstatus alwayslastline "%{= kw} %-w%40L>%{u ..}%n %t%{-}%+w%-036=%{= kw}%Y/%m/%d %{= kw}%c:%s [%l]"
 sorendition "= Kk"
 shelltitle '$ |shell'
