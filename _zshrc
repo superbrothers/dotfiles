@@ -32,6 +32,10 @@ elif [[ -s ~/.nvm/nvm.sh ]]; then
     source ~/.nvm/nvm.sh
 fi
 
+# golang
+export GOPATH=$HOME/.go
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
 # uniq path
 typeset -U path
 

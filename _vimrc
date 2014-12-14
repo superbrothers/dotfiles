@@ -1,14 +1,18 @@
+" setup for vundle
+" git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+" setup for golang
+" go get github.com/nsf/gocode
+" go get golang.org/x/tools/cmd/godoc
+" go get golang.org/x/tools/cmd/goimports
+
 " initialize {{{1
 
 set nocompatible
 set shellslash
 filetype off
 
-" for golang {{{2
-set rtp+=$GOROOT/misc/vim
-
 " Vundle {{{2
-" git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -48,7 +52,9 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'thinca/vim-quickrun'
 Bundle 'tyru/open-browser.vim'
 Bundle 'superbrothers/vim-quickrun-markdown-gfm'
-Bundle 'nsf/gocode', {'rtp': 'vim'}
+Bundle 'fatih/vim-go'
+Bundle 'google/vim-ft-go'
+Bundle 'vim-jp/vim-go-extra'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
