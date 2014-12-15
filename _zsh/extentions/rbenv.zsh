@@ -8,7 +8,7 @@ if `which rbenv >/dev/null 2>&1` && [ -z "$RBENV_ROOT" ]; then
 fi
 
 rbenv_version() {
-    if [ -n "$RBENV_ROOT" ]; then
+    if [ -x "`which rbenv 2>/dev/null`" ]; then
         VERSION=''
         NOTFOUND=''
         if [ -r .ruby-version ]; then
