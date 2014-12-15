@@ -713,3 +713,8 @@ let g:quickrun_config = {
 
 " finalize {{{1
 filetype plugin indent on
+
+" .vimrc.local
+if filereadable(glob('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
