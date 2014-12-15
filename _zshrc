@@ -33,8 +33,10 @@ elif [[ -s ~/.nvm/nvm.sh ]]; then
 fi
 
 # golang
-export GOPATH=$HOME/.go
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+if [ -x "`which go 2>/dev/null`" ]; then
+    export GOPATH=$HOME/.go
+    export PATH=$GOPATH/bin:$PATH
+fi
 
 # uniq path
 typeset -U path
