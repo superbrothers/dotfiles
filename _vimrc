@@ -23,7 +23,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
-Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplete.vim'
 " Bundle 'hallettj/jslint.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'othree/eregex.vim'
@@ -464,86 +464,76 @@ let g:yankring_paste_v_bkey = ''
 let g:yankring_paste_v_key  = ''
 
 nmap ,y :YRShow<CR>
-
-" neocomplcache {{{2
+" neocomplete {{{2
 " Disable AutoComplPop. Comment out this line if AutoComplPop is not installed.
 " let g:acp_enableAtStartup = 0
-" Launches neocomplcache automatically on vim startup.
-let g:neocomplcache_enable_at_startup = 1
+" Launches neocomplete automatically on vim startup.
+let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 1
 " Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplete#enable_camel_case_completion = 1
 " Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplete#enable_underbar_completion = 1
 " Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder 
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#min_syntax_length = 3
+" buffer file name pattern that locks neocomplete. e.g. ku.vim or fuzzyfinder 
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define file-type dependent dictionaries.
-let g:neocomplcache_dictionary_filetype_lists = {
+let g:neocomplete#dictionary_filetype_lists = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
     \ }
 
 " Define keyword, for minor languages
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " SuperTab like snippets behavior.
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"imap <expr><TAB> neocomplete#sources#snippets_complete#expandable() ? "\<Plug>(neocomplete#snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=jscomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-
-if !exists('g:neocomplcache_omni_functions')
-  let g:neocomplcache_omni_functions = {}
+" Enable heavy omni completion, which require computational power and may stall the vim.
+if !exists('g:neocomplete#omni_patterns')
+  let g:neocomplete#omni_patterns = {}
 endif
-let g:neocomplcache_omni_functions.ruby = 'rubycomplete#Complete'
-let g:neocomplcache_omni_functions.css = 'csscomplete#CompleteCSS'
-let g:neocomplcache_omni_functions.html = 'htmlcomplete#CompleteTags'
-let g:neocomplcache_omni_functions.markdown = 'htmlcomplete#CompleteTags'
-let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
-let g:neocomplcache_omni_functions.python = 'pythoncomplete#Complete'
-let g:neocomplcache_omni_functions.xml = 'xmlcomplete#CompleteTags'
-
-" Enable heavy omni completion, which require computational power and may stall the vim. 
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.go = '\h\w*'
+let g:neocomplete#omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplete#omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplete#omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+let g:neocomplete#omni_patterns.go = '\h\w*'
 
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
