@@ -557,6 +557,9 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+" Custom snippets
+let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
+
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
 " =====================================================
