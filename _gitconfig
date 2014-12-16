@@ -30,7 +30,7 @@
 	s = status --short --branch
 	st = status
 	su = submodule update
-	changelog = log --pretty=format:'- %s (%h)'
+	changelog = log --pretty=format:'* %s (%h)'
 [ghq]
 	root = ~/src
 [include]
