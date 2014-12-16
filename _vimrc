@@ -24,6 +24,8 @@ Bundle 'gmarik/vundle'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'Shougo/neocomplete.vim'
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 " Bundle 'hallettj/jslint.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'othree/eregex.vim'
@@ -534,6 +536,26 @@ let g:neocomplete#omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplete#omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 let g:neocomplete#omni_patterns.go = '\h\w*'
+
+" neosnippet
+" ==========
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 " eregex.vim {{{2
 " http://www.vim.org/scripts/script.php?script_id=3282
