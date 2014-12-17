@@ -2,12 +2,12 @@
 export PATH=/usr/local/bin:$PATH
 
 for ext_file ($ZSH/extentions/*.zsh) source $ext_file
-if [ -f ~/.zsh/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source ~/.zsh/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f ~/.zsh.d/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.zsh.d/extentions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # Load all of zsh config files
-for config_file ($ZSH/*.zsh) source $config_file
+for config_file ($ZSH/*.zsh.d) source $config_file
 
 # rvm
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
