@@ -76,6 +76,7 @@ Bundle 'elzr/vim-json'
 Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
+Bundle 'chakrit/upstart.vim'
 
 " vim-scripts repos
 Bundle 'confluencewiki.vim'
