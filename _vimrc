@@ -57,6 +57,7 @@ Bundle 'superbrothers/vim-quickrun-markdown-gfm'
 Bundle 'fatih/vim-go'
 Bundle 'google/vim-ft-go'
 Bundle 'vim-jp/vim-go-extra'
+Bundle 'editorconfig/editorconfig-vim'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
