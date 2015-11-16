@@ -730,6 +730,9 @@ let g:quickrun_config = {
 \ }
 \ }
 
+" NERDTree
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
 " finalize {{{1
 filetype plugin indent on
 
