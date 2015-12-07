@@ -15,7 +15,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-if [ "$ITERM_PROFILE" != "Hotkey Window" -a \
+if [ -z "$SSH_TTY" -a "$ITERM_PROFILE" != "Hotkey Window" -a \
      $SHLVL -eq 1 -a -x "`which screen 2>/dev/null`" ]; then
     screen -UxR
 fi
