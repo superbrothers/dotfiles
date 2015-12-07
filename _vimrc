@@ -58,6 +58,7 @@ Bundle 'fatih/vim-go'
 Bundle 'google/vim-ft-go'
 Bundle 'vim-jp/vim-go-extra'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'plasticboy/vim-markdown'
 " vim-scripts repos
 Bundle 'YankRing.vim'
 Bundle 'grep.vim'
@@ -71,7 +72,6 @@ Bundle 'vim-scripts/JavaScript-syntax'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'superbrothers/vim-vimperator'
 Bundle 'hail2u/vim-css3-syntax'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'elzr/vim-json'
 Bundle 'ekalinin/Dockerfile.vim'
 Bundle 'mxw/vim-jsx'
@@ -431,6 +431,7 @@ let g:is_bash = 1
 autocmd Bufread,BufNewFile *.inc setlocal filetype=php
 autocmd Bufread,BufNewFile *.cfl setlocal filetype=confluencewiki
 autocmd Bufread,BufNewFile *.pentadactylrc setlocal filetype=vimperator
+autocmd Bufread,BufNewFile *.md setlocal filetype=markdown
 
 " Plugins: {{{1
 

@@ -1,3 +1,6 @@
+setlocal fileencoding=utf-8
+setlocal ts=2 sts=2 sw=2
+
 " forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7
 
 " todoリストを簡単に入力する
