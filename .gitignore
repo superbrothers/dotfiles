@@ -1,6 +1,2 @@
 .DS_Store
-*.swp
-/_vimperator/info/*
-/_vim/.netrwhist
-/_vim/bundle/*
-/_vim/config/simplenote.vim
+.vim/bundle
