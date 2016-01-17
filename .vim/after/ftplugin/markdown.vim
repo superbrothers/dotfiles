@@ -1,5 +1,6 @@
 setlocal fileencoding=utf-8
 setlocal ts=2 sts=2 sw=2
+setlocal omnifunc=emoji#complete
 
 " forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7
 
@@ -44,8 +45,3 @@ function! ToggleCheckbox()
     call setline('.', l:result)
   end
 endfunction
-
-syn match MkdCheckboxMark /-\s\[x\]\s.\+/ display containedin=ALL
-hi MkdCheckboxMark ctermfg=green
-syn match MkdCheckboxUnmark /-\s\[\s\]\s.\+/ display containedin=ALL
-hi MkdCheckboxUnmark ctermfg=red

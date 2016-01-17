@@ -38,3 +38,5 @@
 	pushInsteadOf = https://github.com/
 [ghq]
 	root = ~/src
+[github]
+    user = superbrothers
