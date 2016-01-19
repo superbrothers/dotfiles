@@ -92,6 +92,8 @@ set cursorline
 set t_Co=256
 colorscheme molokai
 set clipboard=unnamed
+set concealcursor=
+
 
 """ Backup
 set backup
@@ -448,6 +450,11 @@ nmap ,y :YRShow<CR>
 
 " Yggdroot/indentLine {{{
 let g:indentLine_color_term = 239
+let g:indentLine_concealcursor = ''
+" }}}
+
+" plasticboy/vim-markdown {{{
+let g:vim_markdown_folding_disabled = 1
 " }}}
 
 " .vimrc.local {{{
