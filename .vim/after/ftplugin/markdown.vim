@@ -1,5 +1,3 @@
-setlocal fileencoding=utf-8
-setlocal ts=4 sts=4 sw=4
 setlocal omnifunc=emoji#complete
 
 " forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7

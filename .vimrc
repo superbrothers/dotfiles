@@ -104,8 +104,8 @@ set viewdir=$HOME/.vim/view/
 
 """ Tab
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
-set softtabstop=0
 set expandtab
 set shiftround
 
