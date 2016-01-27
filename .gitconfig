@@ -40,3 +40,5 @@
 	root = ~/src
 [github]
     user = superbrothers
+[stash]
+	showPatch = true
