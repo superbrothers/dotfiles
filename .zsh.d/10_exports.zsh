@@ -8,3 +8,6 @@ export WORDCHARS='*_[]~;!%^(){}<>'
 # coreutils
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# gnu-sed
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
