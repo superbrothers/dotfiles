@@ -58,6 +58,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': ['css'] }
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'justmao945/vim-clang', { 'for': ['c', 'cpp'] }
+  Plug 'cespare/vim-toml', { 'for': ['toml'] }
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
