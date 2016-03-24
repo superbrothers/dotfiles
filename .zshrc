@@ -36,6 +36,9 @@ if [ -x "`which go 2>/dev/null`" ]; then
     export PATH=$GOPATH/bin:$PATH
 fi
 
+# brew info zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # uniq path
 typeset -U path
 
