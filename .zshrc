@@ -32,7 +32,7 @@ fi
 
 # golang
 if [ -x "`which go 2>/dev/null`" ]; then
-    export GOPATH=$HOME/.go
+    export GOPATH=$HOME
     export PATH=$GOPATH/bin:$PATH
 fi
 
