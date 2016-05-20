@@ -59,6 +59,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'elzr/vim-json', { 'for': ['json'] }
   Plug 'justmao945/vim-clang', { 'for': ['c', 'cpp'] }
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
+  Plug 'google/vim-jsonnet', { 'for': ['jsonnet', 'libsonnet'] }
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
