@@ -19,3 +19,4 @@ fi
 alias g='git'
 alias gs='git status -sb'
 alias grep='grep --color=auto'
+alias k='kubectl'
