@@ -22,6 +22,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/neosnippet-snippets'
   Plug 'scrooloose/nerdcommenter'
   Plug 'Shougo/unite.vim'
+  Plug 'Shougo/unite-outline'
   Plug 'ujihisa/unite-colorscheme'
   Plug 'Shougo/neomru.vim'
   Plug 'editorconfig/editorconfig-vim'
@@ -35,6 +36,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/YankRing.vim'
   Plug 'noahfrederick/vim-skeleton'
   Plug 'mattn/webapi-vim'
+  Plug 'majutsushi/tagbar'
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
   Plug 'vim-scripts/sudo.vim', { 'on': ['SudoRead', 'SudoWrite'] }
@@ -422,6 +424,7 @@ nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
+nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 " }}}
 
 " justmao945/vim-clang {{{
@@ -466,6 +469,9 @@ let g:indentLine_concealcursor = ''
 " plasticboy/vim-markdown {{{
 let g:vim_markdown_folding_disabled = 1
 " }}}
+
+" majutsushi/tagbar
+noremap <silent> ,t :TagbarToggle<CR>
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
