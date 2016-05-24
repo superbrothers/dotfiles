@@ -36,7 +36,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/YankRing.vim'
   Plug 'noahfrederick/vim-skeleton'
   Plug 'mattn/webapi-vim'
-  Plug 'majutsushi/tagbar'
+  Plug 'majutsushi/tagbar', { 'tag': '*' }
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
   Plug 'vim-scripts/sudo.vim', { 'on': ['SudoRead', 'SudoWrite'] }
@@ -389,9 +389,8 @@ let NERDTreeShowHidden=1
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "" start NERDTree
 autocmd VimEnter * NERDTree
-" go to previous (last accessed) window if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() > 0 && !exists("s:std_in") | wincmd p | endif
+" go to previous (last accessed) window
+autocmd VimEnter * wincmd p | endif
 "" close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " }}}
