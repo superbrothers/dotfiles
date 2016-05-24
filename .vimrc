@@ -390,7 +390,7 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "" start NERDTree
 autocmd VimEnter * NERDTree
 " go to previous (last accessed) window
-autocmd VimEnter * wincmd p | endif
+autocmd VimEnter * wincmd p
 "" close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " }}}
@@ -471,6 +471,7 @@ let g:vim_markdown_folding_disabled = 1
 
 " majutsushi/tagbar
 noremap <silent> ,t :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
