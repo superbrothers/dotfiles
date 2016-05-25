@@ -436,7 +436,9 @@ let g:clang_c_options = '-std=c11'
 " }}}
 
 " scrooloose/syntastic {{{
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = {
   \ 'mode': 'active',
   \ 'active_filetypes': [
@@ -469,9 +471,42 @@ let g:indentLine_concealcursor = ''
 let g:vim_markdown_folding_disabled = 1
 " }}}
 
-" majutsushi/tagbar
+" fatih/vim-go {{{
+let g:go_list_type = "quickfix"
+let g:go_auto_type_info = 1
+" }}}
+
+" majutsushi/tagbar {{{
 noremap <silent> ,t :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
+let g:tagbar_type_go = {
+  \ 'ctagstype' : 'go',
+  \ 'kinds'     : [
+    \ 'p:package',
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types',
+    \ 'n:interfaces',
+    \ 'w:fields',
+    \ 'e:embedded',
+    \ 'm:methods',
+    \ 'r:constructor',
+    \ 'f:functions'
+  \ ],
+  \ 'sro' : '.',
+  \ 'kind2scope' : {
+    \ 't' : 'ctype',
+    \ 'n' : 'ntype'
+  \ },
+  \ 'scope2kind' : {
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'
+  \ },
+  \ 'ctagsbin'  : 'gotags',
+  \ 'ctagsargs' : '-sort -silent'
+\ }
+" }}}
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
