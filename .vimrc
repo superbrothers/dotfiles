@@ -388,7 +388,7 @@ nnoremap ,9   :e #9<CR>
 let NERDTreeShowHidden=1
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "" start NERDTree
-autocmd VimEnter * NERDTree
+autocmd VimEnter * if argc() > 0 && &filetype != "gitcommit" | NERDTree | endif
 " go to previous (last accessed) window
 autocmd VimEnter * wincmd p
 "" close vim if the only window left open is a NERDTree
