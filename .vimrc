@@ -498,9 +498,10 @@ let g:go_fmt_fail_silently = 1
 let g:go_list_type = "quickfix"
 " }}}
 
-" osyo-manga/vim-watchdogs
+" osyo-manga/vim-watchdogs {{{
 let g:watchdogs_check_BufWritePost_enable=1
-
+" }}}
+"
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
   source ~/.vimrc.local
