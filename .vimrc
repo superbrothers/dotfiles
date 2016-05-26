@@ -30,12 +30,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/neoinclude.vim'
   Plug 'Shougo/context_filetype.vim'
   Plug 'pix/vim-align'
-  Plug 'scrooloose/syntastic'
   Plug 'edsono/vim-viewoutput'
   Plug 'Yggdroot/indentLine'
   Plug 'vim-scripts/YankRing.vim'
   Plug 'noahfrederick/vim-skeleton'
   Plug 'mattn/webapi-vim'
+  Plug 'thinca/vim-quickrun'
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  Plug 'osyo-manga/shabadou.vim'
+  Plug 'cohama/vim-hier'
+  Plug 'dannyob/quickfixstatus'
+  Plug 'osyo-manga/vim-watchdogs'
   Plug 'majutsushi/tagbar', { 'tag': '*' }
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
@@ -435,23 +440,6 @@ let g:clang_cpp_completeopt = 'menuone'
 let g:clang_c_options = '-std=c11'
 " }}}
 
-" scrooloose/syntastic {{{
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = {
-  \ 'mode': 'active',
-  \ 'active_filetypes': [
-    \ 'javascript',
-    \ 'ruby',
-    \ 'c',
-    \ 'go',
-    \ 'vim'
-  \ ],
-  \ 'passive_filetypes': []
-  \ }
-" }}}
-
 " vim-scripts/YangRing.vim {{{
 let g:yankring_history_dir = $HOME.'/'
 let g:yankring_history_file = '.yankring_history'
@@ -507,6 +495,16 @@ let g:tagbar_type_go = {
   \ 'ctagsargs' : '-sort -silent'
 \ }
 " }}}
+
+" thinca/vim-quickrun
+if !exists("g:quickrun_config")
+  let g:quickrun_config = {}
+end
+let g:quickrun_config['watchdogs_checker/_'] = {
+  \ 'hook/close_quickfix/enable_exit': 1,
+  \ }
+let g:watchdogs_check_BufWritePost_enable=1
+call watchdogs#setup(g:quickrun_config)
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
