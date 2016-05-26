@@ -48,9 +48,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mrtazz/simplenote.vim', { 'on': ['Simplenote'] }
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'fatih/vim-go', { 'for': ['go'] }
+  Plug 'fatih/vim-go', { 'for': ['go'], 'tag': '*' }
   Plug 'google/vim-ft-go', { 'for': ['go'] }
-  Plug 'vim-jp/vim-go-extra', { 'for': ['go'] }
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby'] }
   Plug 'junegunn/vim-emoji', { 'for': ['markdown', 'gitcommit'] }
@@ -459,11 +458,6 @@ let g:indentLine_concealcursor = ''
 let g:vim_markdown_folding_disabled = 1
 " }}}
 
-" fatih/vim-go {{{
-let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 1
-" }}}
-
 " majutsushi/tagbar {{{
 noremap <silent> ,t :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -496,15 +490,16 @@ let g:tagbar_type_go = {
 \ }
 " }}}
 
-" thinca/vim-quickrun
-if !exists("g:quickrun_config")
-  let g:quickrun_config = {}
-end
-let g:quickrun_config['watchdogs_checker/_'] = {
-  \ 'hook/close_quickfix/enable_exit': 1,
-  \ }
+" fatih/vim-go {{{
+let g:go_list_type = "quickfix"
+let g:go_auto_type_info = 1
+let g:go_fmt_autosave = 1
+let g:go_fmt_fail_silently = 1
+let g:go_list_type = "quickfix"
+" }}}
+
+" osyo-manga/vim-watchdogs
 let g:watchdogs_check_BufWritePost_enable=1
-call watchdogs#setup(g:quickrun_config)
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
