@@ -56,6 +56,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+  Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
   Plug 'moll/vim-node', { 'for': ['javascript'] }
   Plug 'myhere/vim-nodejs-complete', { 'for': ['javascript'] }
   Plug 'tpope/vim-haml', { 'for': ['haml'] }
