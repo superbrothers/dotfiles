@@ -45,7 +45,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
   Plug 'vim-scripts/sudo.vim', { 'on': ['SudoRead', 'SudoWrite'] }
-  Plug 'mrtazz/simplenote.vim', { 'on': ['Simplenote'] }
+  Plug 'mrtazz/simplenote.vim', { 'on': ['SimplenoteNew', 'SimplenoteList', 'SimplenoteOpen'] }
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'fatih/vim-go', { 'for': ['go'], 'tag': '*' }
