@@ -503,7 +503,15 @@ let g:go_list_type = "quickfix"
 " osyo-manga/vim-watchdogs {{{
 let g:watchdogs_check_BufWritePost_enable=1
 " }}}
-"
+
+" thinca/vim-quickrun {{{
+let g:quickrun_config = {
+\   "go/watchdogs_checker": {
+    \  "type": "watchdogs_checker/go_vet"
+  \ }
+\ }
+" }}}
+
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
   source ~/.vimrc.local
