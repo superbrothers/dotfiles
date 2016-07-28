@@ -53,6 +53,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby'] }
   Plug 'junegunn/vim-emoji', { 'for': ['markdown', 'gitcommit'] }
+  Plug 'godlygeek/tabular', { 'for': ['markdown'] }
   Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
   Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
