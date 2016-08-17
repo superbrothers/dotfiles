@@ -104,7 +104,7 @@ set t_Co=256
 colorscheme molokai
 set clipboard=unnamed
 set concealcursor=
-
+set completeopt=menu,menuone
 
 """ Backup
 set backup
