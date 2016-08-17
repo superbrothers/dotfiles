@@ -282,7 +282,7 @@ let g:neocomplete#sources#omni#input_patterns.go = '\h\w*'
 
 " itchyny/lightline.vim {{{
 let g:lightline = {
-  \ 'colorscheme': 'solarized_dark',
+  \ 'colorscheme': 'jellybeans',
   \ 'mode_map': { 'c': 'NORMAL' },
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ]
