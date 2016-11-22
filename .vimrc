@@ -48,7 +48,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mrtazz/simplenote.vim', { 'on': ['SimplenoteNew', 'SimplenoteList', 'SimplenoteOpen'] }
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'fatih/vim-go', { 'for': ['go'], 'tag': '*' }
+  Plug 'fatih/vim-go', { 'for': ['go'] }
   Plug 'google/vim-ft-go', { 'for': ['go'] }
   Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
   Plug 'tpope/vim-rails', { 'for': ['ruby'] }
@@ -285,7 +285,10 @@ let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ 'mode_map': { 'c': 'NORMAL' },
   \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ]
+  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ], [ 'go' ] ]
+  \ },
+  \ 'component': {
+  \   'go': '%#goStatuslineColor#%{LightLineGo()}%*',
   \ },
   \ 'component_function': {
   \   'modified': 'LightLineModified',
@@ -360,6 +363,13 @@ endfunction
 
 function! LightLineMode()
   return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+
+function! LightLineGo()
+  if ! exists('*go#statusline#Show')
+    return ''
+  endif
+  return go#statusline#Show()
 endfunction
 " }}}
 
