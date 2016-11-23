@@ -369,7 +369,7 @@ function! LightLineGo()
   if ! exists('*go#statusline#Show')
     return ''
   endif
-  return go#statusline#Show()
+  return winwidth('.') > 70 ? go#statusline#Show() : ''
 endfunction
 " }}}
 
