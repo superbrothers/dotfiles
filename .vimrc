@@ -5,6 +5,11 @@ if has('vim_starting')
     call system('mkdir -p ~/.vim/plugged/vim-plug')
     call system('git clone https://github.com/junegunn/vim-plug.git ~/.vim/plugged/vim-plug/autoload')
   end
+
+  if !isdirectory(expand('~/.vim-bak'))
+    echo 'Create ~/.vim-bak directory for backup...'
+    call system('mkdir -p ~/.vim-bak')
+  end
 endif
 
 call plug#begin('~/.vim/plugged')
