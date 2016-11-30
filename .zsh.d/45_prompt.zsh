@@ -1,4 +1,4 @@
-PROMPT="%B%(?.%{$fg[green]%}(^_^%).%{$fg[red]%}(>_<%))%b %{$fg[red]%}${USER} %{$fg[white]%}in %{$fg[green]%}${HOST} %{$fg[white]%}at %{$fg[cyan]%}%~%{$reset_color%}
-%# "
-RPROMPT='$(vcs_info_msg)$(rbenv_version)$(nvm_node_version)[%D %T]'
+local ret_status="%(?:%{$fg_bold[green]%}# :%{$fg_bold[red]%}# )"
+PROMPT="${ret_status} %{$fg[cyan]%}%c%{$reset_color%} \$(vcs_info_msg) %{$reset_color%}"
+RPROMPT='%{$fg[blue]%}[$(kubernetes_prompt_info)]%{$reset_color%}'
 setopt transient_rprompt
