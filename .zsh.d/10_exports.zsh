@@ -13,3 +13,5 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+# https://github.com/motemen/ghq
+export GHQ_ROOT="${HOME}/src"
