@@ -24,3 +24,15 @@ caption always "%{= Kk} %?%F%{= kK}%? %?%h%:%n %t%? %{-}"
 hardstatus alwayslastline "%{= kw} %-w%40L>%{u ..}%n %t%{-}%+w%-036=%{= kw}%Y/%m/%d %{= kw}%c:%s [%l]"
 sorendition "= Kk"
 shelltitle '$ |shell'
+
+# Resize window
+bind e eval 'command -c resize' 'echo "Resize window"'
+bind ^e eval 'command -c resize' 'echo "Resize window"'
+bind -c resize h eval 'command -c resize' 'resize -h -1'
+bind -c resize l eval 'command -c resize' 'resize -h +1'
+bind -c resize j eval 'command -c resize' 'resize -v +1'
+bind -c resize k eval 'command -c resize' 'resize -v -1'
+bind -c resize ^h eval 'command -c resize' 'resize -h -1'
+bind -c resize ^l eval 'command -c resize' 'resize -h +1'
+bind -c resize ^j eval 'command -c resize' 'resize -v +1'
+bind -c resize ^k eval 'command -c resize' 'resize -v -1'
