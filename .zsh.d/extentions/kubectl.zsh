@@ -1,9 +1,13 @@
-setopt prompt_subst
-
 FOUND_KUBECTL=0
 if which kubectl >/dev/null 2>&1; then
     FOUND_KUBECTL=1
 fi
+
+## Completion
+test "$FOUND_KUBECTL" -eq 1 && source <(kubectl completion zsh)
+
+## PROMPT
+setopt prompt_subst
 
 function kubernetes_current_context() {
     local context="$(kubectl config current-context)"
