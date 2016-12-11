@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Prepends author and committer lines to the message
+AUTHOR_LINE="$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Author: \1/p')"
+COMMITER_LINE="$(git var GIT_COMMITTER_IDENT | sed -n 's/^\(.*>\).*$/Committer: \1/p')"
+sed -i "2s/^/\n# ${AUTHOR_LINE}\n# ${COMMITER_LINE}\n/" "$1"
