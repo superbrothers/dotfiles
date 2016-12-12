@@ -4,9 +4,6 @@ export PATH=/usr/local/bin:$PATH
 # Load all of zsh config files
 for config_file ($ZSH/*.zsh) source $config_file
 
-# brew install zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # rvm
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
