@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'justmao945/vim-clang', { 'for': ['c', 'cpp'] }
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
   Plug 'google/vim-jsonnet', { 'for': ['jsonnet', 'libsonnet'] }
+  Plug 'miyakogi/seiya.vim'
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
@@ -106,7 +107,8 @@ set hlsearch
 set foldmethod=marker
 set cursorline
 set t_Co=256
-colorscheme molokai
+set background=dark
+colorscheme hybrid
 set clipboard=unnamed
 set concealcursor=
 set completeopt=menu,menuone
@@ -528,6 +530,9 @@ let g:quickrun_config = {
   \ }
 \ }
 " }}}
+
+" thinca/vim-quickrun {{{
+let g:seiya_auto_enable=1
 
 " .vimrc.local {{{
 if filereadable(glob('~/.vimrc.local'))
