@@ -109,7 +109,7 @@ set cursorline
 set t_Co=256
 set background=dark
 colorscheme hybrid
-set clipboard=unnamed
+set clipboard=unnamedplus,unnamed
 set concealcursor=
 set completeopt=menu,menuone
 
