@@ -27,3 +27,9 @@ alias ka='kubectl apply'
 alias kl='kubectl logs'
 alias ke='kubectl exec'
 alias vi='vim'
+
+if [ "$(uname)" = "Linux" ]; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+    alias open='xdg-open'
+fi
