@@ -75,6 +75,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'cespare/vim-toml', { 'for': ['toml'] }
   Plug 'google/vim-jsonnet', { 'for': ['jsonnet', 'libsonnet'] }
   Plug 'miyakogi/seiya.vim'
+  Plug 'tyru/open-browser.vim'
+  Plug 'rafi/vim-unite-issue'
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
@@ -447,6 +449,7 @@ nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+nnoremap <silent> ,ui :<C-u>Unite issue:github<CR>
 " }}}
 
 " justmao945/vim-clang {{{
