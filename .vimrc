@@ -35,7 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/neoinclude.vim'
   Plug 'Shougo/context_filetype.vim'
   Plug 'pix/vim-align'
-  Plug 'edsono/vim-viewoutput'
+  Plug 'vim-scripts/ViewOutput'
   Plug 'Yggdroot/indentLine'
   Plug 'vim-scripts/YankRing.vim'
   Plug 'noahfrederick/vim-skeleton'
