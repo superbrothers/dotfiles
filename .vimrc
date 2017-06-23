@@ -46,6 +46,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'cohama/vim-hier'
   Plug 'dannyob/quickfixstatus'
   Plug 'osyo-manga/vim-watchdogs'
+  Plug 'zerowidth/vim-copy-as-rtf'
   Plug 'majutsushi/tagbar', { 'tag': '*' }
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
