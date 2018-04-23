@@ -78,6 +78,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'miyakogi/seiya.vim'
   Plug 'tyru/open-browser.vim'
   Plug 'rafi/vim-unite-issue'
+  Plug 'mattn/vim-maketable', { 'for': ['markdown'] }
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
