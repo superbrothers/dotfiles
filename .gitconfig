@@ -35,10 +35,16 @@
 	path = ~/.gitconfig.local
 [url "git@github.com:"]
 	pushInsteadOf = git://github.com/
-	pushInsteadOf = https://github.com/
+	insteadOf = https://github.com/
 [github]
     user = superbrothers
 [stash]
 	showPatch = true
 [init]
 	templatedir = ~/.git-template
+[http "https://gopkg.in"]
+	followRedirects = true
+[http]
+	sslVerify = true
+[rebase]
+	autosquash = true
