@@ -30,7 +30,8 @@
 	s = status --short --branch
 	st = status
 	su = submodule update
-	changelog = log --pretty=format:'* %s (%h)'
+	changelog = log --pretty=format:'* %s %h (%an)'
+    authors =  !git log --format='%aN' | sort -u
 [include]
 	path = ~/.gitconfig.local
 [url "git@github.com:"]
@@ -40,6 +41,8 @@
     user = superbrothers
 [stash]
 	showPatch = true
+[includeIf "gitdir:~/src/github.com/zlabjp/"]
+	path = ~/.gitconfig.work
 [init]
 	templatedir = ~/.git-template
 [http "https://gopkg.in"]
