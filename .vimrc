@@ -46,7 +46,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'cohama/vim-hier'
   Plug 'dannyob/quickfixstatus'
   Plug 'osyo-manga/vim-watchdogs'
-  Plug 'zerowidth/vim-copy-as-rtf'
   Plug 'majutsushi/tagbar', { 'tag': '*' }
   Plug 'mattn/gist-vim', { 'on': ['Gist'] }
   Plug 'qpkorr/vim-renamer', { 'on': ['Renamer'] }
@@ -79,6 +78,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tyru/open-browser.vim'
   Plug 'rafi/vim-unite-issue'
   Plug 'mattn/vim-maketable', { 'for': ['markdown'] }
+  if has('macos')
+    Plug 'zerowidth/vim-copy-as-rtf'
+  endif
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
