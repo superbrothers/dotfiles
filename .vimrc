@@ -82,6 +82,8 @@ call plug#begin('~/.vim/plugged')
   if has('macos')
     Plug 'zerowidth/vim-copy-as-rtf'
   endif
+  Plug 'vim-scripts/bats.vim', { 'for': ['bats'] }
+  Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
@@ -115,7 +117,7 @@ set foldmethod=marker
 set cursorline
 set t_Co=256
 set background=dark
-colorscheme hybrid
+colorscheme molokai
 set clipboard=unnamedplus,unnamed
 set concealcursor=
 set completeopt=menu,menuone
