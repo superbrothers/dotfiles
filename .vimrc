@@ -78,7 +78,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tyru/open-browser.vim'
   Plug 'rafi/vim-unite-issue'
   Plug 'mattn/vim-maketable', { 'for': ['markdown'] }
-  Plug 'rhysd/vim-github-actions', { 'for': ['workflow'] }
   if has('macos')
     Plug 'zerowidth/vim-copy-as-rtf'
   endif
