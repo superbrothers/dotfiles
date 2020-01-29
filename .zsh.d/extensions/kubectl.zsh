@@ -12,5 +12,10 @@ if which kubectl >/dev/null 2>&1; then
   fi
 fi
 
+# Completion for Kind
+if which kind >/dev/null 2>&1; then
+  source <(kind completion zsh)
+fi
+
 ## https://github.com/GoogleContainerTools/krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
