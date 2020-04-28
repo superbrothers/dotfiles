@@ -32,6 +32,7 @@
 	su = submodule update
 	changelog = log --pretty=format:'* %s %h (%an)'
     authors =  !git log --format='%aN' | sort -u
+    fixup = commit --fixup=HEAD
 [include]
 	path = ~/.gitconfig.local
 [url "git@github.com:"]
