@@ -93,6 +93,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'chriskempson/vim-tomorrow-theme'
   Plug 'w0ng/vim-hybrid'
   Plug 'jnurmine/Zenburn'
+
+  " vim-lsp
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'ryanolsonx/vim-lsp-typescript'
+  Plug 'mattn/vim-lsp-settings'
   " }}}
 call plug#end()
 
