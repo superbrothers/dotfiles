@@ -44,8 +44,6 @@
     user = superbrothers
 [stash]
 	showPatch = true
-[includeIf "gitdir:~/src/github.com/zlabjp/"]
-	path = ~/.gitconfig.work
 [init]
 	templatedir = ~/.git-template
 [http "https://gopkg.in"]
