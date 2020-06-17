@@ -1,6 +1,7 @@
 [user]
 	name = Kazuki Suda
 	email = kazuki.suda@gmail.com
+	signingkey = F735607417C95F32
 [color]
 	ui = auto
 [merge]
@@ -52,3 +53,7 @@
 	sslVerify = true
 [rebase]
 	autosquash = true
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
