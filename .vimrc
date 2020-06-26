@@ -83,6 +83,7 @@ call plug#begin('~/.vim/plugged')
   endif
   Plug 'vim-scripts/bats.vim', { 'for': ['bats'] }
   Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
+  Plug 'aklt/plantuml-syntax', { 'for': ['plantuml'] }
   " colorscheme
   Plug 'jnurmine/Zenburn'
   Plug 'tomasr/molokai'
