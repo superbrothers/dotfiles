@@ -6,11 +6,11 @@ export MANPATH=$HOME/share/man:$MANPATH
 export RBENV_ROOT=/usr/local/var/rbenv #Used Homebrew
 export WORDCHARS='*_[]~;!%^(){}<>'
 # coreutils
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 # gnu-sed
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix gnu-sed)/libexec/gnuman:$MANPATH"
 # findutils
 export PATH="$(brew --prefix findutils)/libexec/gnubin:$PATH"
 export MANPATH="$(brew --prefix findutils)/libexec/gnuman:$MANPATH"
