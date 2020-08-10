@@ -17,5 +17,8 @@ if which kind >/dev/null 2>&1; then
   source <(kind completion zsh)
 fi
 
+# alias commands
+alias kbb='kubectl run -it --rm busybox --image=busybox:1.28 -- /bin/sh'
+
 ## https://github.com/GoogleContainerTools/krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
