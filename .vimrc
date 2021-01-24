@@ -78,9 +78,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tyru/open-browser.vim'
   Plug 'rafi/vim-unite-issue'
   Plug 'mattn/vim-maketable', { 'for': ['markdown'] }
-  if has('macos')
-    Plug 'zerowidth/vim-copy-as-rtf'
-  endif
+  Plug 'zerowidth/vim-copy-as-rtf'
   Plug 'vim-scripts/bats.vim', { 'for': ['bats'] }
   Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
   Plug 'aklt/plantuml-syntax', { 'for': ['plantuml'] }
@@ -558,3 +556,6 @@ if filereadable(glob('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 " }}}
+
+" google/vim-jsonnet
+let g:jsonnet_fmt_on_save = 0
