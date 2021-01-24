@@ -49,6 +49,10 @@ if [[ -f /usr/local/bin/brew ]]; then
   # gnu-sed
   export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
   export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
+  # gnu-tar
+  export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+  export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$PATH"
 fi
 
 
