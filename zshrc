@@ -252,7 +252,7 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # ===================
 # auto ls
 function auto_ls() {
-  command ls
+  ls
 }
 add-zsh-hook chpwd auto_ls
 
