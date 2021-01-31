@@ -36,3 +36,6 @@ bind -c resize ^h eval 'command -c resize' 'resize -h -1'
 bind -c resize ^l eval 'command -c resize' 'resize -h +1'
 bind -c resize ^j eval 'command -c resize' 'resize -v +1'
 bind -c resize ^k eval 'command -c resize' 'resize -v -1'
+
+# Copy screen copy buffer to the clipboard
+bindkey -m ' ' eval 'stuff \040' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < /tmp/screen-exchange"'
