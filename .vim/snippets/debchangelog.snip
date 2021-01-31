@@ -1,9 +1,0 @@
-snippet     release
-abbr        package (version) distribution; urgency=urgency
-options     head
-	${1:package} (${2:version}) ${3:distribution}; urgency=${4:urgency}
-	
-	  * ${5:TARGET}
-	
-	 -- `substitute(system('git config --get user.name'), '\n$', '', '')` <`substitute(system('git config --get user.email'), '\n$', '', '')`>  `strftime("%a, %d %b %Y %X %z")`
-	

@@ -1,11 +1,9 @@
-setlocal omnifunc=emoji#complete
+" Forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7
 
-" forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7
-
-" todoリストを簡単に入力する
+" Insert todo list item
 abbreviate tl - [ ]
 
-" 入れ子のリストを折りたたむ
+" Collapse the nested list
 setlocal foldmethod=expr foldexpr=MkdCheckboxFold(v:lnum) foldtext=MkdCheckboxFoldText()
 function! MkdCheckboxFold(lnum)
     let line = getline(a:lnum)
@@ -27,11 +25,10 @@ function! MkdCheckboxFoldText()
     return getline(v:foldstart) . ' (' . (v:foldend - v:foldstart) . ' lines) '
 endfunction
 
-" todoリストのon/offを切り替える
+" Toggle On/Off of a todo list item
 nnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
 vnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
 
-" 選択行のチェックボックスを切り替える
 function! ToggleCheckbox()
   let l:line = getline('.')
   if l:line =~ '\-\s\[\s\]'
