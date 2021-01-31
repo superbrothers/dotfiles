@@ -26,8 +26,8 @@ function! MkdCheckboxFoldText()
 endfunction
 
 " Toggle On/Off of a todo list item
-nnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
-vnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
+nnoremap <buffer> <Bslash><Bslash> :call ToggleCheckbox()<CR>
+vnoremap <buffer> <Bslash><Bslash> :call ToggleCheckbox()<CR>
 
 function! ToggleCheckbox()
   let l:line = getline('.')
