@@ -1,1 +1,0 @@
-ZSH=$HOME/.zsh.d
