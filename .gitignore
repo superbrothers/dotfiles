@@ -1,5 +1,2 @@
-.DS_Store
-.vim/plugged
-.vim/.netrwhist
-.vim/view
+vim/plugged
 Brewfile.lock.json

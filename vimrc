@@ -246,7 +246,7 @@ autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " asyncomplete ====================================
-let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 " Force refresh completion
 imap <C-Space> <Plug>(asyncomplete_force_refresh)
