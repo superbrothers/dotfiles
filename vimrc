@@ -261,11 +261,19 @@ endif
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  nmap <silent> <Leader>d <plug>(lsp-type-definition)
-  nmap <silent> <Leader>r <plug>(lsp-references)
-  nmap <silent> <Leader>i <plug>(lsp-implementation)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+
+  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 endfunction
 
 augroup lsp_install
@@ -274,10 +282,6 @@ augroup lsp_install
 augroup END
 
 command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_text_edit_enabled = 1
 
 " tagbar ===============================================
 noremap <Leader>t :TagbarToggle<CR>
