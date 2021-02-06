@@ -10,6 +10,7 @@ install:
 	ln -s $(PWD)/zshrc ~/.zshrc
 	ln -s $(PWD)/gitconfig ~/.gitconfig
 	ln -s $(PWD)/git-template ~/.git-template
+	ln -s $(PWD)/tmux.conf ~/.tmux.conf
 
 .PHONY: uninstall
 uninstall:
@@ -19,3 +20,4 @@ uninstall:
 	rm ~/.zshrc
 	rm ~/.gitconfig
 	rm -r ~/.git-template
+	rm ~/.tmux.conf
