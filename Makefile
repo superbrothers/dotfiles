@@ -11,6 +11,8 @@ install:
 	ln -s $(PWD)/gitconfig ~/.gitconfig
 	ln -s $(PWD)/git-template ~/.git-template
 	ln -s $(PWD)/tmux.conf ~/.tmux.conf
+	mkdir -p ~/.ssh && chmod 700 ~/.ssh
+	ln -s $(PWD)/sshconfig ~/.ssh/config
 
 .PHONY: uninstall
 uninstall:
@@ -21,3 +23,4 @@ uninstall:
 	rm ~/.gitconfig
 	rm -r ~/.git-template
 	rm ~/.tmux.conf
+	rm ~/.ssh/config
