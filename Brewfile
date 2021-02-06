@@ -31,6 +31,7 @@ brew 'watch'
 # https://qiita.com/ykgeek/items/98ecfd0f3e22cea7eb10
 brew 'pinentry-mac'
 brew 'findutils'
+brew 'fzf'
 
 tap 'superbrothers/zsh-kubectl-prompt'
 brew 'zsh-kubectl-prompt'
@@ -46,6 +47,7 @@ cask 'spectacle'
 cask 'google-backup-and-sync'
 cask 'google-cloud-sdk'
 cask 'stay'
+cask '1password-cli'
 
 tap 'homebrew/cask-fonts'
 cask 'font-devicons'
