@@ -10,7 +10,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'superbrothers/vim-bclose'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -35,6 +34,7 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'noahfrederick/vim-skeleton'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'othree/eregex.vim'
+Plug 'ap/vim-buftabline'
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -186,24 +186,6 @@ xnoremap p "_dP
 
 " indentLine ======================================
 let g:indentLine_conceallevel=0
-
-" minibufexpl =====================================
-let g:miniBufExplMapWindowNavVim=1
-let g:miniBufExplSplitBelow=0
-let g:miniBufExplMapWindowNavArrows=0
-let g:miniBufExplMapCTabSwitchBuffs=1
-let g:miniBufExplModSelTarget=1
-let g:miniBufExplSplitToEdge=1
-
-nnoremap ,1   :e #1<CR>
-nnoremap ,2   :e #2<CR>
-nnoremap ,3   :e #3<CR>
-nnoremap ,4   :e #4<CR>
-nnoremap ,5   :e #5<CR>
-nnoremap ,6   :e #6<CR>
-nnoremap ,7   :e #7<CR>
-nnoremap ,8   :e #8<CR>
-nnoremap ,9   :e #9<CR>
 
 " vim-airline ======================================
 let g:airline_theme='molokai'
