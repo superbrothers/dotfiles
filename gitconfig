@@ -32,17 +32,17 @@
 	st = status
 	su = submodule update
 	changelog = log --pretty=format:'* %s %h (%an)'
-    authors =  !git log --format='%aN' | sort -u
-    fixup = commit --fixup=HEAD
+	authors =  !git log --format='%aN' | sort -u
+	fixup = commit --fixup=HEAD
 [include]
 	path = ~/.gitconfig.local
 [url "git@github.com:"]
 	pushInsteadOf = git://github.com/
 	pushInsteadOf = https://github.com/
 [url "git://github.com/"]
-    pullInsteadOf = https://github.com/
+	pullInsteadOf = https://github.com/
 [github]
-    user = superbrothers
+	user = superbrothers
 [stash]
 	showPatch = true
 [init]
@@ -57,3 +57,4 @@
 	program = gpg
 [commit]
 	gpgsign = true
+# vim: ai ts=4 sw=4 sts=4 ft=gitconfig
