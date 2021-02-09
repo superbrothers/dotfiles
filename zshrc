@@ -247,6 +247,12 @@ bindkey '^]' peco-src
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# zsh-autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=("history")
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+
 # ===================
 #    MISC SETTINGS
 # ===================
