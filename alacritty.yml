@@ -1,0 +1,22 @@
+window:
+  decorations: none
+  startup_mode: SimpleFullscreen
+  dynamic_title: false
+font:
+  size: 14
+  normal:
+    family: 'Ricty for Powerline'
+    style: Regular
+  bold:
+    family: 'Ricty for Powerline'
+    style: Bold
+  italic:
+    family: 'Ricty for Powerline'
+    style: Italic
+  bold_italic:
+    family: 'Ricty for Powerline'
+    style: Bold Italic
+background_opacity: 0.9
+mouse:
+  hide_when_typing: true
+  save_to_clipboard: true
