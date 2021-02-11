@@ -35,6 +35,7 @@ Plug 'noahfrederick/vim-skeleton'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'othree/eregex.vim'
 Plug 'ap/vim-buftabline'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -319,6 +320,15 @@ let g:yankring_paste_v_akey = ''
 let g:yankring_paste_v_bkey = ''
 let g:yankring_paste_v_key  = ''
 nmap ,y :YRShow<CR>
+
+" vim-go =================================-=
+let g:go_code_completion_enabled = 0
+let g:go_gopls_enabled = 1
+let g:go_fmt_autosave = 0
+let g:go_mod_fmt_autosave = 0
+let g:go_asmfmt_autosave = 0
+let g:go_metalinter_autosave = 0
+let g:go_auto_type_info = 0
 
 " othree/eregex.vim ==========================================
 nnoremap / :M/
