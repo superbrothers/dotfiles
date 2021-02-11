@@ -180,7 +180,7 @@ inoremap <expr> <TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 " don't yank with replaced word
-xnoremap p "_dp
+xnoremap p "_dP
 
 """ PLUGINS
 
