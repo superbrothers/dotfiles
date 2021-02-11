@@ -2,21 +2,21 @@
 bundle:
 	brew bundle --no-lock
 
-.PHONY: install
-install:
-	ln -s $(PWD)/vimrc ~/.vimrc
-	ln -s $(PWD)/vim ~/.vim
-	ln -s $(PWD)/zshrc ~/.zshrc
-	ln -s $(PWD)/gitconfig ~/.gitconfig
-	ln -s $(PWD)/git-template ~/.git-template
-	ln -s $(PWD)/tmux.conf ~/.tmux.conf
+.PHONY: sync
+sync:
+	test -f ~/.vimrc || ln -s $(PWD)/vimrc ~/.vimrc
+	test -f ~/.vim || ln -s $(PWD)/vim ~/.vim
+	test -f ~/.zshrc || ln -s $(PWD)/zshrc ~/.zshrc
+	test -f ~/.gitconfig || ln -s $(PWD)/gitconfig ~/.gitconfig
+	test -f ~/.git-template || ln -s $(PWD)/git-template ~/.git-template
+	test -f ~/.tmux.conf || ln -s $(PWD)/tmux.conf ~/.tmux.conf
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
-	ln -s $(PWD)/sshconfig ~/.ssh/config
+	test -f ~/.ssh/config || ln -s $(PWD)/sshconfig ~/.ssh/config
 	mkdir -p ~/.config/alacritty
-	ln -s $(PWD)/alacritty.yml ~/.config/alacritty/alacritty.yml
+	test -f ~/.config/alacritty/alacritty.yml || ln -s $(PWD)/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-.PHONY: uninstall
-uninstall:
+.PHONY: clean
+clean:
 	rm -f ~/.vimrc
 	rm -f ~/.vim
 	rm -f ~/.zshrc
