@@ -84,6 +84,10 @@ set background=dark
 let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight SpecialKey ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 """ TAB
 set tabstop=4
