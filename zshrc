@@ -1,6 +1,50 @@
-# ===================
-#   ALIAS
-# ===================
+if [[ ! -d "$HOME/.zinit" ]]; then
+  mkdir -p "$HOME/.zinit"
+  git clone https://github.com/zdharma/zinit.git "$HOME/.zinit/bin"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions \
+
+zinit light-mode for \
+  compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh' \
+    sindresorhus/pure \
+  pick"zsh-lazyload.zsh" \
+    qoomon/zsh-lazyload \
+  pick"kubectl.zsh" \
+    superbrothers/zsh-kubectl-prompt \
+
+## PLUGIN #############################################
+
+# sindresorhus/pure
+zstyle :prompt:pure:git:stash show yes
+
+# zsh-autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=("history")
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# zsh-kubectl-prompt
+# Avoid invoking kubectl command in a script, which will cause lazyload to stop working
+command -v "$HOME/bin/kz" >/dev/null || ln "$(which kubectl)" "$HOME/bin/kz"
+zstyle :zsh-kubectl-prompt: binary kz
+
+### PROMPT ############################################
+
+autoload -U colors && colors
+setopt transient_rprompt
+RPROMPT='%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
+## ALIAS ##############################################
+
 alias ..='cd ..'
 alias ls='ls --color'
 alias ll='ls -lhF --color'
@@ -13,21 +57,17 @@ alias vi='vim'
 alias g='git'
 which hub >/dev/null 2>&1 && alias git=hub
 
-if [ "$(uname)" = "Linux" ]; then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-    alias open='xdg-open'
+if [[ "$(uname)" == "Linux" ]]; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+  alias open='xdg-open'
 fi
 
 alias k='kubectl'
-function kd() {
-  set -x
-  kubectl run -it --rm debug --image=ghcr.io/superbrothers/debug "${@[@]}" -- /bin/bash
-}
+function kd() { set -x; kubectl run -it --rm debug-$(date +%s) --image=ghcr.io/superbrothers/debug "$@" -- /bin/bash }
 
-# ===================
-#    EXPORT
-# ===================
+### EXPORT ####################################
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vim
@@ -63,10 +103,9 @@ fi
 # https://github.com/motemen/ghq
 export GHQ_ROOT="${HOME}/src"
 
-# ===================
-#    HISTORY
-# ===================
-## Command history configuration
+## HISTORY ############################################
+
+# Command history configuration
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
@@ -79,10 +118,8 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-# share command history data
-setopt share_history
 
-# https://github.com/zsh-users/zsh/blob/master/Functions/Zle/history-search-end
+# # https://github.com/zsh-users/zsh/blob/master/Functions/Zle/history-search-end
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -90,76 +127,12 @@ zle -N history-beginning-search-forward-end history-search-end
 setopt auto_pushd
 setopt pushd_ignore_dups
 
-# ===================
-#    PROMPT
-# ===================
-autoload -U colors && colors
-autoload -Uz add-zsh-hook
-setopt promptsubst
+## COMPLETIONS ########################################
 
-# github.com/superbrothers/zsh-kubectl-prompt
-source /usr/local/etc/zsh-kubectl-prompt/kubectl.zsh
-
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats '(%s)-[%b]'
-zstyle ':vcs_info:*' actionformats '(%s)-[%b]' '<!%a>'
-
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr '+'
-zstyle ':vcs_info:git:*' unstagedstr '-'
-zstyle ':vcs_info:git:*' formats '(%c%u%b)'
-zstyle ':vcs_info:git:*' actionformats '(%c%u%b)' '<!%a>'
-
-function _update_vcs_info_msg() {
-  psvar=()
-  LANG=en_US.UTF-8 vcs_info
-  psvar[2]=$(_git_not_pushed)
-  psvar[3]=$(_git_stash_count)
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-  [[ -n "$vcs_info_msg_1_" ]] && psvar[4]="$vcs_info_msg_1_"
-}
-add-zsh-hook precmd _update_vcs_info_msg
-
-function _git_not_pushed() {
-  if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]]; then
-    local head="$(git rev-parse HEAD)"
-    for x in $(git rev-parse --remotes); do
-      if [ "$head" = "$x" ]; then
-        return 0
-      fi
-    done
-    echo "{?}"
-  fi
-  return 0
-}
-
-function _git_stash_count() {
-  local count=`git stash list 2>/dev/null | wc -l | tr -d ' '`
-  if [ "$count" -gt 0 ]; then
-    echo "S$count"
-  fi
-}
-
-function vcs_info_msg() {
-    echo "%1(v|%F{cyan}%1v%2v%3v%f%F{red}%4v%f|)%{$reset_color%}"
-}
-
-local ret_status='%(?:%{$fg_bold[green]%}# :%{$fg_bold[red]%}# )'
-PROMPT="${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(vcs_info_msg) %{$reset_color%}"
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
-setopt transient_rprompt
-
-# ===================
-#    AUTOCOMPLETION
-# ===================
-autoload -Uz compinit && compinit -u
 autoload bashcompinit && bashcompinit
-
 zmodload -i zsh/complist
 
 WORDCHARS=''
-
 unsetopt menu_complete
 unsetopt flowcontrol
 setopt auto_menu
@@ -174,32 +147,14 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
-which hub >/dev/null 2>&1 && compdef hub=git
+lazyload hub -- 'compdef hub=git'
+lazyload kubectl -- 'source <(kubectl completion zsh)'
+lazyload stern -- 'source <(stern --completion=zsh)'
+lazyload clusterctl -- 'source <(clusterctl completion zsh 2>/dev/null)'
+lazyload kind -- 'source <(kind completion zsh; echo compdef _kind kind)'
 
-if which kubectl >/dev/null 2>&1; then
-  source <(kubectl completion zsh)
-  complete -o default -F __start_kubectl k
-fi
+## KEY BINDINGS ######################################
 
-which kind >/dev/null 2>&1 && kind completion zsh > "${fpath[1]}/_kind"
-which stern >/dev/null 2>&1 && source <(stern --completion=zsh)
-which clusterctl >/dev/null 2>&1 && source <(clusterctl completion zsh)
-
-# asdf-vm
-if which asdf >/dev/null 2>&1 && which brew >/dev/null 2>&1; then
-  . /usr/local/opt/asdf/asdf.sh
-  . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-elif [[ -n "${ASDF_DATA_DIR}" ]]; then
-  . "${ASDF_DATA_DIR}/completions/asdf.bash"
-fi
-
-
-# brew info zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-
-# ===================
-#    KEY BINDINGS
-# ===================
 bindkey -e
 bindkey "^p" history-beginning-search-backward-end
 bindkey "^n" history-beginning-search-forward-end
@@ -241,25 +196,14 @@ function peco-src () {
 zle -N peco-src
 bindkey '^]' peco-src
 
-# ===================
-#    PLUGINS
-# ===================
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+## MISC SETTINGS ###################################
 
-# zsh-autosuggestions
-export ZSH_AUTOSUGGEST_STRATEGY=("history")
-export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
-export ZSH_AUTOSUGGEST_USE_ASYNC=1
+# asdf-vm
+. /usr/local/opt/asdf/asdf.sh
+lazyload asdf -- '. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash'
 
-# ===================
-#    MISC SETTINGS
-# ===================
 # auto ls
-function auto_ls() {
-  ls
-}
+function auto_ls() { ls }
 add-zsh-hook chpwd auto_ls
 
 # Senstive functions which are not pushed to Github
