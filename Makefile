@@ -17,10 +17,10 @@ install:
 .PHONY: uninstall
 uninstall:
 	rm ~/.vimrc
-	rm -r ~/.vim
+	rm ~/.vim
 	rm ~/.screenrc
 	rm ~/.zshrc
 	rm ~/.gitconfig
-	rm -r ~/.git-template
+	rm ~/.git-template
 	rm ~/.tmux.conf
 	rm ~/.ssh/config
