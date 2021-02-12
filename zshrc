@@ -45,8 +45,21 @@ zstyle :zsh-kubectl-prompt: binary kz
 
 autoload -U colors && colors
 setopt transient_rprompt
-RPROMPT='%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
+function _number_jobs_prompt_precmd {
+  NUMBER_JOBS=""
+  if [[ $(jobs | wc -l) > 0 ]]; then
+    NUMBER_JOBS="%{$fg[magenta]%}[%j]%{$reset_color%}"
+  fi
+}
+add-zsh-hook precmd _number_jobs_prompt_precmd
+
+RPROMPT=""
+# number jobs
+RPROMPT+='$NUMBER_JOBS '
+# zsh-kubectl-prompt
+RPROMPT+='%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+ 
 ## ALIAS ##############################################
 
 alias ..='cd ..'
