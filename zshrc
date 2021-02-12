@@ -21,6 +21,10 @@ zinit light-mode for \
   pick"kubectl.zsh" \
     superbrothers/zsh-kubectl-prompt \
 
+zinit lucid has'docker' for \
+  as'completion' is-snippet \
+    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+
 ## PLUGIN #############################################
 
 # sindresorhus/pure
