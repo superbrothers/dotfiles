@@ -206,6 +206,9 @@ lazyload asdf -- '. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash'
 function auto_ls() { ls }
 add-zsh-hook chpwd auto_ls
 
+# Rust
+source "$HOME/.cargo/env"
+
 # Senstive functions which are not pushed to Github
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
