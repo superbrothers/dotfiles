@@ -38,7 +38,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # zsh-kubectl-prompt
 # Avoid invoking kubectl command in a script, which will cause lazyload to stop working
-command -v "$HOME/bin/kz" >/dev/null || ln "$(which kubectl)" "$HOME/bin/kz"
+command -v "$HOME/bin/kz" >/dev/null || ln "$(command -v kubectl)" "$HOME/bin/kz"
 zstyle :zsh-kubectl-prompt: binary kz
 
 ### PROMPT ############################################
