@@ -1,6 +1,12 @@
+ifeq ($(shell uname),Darwin)
+BREWFILE_PATH = Brewfile
+else
+BREWFILE_PATH = Brewfile.linux
+endif
+
 .PHONY: bundle
 bundle:
-	brew bundle --no-lock
+	brew bundle --no-lock --file $(BREWFILE_PATH)
 
 .PHONY: sync
 sync:
