@@ -7,6 +7,9 @@ if has('vim_starting')
   end
 endif
 
+" detect os type
+let uname = substitute(system('uname'), '\n', '', '')
+
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'superbrothers/vim-bclose'
@@ -23,7 +26,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/gist-vim', { 'on': ['Gist'] }
 Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile'] }
-Plug 'zerowidth/vim-copy-as-rtf'
 Plug 'majutsushi/tagbar', { 'tag': '*' }
 Plug 'elzr/vim-json', { 'for' : 'json' }
 Plug 'tyru/open-browser.vim'
@@ -44,6 +46,10 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
 Plug 'mattn/vim-lsp-icons'
+
+if uname == 'Darwin'
+  Plug 'zerowidth/vim-copy-as-rtf'
+endif
 call plug#end()
 
 set nocompatible

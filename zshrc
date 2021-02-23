@@ -38,7 +38,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # zsh-kubectl-prompt
 # Avoid invoking kubectl command in a script, which will cause lazyload to stop working
-command -v "$HOME/bin/kz" >/dev/null || ln "$(command -v kubectl)" "$HOME/bin/kz"
+test -f "$HOME/bin/kz" >/dev/null || ln "$(which kubectl)" "$HOME/bin/kz"
 zstyle :zsh-kubectl-prompt: binary kz
 
 ### PROMPT ############################################
@@ -94,22 +94,27 @@ export PATH="${HOME}/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # homebrew
-if [[ -f /usr/local/bin/brew ]]; then
+test -f /home/linuxbrew/.linuxbrew/bin/brew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -f /usr/local/bin/brew && eval $(/usr/local/bin/brew shellenv)
+
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export HOMEBREW_NO_ANALYTICS=1
 
-  export PATH="/usr/local/bin:$PATH"
-
   # coreutils
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  export PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
 
   # gnu-sed
-  export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+  export PATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
   # gnu-tar
-  export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$PATH"
+  export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
+
+  # asdf-vm
+  source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+  lazyload asdf -- ". ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
 fi
 
 
@@ -214,10 +219,6 @@ zle -N peco-src
 bindkey '^]' peco-src
 
 ## MISC SETTINGS ###################################
-
-# asdf-vm
-. /usr/local/opt/asdf/asdf.sh
-lazyload asdf -- '. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash'
 
 # auto ls
 function auto_ls() { ls }
