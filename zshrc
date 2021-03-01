@@ -71,11 +71,18 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias grep='grep --color=auto'
 alias vi='vim'
-alias g='git'
+alias g='hub'
 which hub >/dev/null 2>&1 && alias git=hub
 
 if [[ "$(uname)" == "Linux" ]]; then
-  alias pbcopy='xsel --clipboard --input'
+  # Use clipper for sharing clipboard from remote to local
+  # https://github.com/wincent/clipper
+  if [[ -S "${HOME}/.clipper.sock" ]]; then
+    alias pbcopy='socat - UNIX-CLIENT:$HOME/.clipper.sock'
+  else
+    alias pbcopy='xsel --clipboard --input'
+  fi
+
   alias pbpaste='xsel --clipboard --output'
   alias open='xdg-open'
 fi

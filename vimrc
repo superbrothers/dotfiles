@@ -47,6 +47,9 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
 Plug 'mattn/vim-lsp-icons'
 
+if uname == 'Linux'
+  Plug 'wincent/vim-clipper'
+endif
 if uname == 'Darwin'
   Plug 'zerowidth/vim-copy-as-rtf'
 endif
@@ -343,6 +346,10 @@ let g:go_auto_type_info = 0
 " othree/eregex.vim ==========================================
 nnoremap / :M/
 nnoremap ,/ /
+
+" vim-clipper ================================================
+let g:ClipperAddress = '~/.clipper.sock'
+let g:ClipperPort = 0
 
 """ OTHERS
 

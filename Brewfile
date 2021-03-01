@@ -31,6 +31,7 @@ brew 'fzf'
 brew 'pstree'
 brew 'k9s'
 brew 'kubectx'
+brew 'clipper'
 
 cask 'docker'
 cask 'google-chrome'

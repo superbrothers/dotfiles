@@ -20,3 +20,4 @@ brew 'fzf'
 brew 'pstree'
 brew 'k9s'
 brew 'kubectx'
+brew 'socat' # for clipper
