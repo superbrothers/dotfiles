@@ -29,6 +29,8 @@ brew 'pinentry-mac'
 brew 'findutils'
 brew 'fzf'
 brew 'pstree'
+brew 'k9s'
+brew 'kubectx'
 
 cask 'docker'
 cask 'google-chrome'
