@@ -7,4 +7,7 @@ Host *
   ForwardAgent    yes
   UseKeychain yes
   AddKeysToAgent  yes
+  ControlMaster auto
+  ControlPersist 10
+  ControlPath  ~/.ssh/controlmaster-%r-%h.%p
 # vim: ai ts=2 sw=2 et sts=2 ft=sshconfig
