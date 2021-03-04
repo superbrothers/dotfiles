@@ -1,8 +1,10 @@
 Include ~/.ssh/config.local
 
 Host *
+  IgnoreUnknown UseKeychain,AddKeysToAgent
   ServerAliveInterval 60
   ServerAliveCountMax 3
-  AddKeysToAgent  yes
   ForwardAgent    yes
+  UseKeychain yes
+  AddKeysToAgent  yes
 # vim: ai ts=2 sw=2 et sts=2 ft=sshconfig
