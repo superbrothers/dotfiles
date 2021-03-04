@@ -351,6 +351,10 @@ nnoremap ,/ /
 " vim-clipper ================================================
 let g:ClipperAddress = '~/.clipper.sock'
 let g:ClipperPort = 0
+" disable vim-clipper if ~/.clipper.sock does not exist
+if !empty(glob('~/.clipper.sock'))
+  let g:ClipperLoaded = 1
+endif
 
 """ OTHERS
 
