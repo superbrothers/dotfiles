@@ -35,6 +35,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=("history")
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 # zsh-kubectl-prompt
 # Avoid invoking kubectl command in a script, which will cause lazyload to stop working
@@ -95,6 +96,7 @@ function kd() { set -x; kubectl run -it --rm debug-$(date +%s) --image=ghcr.io/s
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vim
+export GPG_TTY="$(tty)"
 
 export PATH="${HOME}/bin:$PATH"
 # https://github.com/GoogleContainerTools/krew
