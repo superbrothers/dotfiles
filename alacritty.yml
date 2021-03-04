@@ -20,3 +20,5 @@ background_opacity: 0.9
 mouse:
   hide_when_typing: true
   save_to_clipboard: true
+key_bindings:
+- { key: F, mods: Command|Control, action: ToggleSimpleFullscreen }
