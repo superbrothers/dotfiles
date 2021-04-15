@@ -72,6 +72,7 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias grep='grep --color=auto'
 alias vi='vim'
+alias watch='watch '
 alias g='hub'
 which hub >/dev/null 2>&1 && alias git=hub
 
