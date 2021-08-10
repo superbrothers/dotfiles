@@ -103,6 +103,8 @@ export PATH="${HOME}/bin:$PATH"
 # https://github.com/GoogleContainerTools/krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+export TZ=Asia/Tokyo
+
 # homebrew
 test -f /home/linuxbrew/.linuxbrew/bin/brew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 test -f /usr/local/bin/brew && eval $(/usr/local/bin/brew shellenv)
