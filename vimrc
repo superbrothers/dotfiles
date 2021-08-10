@@ -234,7 +234,8 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " NERDTree =========================================
-let NERDTreeShowHidden=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeChDirMode=2
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " start NERDTree
 autocmd VimEnter * if argc() > 0 && &filetype != "gitcommit" | NERDTree | endif
