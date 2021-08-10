@@ -41,6 +41,7 @@ Plug 'othree/eregex.vim'
 Plug 'ap/vim-buftabline'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hashivim/vim-terraform', { 'for': 'tf' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
