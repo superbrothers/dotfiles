@@ -193,10 +193,6 @@ nnoremap <Leader>tp :<C-u>set paste!<CR>
 " no search highlight
 nnoremap  gh :nohlsearch<CR>
 
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr> <S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-
 " don't yank with replaced word
 xnoremap p "_dP
 
