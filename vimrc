@@ -40,6 +40,7 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'othree/eregex.vim'
 Plug 'ap/vim-buftabline'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'hashivim/vim-terraform', { 'for': 'tf' }
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
