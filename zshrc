@@ -124,9 +124,8 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
   export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
 
-  # asdf-vm
+  # asdf-vm. zsh completions will be installed 
   source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
-  lazyload asdf -- ". ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
 fi
 
 
