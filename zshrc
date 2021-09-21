@@ -185,6 +185,7 @@ lazyload stern -- 'source <(stern --completion=zsh)'
 lazyload clusterctl -- 'source <(clusterctl completion zsh 2>/dev/null)'
 lazyload kind -- 'source <(kind completion zsh; echo compdef _kind kind)'
 lazyload helm -- 'source <(helm completion zsh)'
+lazyload flux -- 'source <(flux completion zsh) && compdef _flux flux'
 
 ## KEY BINDINGS ######################################
 
