@@ -42,6 +42,7 @@ Plug 'ap/vim-buftabline'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hashivim/vim-terraform', { 'for': 'tf' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'google/vim-jsonnet'
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
