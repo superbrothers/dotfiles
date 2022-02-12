@@ -205,38 +205,32 @@ zle -N show_buffer_stack
 setopt noflowcontrol
 bindkey '^q' show_buffer_stack
 
-function peco-select-history() {
-  local selected=$(history -n 1 | \
-                      tac  | \
-                      awk '!a[$0]++' | \
-                      peco --query "$LBUFFER")
-
+function fzf-select-history() {
+  local selected="$(history -n 1 | tac  | awk '!a[$0]++' | fzf --reverse --no-sort --query "$LBUFFER")"
   if [[ -n "$selected" ]]; then
     BUFFER="$selected"
     CURSOR=$#BUFFER
     zle reset-prompt
   fi
 }
-zle -N peco-select-history
-bindkey '^R' peco-select-history
+zle -N fzf-select-history
+bindkey '^R' fzf-select-history
 
-# http://qiita.com/ysk_1031/items/8cde9ce8b4d0870a129d
-function peco-src () {
-  local selected_dir=$(ghq list | peco --query "$LBUFFER")
-  if [ -n "$selected_dir" ]; then
-    BUFFER="cd $(ghq root)/${selected_dir}"
+function fzf-select-src () {
+  local selected="$(ghq list | fzf --reverse --preview "tree -C $(ghq root)/{} | head -200")"
+  if [[ -n "$selected" ]]; then
+    cd "$(ghq root)/${selected}"
     zle accept-line
   fi
   zle clear-screen
 }
-
-zle -N peco-src
-bindkey '^]' peco-src
+zle -N fzf-select-src
+bindkey '^]' fzf-select-src
 
 function fzf-select-directory() {
-  local dir="$(z | cut -c 12- | sort -rn | uniq | fzf --reverse --preview 'ls -alh {}')"
-  if [[ -n "$dir" ]]; then
-    cd "$dir"
+  local selected="$(z | cut -c 12- | sort -n | fzf --reverse --preview 'tree -C {} | head -200')"
+  if [[ -n "$selected" ]]; then
+    cd "$selected"
     zle accept-line
   fi
   zle clear-screen
