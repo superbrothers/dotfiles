@@ -213,11 +213,12 @@ nnoremap <leader>gb :Gblame<CR>
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~20%' }
 
-" search 
 nmap <Leader>p :FzfHistory<CR>
 imap <Leader>p <esc>:<C-u>FzfHistory<cr>
 
-" search across files in the current directory
+nmap <Leader>] :FzfGFiles<CR>
+imap <Leader>] <esc>:<C-u>FzfGFiles<CR>
+
 nmap <Leader>[ :FzfFiles<cr>
 imap <Leader>[ <esc>:<C-u>FzfFiles<cr>
 let g:rg_command = '
