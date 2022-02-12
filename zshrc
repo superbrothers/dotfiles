@@ -124,8 +124,11 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
   export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
 
-  # asdf-vm. zsh completions will be installed 
+  # asdf-vm. zsh completions will be installed
   source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+
+  # z: https://github.com/rupa/z
+  source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 fi
 
 
@@ -229,6 +232,17 @@ function peco-src () {
 
 zle -N peco-src
 bindkey '^]' peco-src
+
+function fzf-select-directory() {
+  local dir="$(z | cut -c 12- | sort -rn | uniq | fzf --reverse --preview 'ls -alh {}')"
+  if [[ -n "$dir" ]]; then
+    cd "$dir"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N fzf-select-directory
+bindkey '^[' fzf-select-directory
 
 ## MISC SETTINGS ###################################
 
