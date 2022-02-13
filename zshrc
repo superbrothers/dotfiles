@@ -5,13 +5,13 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
     zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 
 zinit light-mode for \
   compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh' \
@@ -196,14 +196,14 @@ bindkey -e
 bindkey "^p" history-beginning-search-backward-end
 bindkey "^n" history-beginning-search-forward-end
 
-function show_buffer_stack() {
+function show-buffer-stack() {
   POSTDISPLAY="
 stack: $LBUFFER"
   zle push-line-or-edit
 }
-zle -N show_buffer_stack
+zle -N show-buffer-stack
 setopt noflowcontrol
-bindkey '^q' show_buffer_stack
+bindkey '^q' show-buffer-stack
 
 function fzf-select-history() {
   local selected="$(history -n 1 | tac  | awk '!a[$0]++' | fzf --reverse --no-sort --query "$LBUFFER")"
