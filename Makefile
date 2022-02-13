@@ -8,8 +8,14 @@ endif
 bundle:
 	brew bundle --no-lock --file $(BREWFILE_PATH)
 
-.PHONY: sync
-sync:
+.PHONY: sync-brewfile
+sync-brewfile:
+	$(RM) $(BREWFILE_PATH)
+	brew autoremove
+	brew bundle dump --file $(BREWFILE_PATH)
+
+.PHONY: install
+install:
 	test -f ~/.vimrc || ln -s $(PWD)/vimrc ~/.vimrc
 	test -d ~/.vim || ln -s $(PWD)/vim ~/.vim
 	test -f ~/.zshrc || ln -s $(PWD)/zshrc ~/.zshrc
@@ -23,8 +29,8 @@ sync:
 	mkdir -p ~/.config/alacritty
 	test -f ~/.config/alacritty/alacritty.yml || ln -s $(PWD)/alacritty.yml ~/.config/alacritty/alacritty.yml
 
-.PHONY: clean
-clean:
+.PHONY: uninstall
+uninstall:
 	rm -f ~/.vimrc
 	rm -f ~/.vim
 	rm -f ~/.zshrc
