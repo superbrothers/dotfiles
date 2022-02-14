@@ -150,15 +150,10 @@ setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
 # ignore duplication command history list
-setopt hist_ignore_dups 
+setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-
-# # https://github.com/zsh-users/zsh/blob/master/Functions/Zle/history-search-end
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
 
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -193,8 +188,6 @@ lazyload flux -- 'source <(flux completion zsh) && compdef _flux flux'
 ## KEY BINDINGS ######################################
 
 bindkey -e
-bindkey "^p" history-beginning-search-backward-end
-bindkey "^n" history-beginning-search-forward-end
 
 function show-buffer-stack() {
   POSTDISPLAY="
