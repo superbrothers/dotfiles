@@ -221,7 +221,7 @@ zle -N fzf-select-src
 bindkey '^]' fzf-select-src
 
 function fzf-select-directory() {
-  local selected="$(z | cut -c 12- | sort -n | fzf --reverse --preview 'tree -C {} | head -200')"
+  local selected="$(z | cut -c 12- | tac | fzf --reverse --no-sort --preview 'tree -C {} | head -200')"
   if [[ -n "$selected" ]]; then
     cd "$selected"
     zle accept-line
