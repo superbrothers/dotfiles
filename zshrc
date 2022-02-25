@@ -6,11 +6,11 @@ fi
 source "$HOME/.zinit/bin/zinit.zsh"
 
 zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
- blockf \
+  blockf \
     zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
+  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
 zinit light-mode for \
@@ -218,7 +218,7 @@ function fzf-select-src () {
   zle clear-screen
 }
 zle -N fzf-select-src
-bindkey '^]' fzf-select-src
+bindkey '^[' fzf-select-src
 
 function fzf-select-directory() {
   local selected="$(z | cut -c 12- | tac | fzf --reverse --no-sort --preview 'tree -C {} | head -200')"
@@ -229,7 +229,7 @@ function fzf-select-directory() {
   zle clear-screen
 }
 zle -N fzf-select-directory
-bindkey '^[' fzf-select-directory
+bindkey '^]' fzf-select-directory
 
 ## MISC SETTINGS ###################################
 
