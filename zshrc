@@ -250,4 +250,4 @@ source "$HOME/.cargo/env"
 
 # automatically remove duplicates
 typeset -U path
-# vim: set ft=zsh :
+# vim: set ai ts=2 sw=2 et sts=2 ft=zsh :
