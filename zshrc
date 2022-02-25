@@ -75,6 +75,7 @@ alias vi='vim'
 alias watch='watch '
 alias g='hub'
 which hub >/dev/null 2>&1 && alias git=hub
+which nvim >/dev/null 2>&1 && alias vim=nvim
 
 if [[ "$(uname)" == "Linux" ]]; then
   # Use clipper for sharing clipboard from remote to local
@@ -96,7 +97,11 @@ function kd() { set -x; kubectl run -it --rm debug-$(date +%s) --image=ghcr.io/s
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR=vim
+if which nvim >/dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 export GPG_TTY="$(tty)"
 
 export PATH="${HOME}/bin:$PATH"
