@@ -28,6 +28,8 @@ install:
 	test -f ~/.ssh/config || ln -s $(PWD)/sshconfig ~/.ssh/config
 	mkdir -p ~/.config/alacritty
 	test -f ~/.config/alacritty/alacritty.yml || ln -s $(PWD)/alacritty.yml ~/.config/alacritty/alacritty.yml
+	mkdir -p ~/.config/nvim
+	test -f ~/.config/nvim/init.vim || ln -s $(PWD)/init.vim ~/.config/nvim/init.vim
 
 .PHONY: uninstall
 uninstall:
@@ -41,3 +43,4 @@ uninstall:
 	rm -f ~/.tmux.conf.linux
 	rm -f ~/.ssh/config
 	rm -f ~/.config/alacritty/alacritty.yml
+	rm -f ~/.config/nvim/init.vim
