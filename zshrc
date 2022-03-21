@@ -204,7 +204,7 @@ setopt noflowcontrol
 bindkey '^q' show-buffer-stack
 
 function fzf-select-history() {
-  local selected="$(history -n 1 | tac  | awk '!a[$0]++' | fzf --reverse --no-sort --query "$LBUFFER")"
+  local selected="$(history -n 1 | tac  | awk '!a[$0]++' | fzf --exact --reverse --no-sort --query "$LBUFFER")"
   if [[ -n "$selected" ]]; then
     BUFFER="$selected"
     CURSOR=$#BUFFER
@@ -215,7 +215,7 @@ zle -N fzf-select-history
 bindkey '^R' fzf-select-history
 
 function fzf-select-src () {
-  local selected="$(ghq list | fzf --reverse --preview "tree -C $(ghq root)/{} | head -200")"
+  local selected="$(ghq list | fzf --exact --reverse --preview "tree -C $(ghq root)/{} | head -200")"
   if [[ -n "$selected" ]]; then
     cd "$(ghq root)/${selected}"
     zle accept-line
@@ -226,7 +226,7 @@ zle -N fzf-select-src
 bindkey '^[' fzf-select-src
 
 function fzf-select-directory() {
-  local selected="$(z | cut -c 12- | tac | fzf --reverse --no-sort --preview 'tree -C {} | head -200')"
+  local selected="$(z | cut -c 12- | tac | fzf --exact --reverse --no-sort --preview 'tree -C {} | head -200')"
   if [[ -n "$selected" ]]; then
     cd "$selected"
     zle accept-line
