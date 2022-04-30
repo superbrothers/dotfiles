@@ -107,6 +107,10 @@ export GPG_TTY="$(tty)"
 export PATH="${HOME}/bin:$PATH"
 # https://github.com/GoogleContainerTools/krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# NPM
+if which npm 2>&1 >/dev/null; then
+  export PATH="$(npm bin -g):$PATH"
+fi
 
 export TZ=Asia/Tokyo
 
