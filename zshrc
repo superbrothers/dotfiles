@@ -1,6 +1,6 @@
 if [[ ! -d "$HOME/.zinit" ]]; then
   mkdir -p "$HOME/.zinit"
-  git clone https://github.com/zdharma/zinit.git "$HOME/.zinit/bin"
+  git clone https://github.com/zdharma-continuum/zinit.git "$HOME/.zinit/bin"
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
