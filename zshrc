@@ -134,7 +134,7 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
 
   # asdf-vm. zsh completions will be installed
-  source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+  source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 
   # z: https://github.com/rupa/z
   source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
