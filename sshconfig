@@ -7,6 +7,8 @@ Host *
   ForwardAgent    yes
   UseKeychain yes
   AddKeysToAgent  yes
+
+Host * !github.com
   ControlMaster auto
   ControlPersist 10
   ControlPath  ~/.ssh/controlmaster-%r-%h.%p
