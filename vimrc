@@ -44,6 +44,7 @@ Plug 'hashivim/vim-terraform', { 'for': 'tf' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'google/vim-jsonnet'
 Plug 'qpkorr/vim-renamer'
+Plug 'jjo/vim-cue', { 'for': 'cue' }
 " vim-lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
