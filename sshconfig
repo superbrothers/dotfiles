@@ -12,6 +12,8 @@ Host *
 
 Host * !github.com
   ControlMaster auto
-  ControlPersist 10
+  ControlPersist 100
   ControlPath  ~/.ssh/controlmaster-%r-%h.%p
+  ServerAliveInterval 300
+  TCPKeepAlive yes
 # vim: ai ts=2 sw=2 et sts=2 ft=sshconfig

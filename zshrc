@@ -89,7 +89,7 @@ RPROMPT=""
 RPROMPT+='$NUMBER_JOBS '
 # zsh-kubectl-prompt
 RPROMPT+='%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
- 
+
 ## ALIAS ##############################################
 
 alias ..='cd ..'
@@ -162,9 +162,6 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
   export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
 
-  # asdf-vm. zsh completions will be installed
-  source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
-
   # z: https://github.com/rupa/z
   source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 fi
@@ -221,6 +218,7 @@ lazyload clusterctl -- 'source <(clusterctl completion zsh 2>/dev/null)'
 lazyload kind -- 'source <(kind completion zsh; echo compdef _kind kind)'
 lazyload helm -- 'source <(helm completion zsh)'
 lazyload flux -- 'source <(flux completion zsh) && compdef _flux flux'
+lazyload asdf -- 'source <(asdf completion zsh)'
 
 ## KEY BINDINGS ######################################
 
