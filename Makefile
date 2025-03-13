@@ -1,19 +1,3 @@
-ifeq ($(shell uname),Darwin)
-BREWFILE_PATH = Brewfile
-else
-BREWFILE_PATH = Brewfile.linux
-endif
-
-.PHONY: bundle
-bundle:
-	brew bundle --no-lock --file $(BREWFILE_PATH)
-
-.PHONY: sync-brewfile
-sync-brewfile:
-	$(RM) $(BREWFILE_PATH)
-	brew autoremove
-	brew bundle dump --file $(BREWFILE_PATH)
-
 .PHONY: install
 install:
 	test -f ~/.vimrc || ln -s $(PWD)/vimrc ~/.vimrc
@@ -26,20 +10,4 @@ install:
 	test -f ~/.tmux.conf.linux || ln -s $(PWD)/tmux.conf.linux ~/.tmux.conf.linux
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
 	test -f ~/.ssh/config || ln -s $(PWD)/sshconfig ~/.ssh/config
-	mkdir -p ~/.config/alacritty
-	test -f ~/.config/alacritty/alacritty.yml || ln -s $(PWD)/alacritty.yml ~/.config/alacritty/alacritty.yml
 	ln -s ~/.vim ~/.config/nvim
-
-.PHONY: uninstall
-uninstall:
-	rm -f ~/.vimrc
-	rm -f ~/.vim
-	rm -f ~/.zshrc
-	rm -f ~/.zshenv
-	rm -f ~/.gitconfig
-	rm -f ~/.git-template
-	rm -f ~/.tmux.conf
-	rm -f ~/.tmux.conf.linux
-	rm -f ~/.ssh/config
-	rm -f ~/.config/alacritty/alacritty.yml
-	rm -f ~/.config/nvim
