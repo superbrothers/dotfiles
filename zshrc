@@ -25,6 +25,35 @@ zinit lucid has'docker' for \
   as'completion' is-snippet \
     https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
 
+## homebrew
+test -f /home/linuxbrew/.linuxbrew/bin/brew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
+
+  # coreutils
+  export PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
+
+  # gnu-sed
+  export PATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
+  # gnu-tar
+  export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+  export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$PATH"
+
+  # asdf-vm. zsh completions will be installed
+  source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
+
+  # z: https://github.com/rupa/z
+  source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
+fi
+
+
+
 ## PLUGIN #############################################
 
 # sindresorhus/pure
@@ -140,7 +169,6 @@ if [[ -n "$HOMEBREW_PREFIX" ]]; then
   source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 fi
 
-
 if which go >/dev/null 2>&1; then
   export GOPATH="$HOME"
 fi
@@ -247,7 +275,7 @@ function auto_ls() { ls }
 add-zsh-hook chpwd auto_ls
 
 # Rust
-source "$HOME/.cargo/env"
+test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
 
 # Senstive functions which are not pushed to Github
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

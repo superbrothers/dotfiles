@@ -7,6 +7,8 @@ Host *
   ForwardAgent    yes
   UseKeychain yes
   AddKeysToAgent  yes
+  HostkeyAlgorithms +ssh-rsa
+  PubkeyAcceptedAlgorithms +ssh-rsa
 
 Host * !github.com
   ControlMaster auto

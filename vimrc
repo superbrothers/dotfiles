@@ -199,17 +199,17 @@ nnoremap  gh :nohlsearch<CR>
 " don't yank with replaced word
 xnoremap p "_dP
 
-""" NVIM
-if has('nvim')
-  let g:clipboard = {
-    \ 'name': 'myclipboard',
-    \ 'copy': {
-    \   '*': ['pbcopy'],
-    \   '+': ['pbcopy'],
-    \  },
-    \ 'cache_enabled': 1,
-    \ }
-endif
+""" nvim
+" if has('nvim')
+  " let g:clipboard = {
+    " \ 'name': 'myclipboard',
+    " \ 'copy': {
+    " \   '*': ['pbcopy'],
+    " \   '+': ['pbcopy'],
+    " \  },
+    " \ 'cache_enabled': 1,
+    " \ }
+" endif
 
 """ PLUGINS
 
