@@ -96,7 +96,7 @@ set conceallevel=0
 """ COLOR
 syntax on
 set t_Co=256
-set background=light
+set background=dark
 let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
