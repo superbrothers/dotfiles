@@ -275,6 +275,9 @@ add-zsh-hook chpwd auto_ls
 # Rust
 test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
 
+# Rancher Desktop
+test -d "$HOME/.rd/bin" && export PATH="$HOME/.rd/bin:$PATH"
+
 # Senstive functions which are not pushed to Github
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
