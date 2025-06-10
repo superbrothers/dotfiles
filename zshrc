@@ -275,6 +275,9 @@ test -f "$HOME/.cargo/env" && source "$HOME/.cargo/env"
 # Rancher Desktop
 test -d "$HOME/.rd/bin" && export PATH="$HOME/.rd/bin:$PATH"
 
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Senstive functions which are not pushed to Github
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
