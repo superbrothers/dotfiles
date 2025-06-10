@@ -54,9 +54,6 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
 Plug 'mattn/vim-lsp-icons'
 
-if uname == 'Linux'
-  Plug 'wincent/vim-clipper'
-endif
 if uname == 'Darwin'
   Plug 'zerowidth/vim-copy-as-rtf'
 endif
@@ -198,18 +195,6 @@ nnoremap  gh :nohlsearch<CR>
 
 " don't yank with replaced word
 xnoremap p "_dP
-
-""" nvim
-" if has('nvim')
-  " let g:clipboard = {
-    " \ 'name': 'myclipboard',
-    " \ 'copy': {
-    " \   '*': ['pbcopy'],
-    " \   '+': ['pbcopy'],
-    " \  },
-    " \ 'cache_enabled': 1,
-    " \ }
-" endif
 
 """ PLUGINS
 
@@ -364,12 +349,9 @@ let g:go_auto_type_info = 0
 nnoremap / :M/
 nnoremap ,/ /
 
-" vim-clipper ================================================
-let g:ClipperAddress = '~/.clipper.sock'
-let g:ClipperPort = 0
-" disable vim-clipper if ~/.clipper.sock does not exist
+" clipper ================================================
 if empty(glob('~/.clipper.sock'))
-  let g:ClipperLoaded = 1
+  nnoremap <leader>y :call system('socat - UNIX-CLIENT:'.$HOME.'/.clipper.sock', @0)<CR>
 endif
 
 """ OTHERS
