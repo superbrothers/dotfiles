@@ -177,6 +177,9 @@ nnoremap <silent> bd :Bclose<CR>
 inoremap <Leader>date <C-R>=strftime('%Y/%m/%d %H:%M:%S')<CR>
 inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
 
+" insert details tag
+inoremap <Leader>details <details><CR><summary><code></code></summary><CR><CR></details><Up><Up><C-O>0<C-O>f><C-O>l
+
 " close window
 nnoremap cl :close<CR>
 
