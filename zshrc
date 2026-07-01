@@ -26,8 +26,8 @@ zinit lucid has'docker' for \
     https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
 
 ## homebrew
-test -f /home/linuxbrew/.linuxbrew/bin/brew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+test -f /home/linuxbrew/.linuxbrew/bin/brew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+test -f /opt/homebrew/bin/brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export HOMEBREW_NO_ANALYTICS=1
@@ -141,8 +141,8 @@ fi
 export TZ=Asia/Tokyo
 
 # homebrew
-test -f /home/linuxbrew/.linuxbrew/bin/brew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-test -f /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+test -f /home/linuxbrew/.linuxbrew/bin/brew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+test -f /opt/homebrew/bin/brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [[ -n "$HOMEBREW_PREFIX" ]]; then
   export HOMEBREW_NO_ANALYTICS=1
