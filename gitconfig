@@ -54,4 +54,6 @@
 	program = gpg
 [commit]
 	gpgsign = true
+[core]
+	excludesfile = ~/.gitignore_global
 # vim: ai ts=4 sw=4 sts=4 ft=gitconfig

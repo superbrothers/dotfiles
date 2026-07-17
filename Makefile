@@ -5,6 +5,7 @@ install:
 	test -f ~/.zshrc || ln -s $(PWD)/zshrc ~/.zshrc
 	test -f ~/.zshenv || ln -s $(PWD)/zshenv ~/.zshenv
 	test -f ~/.gitconfig || ln -s $(PWD)/gitconfig ~/.gitconfig
+	test -f ~/.gitignore_global || ln -s $(PWD)/gitignore_global ~/.gitignore_global
 	test -d ~/.git-template || ln -s $(PWD)/git-template ~/.git-template
 	test -f ~/.tmux.conf || ln -s $(PWD)/tmux.conf ~/.tmux.conf
 	test -f ~/.tmux.conf.linux || ln -s $(PWD)/tmux.conf.linux ~/.tmux.conf.linux
