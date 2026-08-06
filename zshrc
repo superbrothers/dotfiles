@@ -265,9 +265,18 @@ bindkey '^]' fzf-select-directory
 
 # List every worktree of the current repo, paired with its resumable Claude
 # Code session if one exists (~/.claude/projects/<encoded-worktree-path>/).
+# _col_width / _fzf_pick / _claude_status_* are defined in zshenv, alongside
+# tmuxjump, so they're shared between this widget and the non-interactive
+# `zsh -c tmuxjump` tmux.conf invokes.
 function fzf-select-worktree() {
   emulate -L zsh
   setopt no_aliases
+
+  local REPLY
+  if ! _claude_missing_commands git fzf jq; then
+    zle -M "fzf-select-worktree: command not found: $REPLY"
+    return 1
+  fi
 
   local -a lines
   lines=("${(@f)$(command git worktree list --porcelain 2>/dev/null)}")
@@ -275,6 +284,8 @@ function fzf-select-worktree() {
     zle -M "Not a git repository"
     return
   fi
+
+  _claude_status_invalidate
 
   local namecap=28 branchcap=45
 
@@ -320,18 +331,20 @@ function fzf-select-worktree() {
 
   # column widths: widest name / branch actually present (already capped
   # above, so a very long branch name can't blow out the whole table)
-  local namew=0 branchw=0
-  for name in $wt_name; do (( ${#name} > namew )) && namew=${#name}; done
-  for branch in $wt_branch; do (( ${#branch} > branchw )) && branchw=${#branch}; done
+  local namew=$(_col_width "${wt_name[@]}") branchw=$(_col_width "${wt_branch[@]}")
 
   # pass 2: render, one resume row (if any) + one new-session row per worktree
   local -a rows
-  local i label resume_marker new_marker
-  resume_marker=$'\e[32m●\e[0m'
+  local i label marker new_marker
   new_marker=$'\e[2m+ new session\e[0m'
   for (( i = 1; i <= ${#wt_name}; i++ )); do
     if [[ -n "${wt_sid[$i]}" ]]; then
-      label=$(printf "%-${namew}s  %-${branchw}s  │ %s %s" "${wt_name[$i]}" "${wt_branch[$i]}" "$resume_marker" "${wt_title[$i]}")
+      # live status (waiting/busy/idle) takes priority over the plain
+      # "resumable" dot, since it tells you whether it needs your input now
+      _claude_status_marker "${wt_path[$i]}"
+      marker=$REPLY
+      [[ -z "$marker" ]] && marker=$'\e[32m●\e[0m'
+      label=$(printf "%-${namew}s  %-${branchw}s  │ %s %s" "${wt_name[$i]}" "${wt_branch[$i]}" "$marker" "${wt_title[$i]}")
       rows+=("$label	${wt_path[$i]}	${wt_sid[$i]}")
     fi
     label=$(printf "%-${namew}s  %-${branchw}s  │ %s" "${wt_name[$i]}" "${wt_branch[$i]}" "$new_marker")
@@ -339,7 +352,7 @@ function fzf-select-worktree() {
   done
 
   local selected
-  selected=$(print -l -- "${rows[@]}" | fzf --ansi --exact --reverse --no-sort --delimiter=$'\t' --with-nth=1)
+  selected=$(_fzf_pick "${rows[@]}")
   if [[ -n "$selected" ]]; then
     local cdpath=${${selected#*$'\t'}%%$'\t'*}
     sid=${selected##*$'\t'}
