@@ -263,6 +263,111 @@ function fzf-select-directory() {
 zle -N fzf-select-directory
 bindkey '^]' fzf-select-directory
 
+# List every worktree of the current repo, paired with its resumable Claude
+# Code session if one exists (~/.claude/projects/<encoded-worktree-path>/).
+# _col_width / _fzf_pick / _claude_status_* are defined in zshenv, alongside
+# tmuxjump, so they're shared between this widget and the non-interactive
+# `zsh -c tmuxjump` tmux.conf invokes.
+function fzf-select-worktree() {
+  emulate -L zsh
+  setopt no_aliases
+
+  local REPLY
+  if ! _claude_missing_commands git fzf jq; then
+    zle -M "fzf-select-worktree: command not found: $REPLY"
+    return 1
+  fi
+
+  local -a lines
+  lines=("${(@f)$(command git worktree list --porcelain 2>/dev/null)}")
+  if (( ${#lines} == 0 )); then
+    zle -M "Not a git repository"
+    return
+  fi
+
+  _claude_status_invalidate
+
+  local namecap=28 branchcap=45
+
+  # pass 1: collect one record per worktree (name, branch, path, resumable
+  # session id + title, all already truncated to their display caps)
+  local -a wt_name wt_branch wt_path wt_sid wt_title
+  local line cur="" branch="(detached)" enc f latest sid title name
+  for line in $lines "worktree"; do
+    if [[ $line == worktree\ * || $line == worktree ]]; then
+      if [[ -n "$cur" ]]; then
+        name=${cur:t}
+        (( ${#name} > namecap )) && name="${name[1,namecap-1]}…"
+        (( ${#branch} > branchcap )) && branch="${branch[1,branchcap-1]}…"
+
+        enc=${cur//[^a-zA-Z0-9]/-}
+        latest=""
+        for f in $HOME/.claude/projects/$enc/*.jsonl(N.om); do
+          latest=$f
+          break
+        done
+        sid="" title=""
+        if [[ -n "$latest" ]]; then
+          sid=${latest:t:r}
+          # Claude Code's own auto-generated / user-set session title (the
+          # same text shown in its `/resume` picker)
+          title=$(jq -r 'select(.type=="ai-title" or .type=="agent-name") | (.aiTitle // .agentName)' "$latest" 2>/dev/null | tail -1)
+          [[ -z "$title" ]] && title=$sid
+        fi
+
+        wt_name+=("$name")
+        wt_branch+=("$branch")
+        wt_path+=("$cur")
+        wt_sid+=("$sid")
+        wt_title+=("$title")
+      fi
+      cur=${line#worktree }
+      [[ "$cur" == "worktree" ]] && cur=""
+      branch="(detached)"
+    elif [[ $line == branch\ * ]]; then
+      branch=${${line#branch }#refs/heads/}
+    fi
+  done
+
+  # column widths: widest name / branch actually present (already capped
+  # above, so a very long branch name can't blow out the whole table)
+  local namew=$(_col_width "${wt_name[@]}") branchw=$(_col_width "${wt_branch[@]}")
+
+  # pass 2: render, one resume row (if any) + one new-session row per worktree
+  local -a rows
+  local i label marker new_marker
+  new_marker=$'\e[2m+ new session\e[0m'
+  for (( i = 1; i <= ${#wt_name}; i++ )); do
+    if [[ -n "${wt_sid[$i]}" ]]; then
+      # live status (waiting/busy/idle) takes priority over the plain
+      # "resumable" dot, since it tells you whether it needs your input now
+      _claude_status_marker "${wt_path[$i]}"
+      marker=$REPLY
+      [[ -z "$marker" ]] && marker=$'\e[32m●\e[0m'
+      label=$(printf "%-${namew}s  %-${branchw}s  │ %s %s" "${wt_name[$i]}" "${wt_branch[$i]}" "$marker" "${wt_title[$i]}")
+      rows+=("$label	${wt_path[$i]}	${wt_sid[$i]}")
+    fi
+    label=$(printf "%-${namew}s  %-${branchw}s  │ %s" "${wt_name[$i]}" "${wt_branch[$i]}" "$new_marker")
+    rows+=("$label	${wt_path[$i]}	-")
+  done
+
+  local selected
+  selected=$(_fzf_pick "${rows[@]}")
+  if [[ -n "$selected" ]]; then
+    local cdpath=${${selected#*$'\t'}%%$'\t'*}
+    sid=${selected##*$'\t'}
+    if [[ "$sid" == "-" ]]; then
+      BUFFER="cd ${(q)cdpath} && claude"
+    else
+      BUFFER="cd ${(q)cdpath} && claude --resume $sid"
+    fi
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N fzf-select-worktree
+bindkey '^G' fzf-select-worktree
+
 ## MISC SETTINGS ###################################
 
 # auto ls
