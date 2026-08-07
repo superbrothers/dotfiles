@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Daemon that colors tmux window tabs by reading what each Claude Code pane
+# actually has on screen, instead of trusting hook-fired flags.
+#
+# Why: Claude Code has no hook that fires when a permission prompt is
+# *resolved* (approved/denied) - only Notification/permission_prompt (shown)
+# and PostToolUse (tool finished). For a long-running approved command,
+# that leaves a stale "permission" flag lit for the whole run. And an
+# unrelated parallel tool's PostToolUse can clear a flag that's still live.
+# Reading the rendered pane sidesteps this: it's always in sync with what
+# you'd see if you switched to the pane yourself.
+#
+# Sets the pane option @claude_prompt to "permission", "question", or ""
+# (empty), consumed by window-status-format in tmux.conf. Runs as a single
+# long-lived background process, started via `run -b` from tmux.conf.
+# Never touches @claude_status, which stays hook-owned for the yellow
+# idle/turn-ended state (no hook gap there - Stop/idle_prompt/
+# agent_needs_input/UserPromptSubmit/PostToolUse/SessionEnd cover it fine).
+
+set -u
+
+command -v tmux >/dev/null 2>&1 || exit 0
+[ -n "${TMUX:-}" ] || exit 0
+
+lockfile="/tmp/tmux-claude-watch.lock"
+exec 9>"$lockfile"
+flock -n 9 || exit 0   # another instance is already running
+
+classify() {
+  # $1: pane_id
+  local tail
+  tail=$(tmux capture-pane -p -t "$1" 2>/dev/null | grep -v '^[[:space:]]*$' | tail -20)
+  [ -z "$tail" ] && return
+
+  local choice_lines
+  choice_lines=$(printf '%s\n' "$tail" | grep -cE '^[[:space:]]*(❯[[:space:]]+)?[0-9]+\. ')
+  printf '%s\n' "$tail" | grep -qE '^[[:space:]]*❯[[:space:]]+[0-9]+\.' || return
+  [ "$choice_lines" -ge 2 ] || return
+
+  if printf '%s\n' "$tail" | grep -qE 'Do you want to|Would you like to proceed'; then
+    echo permission
+  else
+    echo question
+  fi
+}
+
+while true; do
+  while IFS=' ' read -r pane_id in_mode; do
+    [ "$in_mode" = "1" ] && continue   # copy-mode: showing scrollback, skip
+
+    new="$(classify "$pane_id")"
+    old="$(tmux show-options -pqv -t "$pane_id" @claude_prompt 2>/dev/null)"
+    [ "$new" = "$old" ] && continue
+    tmux set-option -p -t "$pane_id" @claude_prompt "$new" 2>/dev/null
+  done < <(tmux list-panes -a -F '#{pane_id} #{pane_in_mode}' 2>/dev/null)
+
+  sleep 2
+done
