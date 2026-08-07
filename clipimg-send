@@ -1,0 +1,92 @@
+#!/bin/sh
+# clipimg-send <remote-host>
+#
+# macOS only. Pushes the current clipboard image (or a file Cmd+C'd from
+# Finder) to <remote-host> over SSH, then prints the resulting remote path
+# (no trailing newline) so it can be typed into a terminal session.
+#
+# Background: when SSH'd into a remote host (e.g. over tailscale), that
+# host has no access to the Mac's clipboard, so pasting an image directly
+# doesn't work there -- this is true regardless of tmux; tmux just happens
+# to make the underlying "no clipboard on the remote side" problem more
+# visible, and pasting an image sometimes fails to reach the prompt at all
+# when going through tmux (see anthropics/claude-code#25672). This script
+# is the workaround: run it, get a path, drop that path into whatever
+# expects an attachment (e.g. Claude Code's Read tool).
+#
+# Meant to be run as an iTerm2 coprocess bound to a key:
+#   Settings > Keys > Key Bindings > + > Action: "Run Coprocess...",
+#   Value: `~/bin/clipimg-send <remote-host>`
+# A coprocess's stdout is delivered to its session as if the user had
+# typed it, so this script's output lands directly in whatever prompt has
+# focus there.
+#
+# Pick a shortcut that isn't already used for anything else in that
+# session (local image paste included) -- iTerm2 key bindings intercept
+# the keystroke entirely, so reusing one silently breaks whatever it used
+# to do. The binding also targets one fixed remote host, so pressing it in
+# a local (non-SSH) session is a harmless misfire: a bogus remote path
+# gets typed into the local prompt -- just clear the line.
+#
+# Requires `pngpaste` (brew install pngpaste). Remote files land in
+# ~/.cache/clipimg/ on the target host; files older than 7 days there are
+# pruned on each run.
+
+set -eu
+
+# iTerm2 launches coprocesses from launchd's environment, which does not
+# include Homebrew's paths (pngpaste, ssh from Homebrew if installed there).
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+host="${1:-nuc}"
+tmp="$(mktemp -t clipimg).png"
+cleanup() { rm -f "$tmp" 2>/dev/null || true; }
+trap cleanup EXIT
+
+notify() {
+  osascript -e "display notification \"$1\" with title \"clipimg-send\"" >/dev/null 2>&1 || true
+}
+
+if ! command -v pngpaste >/dev/null 2>&1; then
+  notify "pngpaste not found (brew install pngpaste)"
+  exit 1
+fi
+
+# 1. Try a raster image first (e.g. a screenshot sitting on the clipboard).
+if pngpaste "$tmp" 2>/dev/null; then
+  src="$tmp"
+  ext="png"
+else
+  # 2. Fall back to a Finder file copy (Cmd+C on a file) -- may be png/jpg/pdf/etc.
+  furl="$(osascript -e 'try
+    POSIX path of (the clipboard as «class furl»)
+  end try' 2>/dev/null || true)"
+  if [ -z "$furl" ] || [ ! -f "$furl" ]; then
+    notify "Clipboard has no image or file"
+    exit 0
+  fi
+  src="$furl"
+  ext="${furl##*.}"
+  case "$ext" in
+    "$furl") ext="bin" ;; # no dot in the filename
+  esac
+fi
+
+name="$(date '+%Y%m%d-%H%M%S')-$$.${ext}"
+
+remote_path="$(ssh "$host" "
+  set -eu
+  mkdir -p ~/.cache/clipimg
+  cat > ~/.cache/clipimg/$name
+  find ~/.cache/clipimg -type f -mtime +7 -delete || true
+  printf '%s' \"\$HOME/.cache/clipimg/$name\"
+" < "$src")"
+
+if [ -z "$remote_path" ]; then
+  notify "Transfer to $host failed"
+  exit 1
+fi
+
+# Trailing space (no newline): typed into the prompt, ready to keep typing
+# after it, without submitting the line.
+printf '%s ' "$remote_path"
