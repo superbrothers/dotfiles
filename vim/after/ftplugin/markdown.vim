@@ -1,3 +1,9 @@
+" Neovim's bundled ftplugin enables treesitter highlighting for markdown, which
+" disables regex syntax and skips after/syntax/markdown.vim (todo highlights).
+if has('nvim')
+  lua vim.treesitter.stop()
+endif
+
 " Forked from http://qiita.com/naoty_k/items/56eddc9b76fe630f9be7
 
 " Insert todo list item
