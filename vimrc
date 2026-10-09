@@ -124,7 +124,16 @@ set autowrite
 set hidden
 set autochdir
 set nobackup
-set noswapfile
+" Keep swap files to recover unsaved edits after a crash
+set swapfile
+if !has('nvim')
+  " Neovim already uses $XDG_STATE_HOME/nvim/swap//; keep Vim's out of the working tree too
+  let s:swapdir = expand('~/.local/state/vim/swap')
+  if !isdirectory(s:swapdir)
+    call mkdir(s:swapdir, 'p', 0700)
+  endif
+  let &directory = s:swapdir . '//'
+endif
 
 """ SEARCH
 set ignorecase
