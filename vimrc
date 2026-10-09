@@ -7,9 +7,6 @@ if has('vim_starting')
   end
 endif
 
-" detect os type
-let uname = substitute(system('uname'), '\n', '', '')
-
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
 Plug 'superbrothers/vim-bclose'
@@ -31,7 +28,6 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile'] }
 Plug 'majutsushi/tagbar', { 'tag': '*' }
 Plug 'elzr/vim-json', { 'for' : 'json' }
 Plug 'tyru/open-browser.vim'
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 't9md/vim-choosewin'
 Plug 'godlygeek/tabular', { 'for' : 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
@@ -53,7 +49,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
 Plug 'mattn/vim-lsp-icons'
 
-if uname == 'Darwin'
+if has('mac')
   Plug 'zerowidth/vim-copy-as-rtf'
 endif
 call plug#end()
@@ -63,10 +59,6 @@ augroup vimrc
   autocmd!
 augroup END
 
-set nocompatible
-filetype off
-filetype plugin indent on
-set ttyfast
 set lazyredraw
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard^=unnamed
@@ -76,7 +68,6 @@ set maxmempattern=20000
 
 """ ENCODING
 set encoding=utf-8
-set fileencoding=utf-8
 
 """ DISPLAY
 set number
@@ -96,7 +87,6 @@ set conceallevel=0
 
 """ COLOR
 syntax on
-set t_Co=256
 set background=dark
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -207,9 +197,6 @@ nnoremap <Leader>s. :<C-u>source $MYVIMRC<CR>
 
 " execute current buffer
 nmap <Leader>e :execute '!' &ft ' %'<CR>
-
-" toggle paste mode
-nnoremap <Leader>tp :<C-u>set paste!<CR>
 
 " no search highlight
 nnoremap  gh :nohlsearch<CR>
