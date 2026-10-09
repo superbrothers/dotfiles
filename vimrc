@@ -126,13 +126,18 @@ set autochdir
 set nobackup
 " Keep swap files to recover unsaved edits after a crash
 set swapfile
+" Keep undo history across restarts
+set undofile
 if !has('nvim')
-  " Neovim already uses $XDG_STATE_HOME/nvim/swap//; keep Vim's out of the working tree too
-  let s:swapdir = expand('~/.local/state/vim/swap')
-  if !isdirectory(s:swapdir)
-    call mkdir(s:swapdir, 'p', 0700)
-  endif
-  let &directory = s:swapdir . '//'
+  " Neovim already uses $XDG_STATE_HOME/nvim/{swap,undo}//; keep Vim's out of the working tree too
+  for [s:opt, s:name] in [['directory', 'swap'], ['undodir', 'undo']]
+    let s:dir = expand('~/.local/state/vim/' . s:name)
+    if !isdirectory(s:dir)
+      call mkdir(s:dir, 'p', 0700)
+    endif
+    execute 'let &' . s:opt . ' = s:dir . "//"'
+  endfor
+  unlet s:opt s:name s:dir
 endif
 
 """ SEARCH
