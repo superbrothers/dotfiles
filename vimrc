@@ -36,7 +36,6 @@ Plug 't9md/vim-choosewin'
 Plug 'godlygeek/tabular', { 'for' : 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 Plug 'noahfrederick/vim-skeleton'
-Plug 'vim-scripts/YankRing.vim'
 Plug 'othree/eregex.vim'
 Plug 'ap/vim-buftabline'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
@@ -336,13 +335,46 @@ let g:NERDCompactSexyComs = 1
 nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
 
-" vim-scripts/YangRing.vim  ==================================
-let g:yankring_history_dir = $HOME.'/'
-let g:yankring_history_file = '.yankring_history'
-let g:yankring_paste_v_akey = ''
-let g:yankring_paste_v_bkey = ''
-let g:yankring_paste_v_key  = ''
-nmap ,y :YRShow<CR>
+" yank history ===============================================
+" Pick a past yank with fzf and paste it.
+" The uppercase name lets Neovim persist the history via ShaDa ('!' in 'shada').
+let g:YANK_HISTORY = get(g:, 'YANK_HISTORY', [])
+
+function! s:yank_history_add() abort
+  if v:event.operator !=# 'y'
+    return
+  endif
+  let l:entry = [join(v:event.regcontents, "\n"), v:event.regtype]
+  if l:entry[0] =~# '^\s*$'
+    return
+  endif
+  call filter(g:YANK_HISTORY, 'v:val !=# l:entry')
+  call insert(g:YANK_HISTORY, l:entry)
+  let g:YANK_HISTORY = g:YANK_HISTORY[:49]
+endfunction
+
+function! s:yank_history_paste(line) abort
+  let l:entry = g:YANK_HISTORY[str2nr(matchstr(a:line, '^\d\+'))]
+  " Paste through a scratch register so that the clipboard is not overwritten
+  let l:saved = getreginfo('z')
+  call setreg('z', l:entry[0], l:entry[1])
+  normal! "zp
+  call setreg('z', l:saved)
+endfunction
+
+function! s:yank_history_pick() abort
+  call fzf#run(fzf#wrap({
+        \ 'source': map(copy(g:YANK_HISTORY), 'v:key . "\t" . substitute(v:val[0], "\n", " ⏎ ", "g")'),
+        \ 'sink': function('s:yank_history_paste'),
+        \ 'options': ['--no-sort', '--delimiter', "\t", '--with-nth', '2..', '--prompt', 'Yank> '],
+        \ }))
+endfunction
+
+if exists('##TextYankPost')
+  autocmd vimrc TextYankPost * call s:yank_history_add()
+endif
+command! YankHistory call s:yank_history_pick()
+nnoremap <silent> <Leader>y :<C-u>YankHistory<CR>
 
 " vim-go =================================-=
 let g:go_code_completion_enabled = 0
