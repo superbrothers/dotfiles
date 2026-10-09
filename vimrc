@@ -59,6 +59,11 @@ if uname == 'Darwin'
 endif
 call plug#end()
 
+" Clear autocmds of this file so that re-sourcing does not duplicate them
+augroup vimrc
+  autocmd!
+augroup END
+
 set nocompatible
 filetype off
 filetype plugin indent on
@@ -144,10 +149,10 @@ set modelines=5
 let mapleader = ","
 
 " Move cursor by display lines when wrapping
-nmap j gj
-nmap k gk
-vmap j gj
-vmap k gk
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
 
 " emacs like keys
 cnoremap <C-B> <Left>
@@ -207,10 +212,6 @@ let g:indentLine_conceallevel=0
 " vim-airline ======================================
 let g:airline_theme='molokai'
 
-" fugitive =========================================
-vnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gb :Gblame<CR>
-
 " fzf ===============================================
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~20%' }
@@ -242,11 +243,11 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeChDirMode=2
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " start NERDTree
-autocmd VimEnter * if argc() > 0 && &filetype != "gitcommit" | NERDTree | endif
+autocmd vimrc VimEnter * if argc() > 0 && &filetype != "gitcommit" | NERDTree | endif
 " go to previous (last accessed) window
-autocmd VimEnter * wincmd p
+autocmd vimrc VimEnter * wincmd p
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd vimrc BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " asyncomplete ====================================
 let g:asyncomplete_auto_popup = 1
@@ -254,37 +255,41 @@ let g:asyncomplete_auto_completeopt = 0
 " Force refresh completion
 imap <C-Space> <Plug>(asyncomplete_force_refresh)
 " To auto close preview window when completion is done.
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd vimrc CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " vim-lsp =========================================
-if empty(globpath(&rtp, 'autoload/lsp.vim'))
-  finish
+if !empty(globpath(&rtp, 'autoload/lsp.vim'))
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+
+    if index(['go', 'rust'], &filetype) >= 0
+      " Use a separate augroup so that re-sourcing vimrc keeps it
+      augroup lsp_format
+        autocmd! * <buffer>
+        autocmd BufWritePre <buffer> LspDocumentFormatSync
+      augroup END
+    endif
+  endfunction
+
+  augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+
+  command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
 endif
-
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-  nmap <buffer> gr <plug>(lsp-references)
-  nmap <buffer> gi <plug>(lsp-implementation)
-  nmap <buffer> gt <plug>(lsp-type-definition)
-  nmap <buffer> <leader>rn <plug>(lsp-rename)
-  nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-  nmap <buffer> K <plug>(lsp-hover)
-
-  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-endfunction
-
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
 
 " tagbar ===============================================
 noremap <Leader>t :TagbarToggle<CR>
@@ -360,7 +365,7 @@ endif
 """ OTHERS
 
 " Restore the last cursor position of a file
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+autocmd vimrc BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 if filereadable(glob('~/.vimrc.local'))
   source ~/.vimrc.local
