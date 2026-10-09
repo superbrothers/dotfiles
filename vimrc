@@ -357,11 +357,6 @@ let g:go_auto_type_info = 0
 nnoremap / :M/
 nnoremap ,/ /
 
-" clipper ================================================
-if !empty(glob('~/.clipper.sock'))
-  nnoremap <leader>y :call system('socat - UNIX-CLIENT:'.$HOME.'/.clipper.sock', @0)<CR>
-endif
-
 """ OTHERS
 
 " Restore the last cursor position of a file
