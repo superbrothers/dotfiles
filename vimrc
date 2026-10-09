@@ -353,7 +353,7 @@ nnoremap / :M/
 nnoremap ,/ /
 
 " clipper ================================================
-if empty(glob('~/.clipper.sock'))
+if !empty(glob('~/.clipper.sock'))
   nnoremap <leader>y :call system('socat - UNIX-CLIENT:'.$HOME.'/.clipper.sock', @0)<CR>
 endif
 
