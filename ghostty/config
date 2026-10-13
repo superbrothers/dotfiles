@@ -1,0 +1,43 @@
+# Ghostty config (2026-09-17)
+
+# ── Font ──
+font-family = HackGen Console NF
+font-size = 13
+
+# ── Line spacing ──
+adjust-cell-height = 6%
+
+# ── Cursor (bar, no blink) ──
+cursor-style = bar
+cursor-style-blink = false
+
+# ── Shell integration (ssh-env/ssh-terminfo: convert TERM and install terminfo automatically on SSH connections) ──
+shell-integration-features = ssh-env,ssh-terminfo
+
+# ── Transparency ──
+background-opacity = 0.95
+
+# ── Clipboard (OSC 52: programs may read the clipboard without prompting) ──
+clipboard-read = allow
+
+# ── Keys ──
+macos-option-as-alt = left
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+keybind = super+page_up=scroll_to_bottom
+
+# ── Quick terminal (left edge, auto-hide, no animation) ──
+quick-terminal-position = left
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0
+# Width is 30% of the screen width (~900pt). To change, edit the value and reload with Cmd+Shift+,
+quick-terminal-size = 30%
+# The global: prefix makes it system-global (works even when not in the foreground)
+# Note: temporarily stops working during Secure Input (e.g. the 1Password unlock screen)
+keybind = global:ctrl+backslash=toggle_quick_terminal
+
+# ── Fullscreen (native; non-native does not support tabs) ──
+macos-non-native-fullscreen = false
+
+# ── Bell ──
+bell-features = no-system,no-audio,no-attention,no-title,no-border

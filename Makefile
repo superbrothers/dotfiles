@@ -1,5 +1,5 @@
 .PHONY: install
-install: install-vim install-zsh install-git install-tmux install-ssh install-clipimg-send
+install: install-vim install-zsh install-git install-tmux install-ssh install-clipimg-send install-ghostty
 
 .PHONY: install-vim
 install-vim:
@@ -37,3 +37,8 @@ install-clipimg-send:
 	test -L ~/.config/raycast/scripts/clipimg-send.sh || ln -s $(PWD)/clipimg-send/clipimg-send.sh ~/.config/raycast/scripts/clipimg-send.sh
 	mkdir -p ~/bin
 	test -L ~/bin/clipimg-send || ln -s $(PWD)/clipimg-send/clipimg-send.sh ~/bin/clipimg-send
+
+.PHONY: install-ghostty
+install-ghostty:
+	mkdir -p ~/.config/ghostty
+	test -f ~/.config/ghostty/config || ln -s $(PWD)/ghostty/config ~/.config/ghostty/config
