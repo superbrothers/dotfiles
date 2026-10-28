@@ -41,3 +41,6 @@ macos-non-native-fullscreen = false
 
 # ── Bell ──
 bell-features = no-system,no-audio,no-attention,no-title,no-border
+
+# ── Titlebar (tabs: integrates the tab bar into the titlebar; "hidden" would disable tabs) ──
+macos-titlebar-style = tabs
