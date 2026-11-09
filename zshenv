@@ -362,9 +362,11 @@ function tmuxjump() {
     # from inside the popup, show the pane in the client the popup is
     # drawn over (the most recently active one outside the popup session),
     # then close the popup
-    local outer
-    outer=${${(f)"$(tmux list-clients -F '#{client_activity} #{client_name} #{client_session}' | grep -v ' popup$' | sort -rn)"}[1]}
-    outer=${${(s: :)outer}[2]}
+    # assign to an array: with a single client, ${${(f)...}[1]} would take
+    # the first character of the line instead of the line
+    local -a outers
+    outers=(${(f)"$(tmux list-clients -F '#{client_activity} #{client_name} #{client_session}' | grep -v ' popup$' | sort -rn)"})
+    local outer=${${(s: :)outers[1]}[2]}
     tmux switch-client -c "$outer" -t "$id" \; select-window -t "$id" \; select-pane -t "$id" \; detach-client -t "$client"
   else
     tmux switch-client -t "$id" \; select-window -t "$id" \; select-pane -t "$id"
